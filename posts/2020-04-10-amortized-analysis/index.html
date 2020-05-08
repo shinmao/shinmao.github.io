@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Amortized analysis - 1pwnch</title>
+        <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Amortized analysis" />
+<meta property="og:description" content="Why we need amortized analysis?
+We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes O(n) of time complexity in worst case, then the sequence of n operations takes O(n^2) time. But how if there is only one O(n) and the rest of them are all O(1)? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" />
+<meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
+<meta property="article:published_time" content="2020-04-10T02:42:35+08:00" />
+<meta property="article:modified_time" content="2020-04-10T02:42:35+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
+
+<meta name="twitter:title" content="Amortized analysis"/>
+<meta name="twitter:description" content="Why we need amortized analysis?
+We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes O(n) of time complexity in worst case, then the sequence of n operations takes O(n^2) time. But how if there is only one O(n) and the rest of them are all O(1)? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis."/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" /><link rel="prev" href="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" /><link rel="next" href="http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Amortized analysis",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.1pwnch.com\/posts\/2020-04-10-amortized-analysis\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "amortized analysis","wordcount":  700 ,
+        "url": "http:\/\/blog.1pwnch.com\/posts\/2020-04-10-amortized-analysis\/","datePublished": "2020-04-10T02:42:35+08:00","dateModified": "2020-04-10T02:42:35+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "1pwnch"
+            },"description": ""
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="1pwnch">1pwnch</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="1pwnch">1pwnch</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Amortized analysis</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>1pwnch</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/algorithm/">
+                                <i class="far fa-folder fa-fw"></i>Algorithm
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-04-10>2020-04-10</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 700 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>4 min&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#aggregate-method">Aggregate method</a></li>
+    <li><a href="#accounting-method">Accounting method</a></li>
+    <li><a href="#potential-method">Potential method</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="why-we-need-amortized-analysis">Why we need amortized analysis?</h1>
+<p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes O(n) of time complexity in worst case, then the sequence of n operations takes O(n^2) time. But how if there is only one O(n) and the rest of them are all O(1)? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>
+<blockquote>
+<p>Amortized analysis helps us to obtain a more accurate bound of worst case&hellip;</p>
+</blockquote>
+<h2 id="aggregate-method">Aggregate method</h2>
+<p>Sum up the all cost of operations (<code>T(n)</code>) and divide it by number of operations <code>n</code>. Take the stack for example,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Npop + Nmultipop takes at most O(Npush)
+total cost: T(n) = Npush * O(1) + O(Npush) = O(n) ... linear time
+per cost: O(n) / n = O(1) ... constant time
+</code></pre></td></tr></table>
+</div>
+</div><p>In aggregate method, we would get same amortized cost on each operations.</p>
+<h2 id="accounting-method">Accounting method</h2>
+<p>Save credits from the operations which takes less cost and used for future operation that take more cost. Take the stack for example,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">actual cost:
+push: 1
+pop: 1
+multipop: min(|S|, k)
+// assign each operation a valid amortized cost
+push: 2
+pop: 0
+multipop: 0
+// validity check: credit always sufficient
+// amortized cost sum (c1&#39; + c2&#39; + c3&#39; + ... + cn&#39;) &gt;= actual cost sum (c1 + c2 + c3 + ... + cn)
+if you want to pop or multipop, you need to push first. so you won&#39;t run into bankruptcy forever:)
+* you should explain this
+// calculate total amortized cost
+O(n) * 2 = O(n) ... linear time   (The largest time of push is n)
+O(n) / n = O(1)
+</code></pre></td></tr></table>
+</div>
+</div><p>Be careful, check that you won&rsquo;t run into bankruptcy no matter which situation. If amortized cost is bigger than actual lost, the difference becomes a credit, otherwise it would become a withdrawl. What is different from aggregate method, each operation can have different amortized cost.</p>
+<h2 id="potential-method">Potential method</h2>
+<p>The core of potential method is potential function Φ(Di) <code>phi</code>. Do: the initial state of data structure, Di: the state after ith operation, ci: the actual cost of ith operation, ci&rsquo;: the amortized cost of ith operation which is <code>ci + Φ(Di) - Φ(Di-1)</code>. Take the stack for example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">// design potential function
+Φ(Di): the number of elements on stack after ith operation
+// validity check
+Sum(ci&#39;) = Sum(ci + Φ(Di) - Φ(Di-1))
+= Sum(ci) + Φ(Dn) - Φ(Dn-1) + Φ(Dn-1) - Φ(Dn-2) + Φ(Dn-2) - Φ(Dn-3) + ... Φ(D1) - Φ(D0)
+= Sum(ci) + Φ(Dn) - Φ(D0)
+=&gt; Φ(Di) - Φ(D0) &gt;= 0   (we usually make it Φ(D0) = 0, and Φ(Di) &gt;= 0)
+
+In this example, Φ(D0) = 0 elements, and Φ(Di) &gt;= 0 elements. Great!
+// calculate each operation amortized cost: ci + Φ(Di) - Φ(Di-1)
+push: 1 + (|s| + 1) - (|s|) = 2
+pop: 1 + (|s| - 1) - (|s|) = 0
+multipop: min(|s|, k) + (|s| - min(|s|, k)) - (|s|) = 0
+// calculate total amortized cost
+all operations has O(1) amortized cost
+total O(n)
+</code></pre></td></tr></table>
+</div>
+</div><p>What&rsquo;s different from accounting method, the credit is assigned to data structure itself.</p>
+<blockquote>
+<p>Is it possible for amortized cost to be negative? Yes, it is possible for single operation to have negative amortized cost. But for n operations, total amortized cost should always be non-negative.</p>
+</blockquote>
+<h1 id="reference">Reference</h1>
+<ul>
+<li><a href="http://ds09.wikidot.com/forum/t-194836/amortized-cost-can-it-be-negative" target="_blank" rel="noopener noreffer">Amortized Cost - can it be negative?</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2020-04-10</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/2020-04-10-amortized-analysis/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" data-title="Amortized analysis" data-via="1pwnch" data-hashtags="amortized analysis"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" data-hashtag="amortized analysis"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" data-title="Amortized analysis" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" data-title="Amortized analysis"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" data-title="Amortized analysis"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" data-title="Amortized analysis" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" data-title="Amortized analysis" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" data-title="Amortized analysis"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/amortized-analysis/">amortized analysis</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2020-04-07-make-it-generic/" class="prev" rel="prev" title="Make it Generic"><i class="fas fa-angle-left fa-fw"></i>Make it Generic</a>
+            <a href="/posts/2020-04-22-functions-you-always-need-to-override/" class="next" rel="next" title="Functions You always need to Override">Functions You always need to Override<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">1pwnch</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"Copy to clipboard","maxShownLines":100},"comment":{},"headerMode":{"desktop":"fixed","mobile":"auto"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

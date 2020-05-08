@@ -1,0 +1,39 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Java - Category - 1pwnch</title>
+        <link>http://blog.1pwnch.com/categories/java/</link>
+        <description>Java - Category - 1pwnch</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 28 Apr 2020 02:42:35 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/java/" rel="self" type="application/rss+xml" /><item>
+    <title>Some Points to design Classes and Interfaces</title>
+    <link>http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/</link>
+    <pubDate>Tue, 28 Apr 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>]]></description>
+</item><item>
+    <title>Functions You always need to Override</title>
+    <link>http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/</link>
+    <pubDate>Wed, 22 Apr 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p>]]></description>
+</item><item>
+    <title>Make it Generic</title>
+    <link>http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/</link>
+    <pubDate>Tue, 07 Apr 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements <strong>while reading them in collection</strong>. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn&rsquo;t it?</p>]]></description>
+</item><item>
+    <title>Conversion from mutable to immutable class</title>
+    <link>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</link>
+    <pubDate>Thu, 13 Feb 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>When it comes to immutability of java, it&rsquo;s important for us to know about data type of <strong>String</strong>. Each time we try to modify the string, it would create a new object with new value. When it comes to mutability of java, the sample data type for it would be such like array, and we can modify the elements on specific index. However, it is a more interesting topic in this article: <strong>How to create an immutable class by ourselves?</strong></p>]]></description>
+</item></channel>
+</rss>

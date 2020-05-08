@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Some Points to design Classes and Interfaces - 1pwnch</title>
+        <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Some Points to design Classes and Interfaces" />
+<meta property="og:description" content="Introduction
+This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" />
+<meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
+<meta property="article:published_time" content="2020-04-28T02:42:35+08:00" />
+<meta property="article:modified_time" content="2020-04-28T02:42:35+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
+
+<meta name="twitter:title" content="Some Points to design Classes and Interfaces"/>
+<meta name="twitter:description" content="Introduction
+This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" /><link rel="prev" href="http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Some Points to design Classes and Interfaces",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.1pwnch.com\/posts\/2020-04-28-some-points-to-design-classes-and-interface\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Obj Oriented in java, mutability, composition, inheritance, abstract class, abstract interface","wordcount":  1717 ,
+        "url": "http:\/\/blog.1pwnch.com\/posts\/2020-04-28-some-points-to-design-classes-and-interface\/","datePublished": "2020-04-28T02:42:35+08:00","dateModified": "2020-04-28T02:42:35+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "1pwnch"
+            },"description": ""
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="1pwnch">1pwnch</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="1pwnch">1pwnch</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Some Points to design Classes and Interfaces</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>1pwnch</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/java/">
+                                <i class="far fa-folder fa-fw"></i>Java
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-04-28>2020-04-28</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 1717 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>9 min&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>
+<h1 id="minimize-accessibility-and-mutability">Minimize accessibility and mutability</h1>
+<p>Most people would use modifier such as <code>private</code>, <code>default</code>, <code>protected</code>, or <code>public</code> to control the accessibility of classes or members. Otherwise, using <code>final</code> can prevent even the state of public member from being modified. However, there is a potential security hole:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Type</span><span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="o">{...};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The problem is that <code>values</code> itself is final, but entries in values are not. <strong>The array with non-zero size is always mutable</strong>. Therefore, giving the accessor for this kind of fields must cause to the security hole. You can use following way to solve this problem:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Type</span><span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="o">{...};</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Type</span><span class="o">[]</span> <span class="nf">values</span><span class="o">(){</span>
+    <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>From the example above, we should always make sure the fields referred by <code>public static final</code> is <strong>immutable</strong>. For accessibility, public classes should designed to have private fields to follow encapsulation. Before talking about the way to create immutable classes, we should know the reason why immutability is necessary? The reason is that <strong>an immutable instance is thread-safe even accessed from multiple threads</strong>. Following are the five rules to create an immutable class:</p>
+<ol>
+<li>Don&rsquo;t provide mutator method</li>
+<li>Make sure the class not to be extended
+We always like to use <code>final</code> to make sure of this point; however, sometimes making class final is too strong. We can use static factory to replace it:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Complex</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">y</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nf">Complex</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span>   <span class="c1">// priv constructor
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>                         <span class="c1">// constructor cannot use static
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Complex</span> <span class="nf">valueOf</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span>  <span class="c1">// static factory
+</span><span class="c1"></span>        <span class="k">return</span> <span class="k">new</span> <span class="n">Complex</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>Set all fields final</li>
+<li>Set all fields private</li>
+<li>Ensure exclusive access to any mutable components</li>
+</ol>
+<h1 id="favor-composition-over-inheritance">Favor composition over inheritance</h1>
+<p>We all love java, and love the inheritance of java. However, inheritance would break encapsulation. Assume a subclass extends to a superclass. When the version code of superclass is updated and subclass isn&rsquo;t updated accordingly, it would cause error disaster to subclass. For example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">(){</span>
+
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">initCap</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">){</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">initCap</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">){</span>
+        <span class="n">addCount</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">){</span>
+        <span class="n">addCount</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">addCount</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// Consider the client code
+</span><span class="c1"></span><span class="n">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InstrumentedHashSet</span><span class="o">&lt;&gt;();</span>
+<span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;Hi&#34;</span><span class="o">,</span> <span class="s">&#34;HelloWorld&#34;</span><span class="o">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We expect to get 2 from <code>s.getAddCount()</code>; however, we will get 4 at the end. But why? The reason is the internal working of hashset. Hashset would call <code>add()</code> when calling <code>addAll</code> (Well&hellip;it is not described in the javadoc = =). First of all, <code>s.addAll()</code> would set <code>addCount</code> as 3 with <code>addCount += c.size()</code> then call <code>HashSet.addAll()</code>. Secondly, <code>HashSet.addAll()</code> would call <code>add</code> for two times. However, due to dynamic dispatching, it would invoke <code>s.add()</code> and add <code>addCount</code> two more times. As a result, <code>addCount</code> is 4 at the end.<br>
+You might think we should overriding methods more carefully, for example, don&rsquo;t call <code>super.addAll()</code>. However, if we rewrite the whole function body, it would cost much effort and time. Following is the way of using elegant composition to prevent the problem:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ForwardingSet
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">ForwardingSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// all the other Set.methods
+</span><span class="c1"></span>    <span class="c1">// IDE would help you to list all the methods need to be implemented
+</span><span class="c1"></span><span class="o">}</span>
+<span class="c1">// InstrumentedSet
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">InstrumentedSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">){</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">){</span>
+        <span class="n">addCount</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">){</span>
+        <span class="n">addCount</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">addCount</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This example implements the interface of Set instead of HashSet. But, we can pass any kind of set such like HashSet or TreeSet into <code>InstrumentedSet(new HashSet&lt;&gt;(...))</code> and <code>InstrumentedSet(new TreeSet&lt;&gt;(...))</code>.<br>
+At the end, I would like to mention two interesting exercises for my course:<br>
+In the example of <code>InstrumentedSet</code>, does the equals method satisfy the contract?<br>
+The answer is Yes. Assume there are two instances of <code>InstrumentedSet</code>. When we try to call <code>s1.equals(s2)</code>, it would return true if <strong>s2 is also a set</strong>, <strong>s1 and s2 have the same size</strong>, and <strong>every members in s2 is contained in s1</strong>. The difinition ensures equals method works properly across different implementations of the set interface [2].<br>
+If we replace Set with Collection, does the equals method still satisfy the contract?<br>
+The answer is No. Assume there are two instances of <code>InstrumentedCollection</code>. We already know that <code>Set</code> and <code>List</code> extend to the interface of Collection. However, the contracts for <code>List.equals</code> and <code>Set.equals</code> state that lists are only equals to other lists, and sets to other sets. Therefore, <strong>a custom equals method for collection class implemented with neither the List nor Set must return false when this collection is compared to any list or set</strong> [3].</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+<span class="n">r</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;ant&#34;</span><span class="o">);</span> <span class="n">r</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;bee&#34;</span><span class="o">);</span>
+
+<span class="n">InstrumentedCollection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InstrumentedCollection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="n">r</span><span class="o">);</span>
+<span class="n">assertTrue</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>   <span class="c1">// fail
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s look more deeply into this example. After we pass the hashset into the constructor of <code>InstrumentedCollection</code>, <code>s.equals()</code> would call equals method in <code>ForwardingCollection</code>. Take a look at the function body of <code>equals</code>, it returns <code>s.equals(o)</code> which means hashset.equals(o) in this example. Therefore, it would check the parameter of <code>equals()</code> is also set or not; however, <code>s</code> implements the interface of <code>Collection</code>. The result must be false.</p>
+<h1 id="dont-call-overridable-methods-in-constructor">Don&rsquo;t call overridable methods in constructor</h1>
+<p>Constructor mustn&rsquo;t call overridable method directly or indirectly. Before we take a look at example, we need to make sure you know how to invoke right method:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Super</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Super</span><span class="o">(){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Super&#34;</span><span class="o">);</span>
+        <span class="n">overrideMe</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">overrideMe</span><span class="o">(){</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sub</span> <span class="kd">extends</span> <span class="n">Super</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Sub</span><span class="o">(){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Sub&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">overrideMe</span><span class="o">(){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">our</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Hi&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// client code
+</span><span class="c1"></span><span class="n">Sub</span> <span class="n">sub</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sub</span><span class="o">();</span>
+<span class="n">Sub</span><span class="o">.</span><span class="na">overrideMe</span><span class="o">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>When the constructor of <code>Sub</code> is called, it would call the constructor of <code>Super</code> first because <code>Sub extends Super</code>. Then <code>Super.constructor</code> call <code>overrideMe()</code>; however, it would call <code>Sub.overrideMe</code> due to dynamic dispatching. At the end, it would call constructor of <code>sub</code> to build up the instance of subclass. Therefore, the example would print out: Super, Hi, Sub, Hi. After we understand this example, we can go to the following example to see why constructor cannot call overridable methods:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Super</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Super</span><span class="o">(){</span>
+        <span class="n">overrideMe</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">overrideMe</span><span class="o">(){}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Sub</span> <span class="kd">extends</span> <span class="n">Super</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Instance</span> <span class="n">instant</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Sub</span><span class="o">(){</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="n">Instance</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">overrideMe</span><span class="o">(){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instant</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// With the same example as above
+</span></code></pre></td></tr></table>
+</div>
+</div><p>When constructor of <code>Super</code> tries to call <code>overrideMe()</code> of <code>Sub</code>, <code>Super</code> cannot find the private <code>instant</code>. Therefore, <code>instant</code> is a null object for <code>Super</code>, the it would print out <code>null</code> at the first time. In fact, it would always cause to <code>NullPointerException</code>, it can print null here because <code>println()</code> accepts null as parameters.<br>
+In addition, <code>clone()</code> and <code>readObject()</code> should also not call overridable methods because they are simaliar to constructor.</p>
+<h1 id="prefer-interface-to-abstract-class">Prefer Interface to Abstract class</h1>
+<p>If you still don&rsquo;t know what the abstract class is, it is the class which includes abstract method. They are the only two things able to have blank function body in Java. The methods in abstract class isn&rsquo;t necessary to be abstract, but abstract funcions should be in abstract class. In addition, abstract class can only be extended but cannot be instantialized. Back to the points of methods, we can define the default behavior of function in abstract class, but Interface prohibit it strictly (However, it is also permitted in Java8&hellip;). Here are some reasons for preferring Interface to Abstract class:</p>
+<ol>
+<li>Existing class can be easily retrofitted into a new interface, but not for abstract class because we cannot extends to multiple classes at the same time.</li>
+<li>We can merge several interfaces into an existing class as optional functionality, but we can&rsquo;t do that for abstract class also because not able to extend to multiple classes at the same time.</li>
+</ol>
+<p>However, if interface provide with so many APIs which are not required for current application, it would cause to the blank implementation in implementer classes. Here comes with a solution: <strong>Abstract Interface</strong> whichs combine the advantages of both abstract class and interface.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// puesdo code
+</span><span class="c1"></span><span class="n">Interface</span> <span class="n">HelloWorld</span> <span class="o">{</span>
+    <span class="n">method1</span><span class="o">(){}</span>
+    <span class="n">method2</span><span class="o">(){}</span>
+    <span class="n">method3</span><span class="o">(){}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Hi</span> <span class="kd">implements</span> <span class="n">HelloWorld</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">method1</span><span class="o">(){}</span>   <span class="c1">// abstract method: subclass should override
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">method2</span><span class="o">(){}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method3</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">H1</span> <span class="kd">extends</span> <span class="n">Hi</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method1</span><span class="o">(){</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method2</span><span class="o">(){</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="c1">// H1 doesn&#39;t need method3
+</span><span class="c1"></span><span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">H2</span> <span class="kd">extends</span> <span class="n">Hi</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method1</span><span class="o">(){</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method2</span><span class="o">(){</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method3</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>With abstract interface, in abstract class which implements interface, we can define the necessary methods as abstract methods because they should be overriden. Otherwise, we can define the default body of the method which is not necessary for some subclasses. We would like to apply this trick to the Interface which provides several methods such like <code>AbstractList</code> for <code>List</code> interface.</p>
+<h1 id="reference">Reference</h1>
+<ol>
+<li><a href="" rel="">Effective-java Item 15~22</a></li>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html#equals%28java.lang.Object%29" target="_blank" rel="noopener noreffer">@Javadoc Set.equals()</a></li>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html#equals%28java.lang.Object%29" target="_blank" rel="noopener noreffer">@Javadoc Collection.equals()</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/java/l-javainterface-abstract/index.html" target="_blank" rel="noopener noreffer">IBM: Figuring out abstract class and interface</a></li>
+</ol></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2020-04-28</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/2020-04-28-some-points-to-design-classes-and-interface/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" data-title="Some Points to design Classes and Interfaces" data-via="1pwnch" data-hashtags="Obj Oriented in java,mutability,composition,inheritance,abstract class,abstract interface"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" data-hashtag="Obj Oriented in java"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" data-title="Some Points to design Classes and Interfaces" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" data-title="Some Points to design Classes and Interfaces"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" data-title="Some Points to design Classes and Interfaces"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" data-title="Some Points to design Classes and Interfaces" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" data-title="Some Points to design Classes and Interfaces" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" data-title="Some Points to design Classes and Interfaces"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/obj-oriented-in-java/">Obj Oriented in java</a>,&nbsp;<a href="/tags/mutability/">mutability</a>,&nbsp;<a href="/tags/composition/">composition</a>,&nbsp;<a href="/tags/inheritance/">inheritance</a>,&nbsp;<a href="/tags/abstract-class/">abstract class</a>,&nbsp;<a href="/tags/abstract-interface/">abstract interface</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2020-04-22-functions-you-always-need-to-override/" class="prev" rel="prev" title="Functions You always need to Override"><i class="fas fa-angle-left fa-fw"></i>Functions You always need to Override</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">1pwnch</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"Copy to clipboard","maxShownLines":100},"comment":{},"headerMode":{"desktop":"fixed","mobile":"auto"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

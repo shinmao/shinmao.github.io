@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Make it Generic - 1pwnch</title>
+        <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Make it Generic" />
+<meta property="og:description" content="Introduction
+Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements while reading them in collection. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn&rsquo;t it?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" />
+<meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
+<meta property="article:published_time" content="2020-04-07T02:42:35+08:00" />
+<meta property="article:modified_time" content="2020-04-07T02:42:35+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
+
+<meta name="twitter:title" content="Make it Generic"/>
+<meta name="twitter:description" content="Introduction
+Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements while reading them in collection. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn&rsquo;t it?"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" /><link rel="prev" href="http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/" /><link rel="next" href="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Make it Generic",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.1pwnch.com\/posts\/2020-04-07-make-it-generic\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Obj Oriented in java, Generic","wordcount":  919 ,
+        "url": "http:\/\/blog.1pwnch.com\/posts\/2020-04-07-make-it-generic\/","datePublished": "2020-04-07T02:42:35+08:00","dateModified": "2020-04-07T02:42:35+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "1pwnch"
+            },"description": ""
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="1pwnch">1pwnch</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="1pwnch">1pwnch</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Make it Generic</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>1pwnch</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/java/">
+                                <i class="far fa-folder fa-fw"></i>Java
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-04-07>2020-04-07</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 919 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>5 min&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#make-it-generic">Make it generic</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p>Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements <strong>while reading them in collection</strong>. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn&rsquo;t it?</p>
+<!--more-->
+<h2 id="make-it-generic">Make it generic</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoundedQueue</span> <span class="o">{</span>
+
+    <span class="kd">protected</span> <span class="n">Object</span> <span class="n">rep</span><span class="o">[];</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">front</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">back</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">BoundedQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Illegal size!&#34;</span><span class="o">)</span>
+        <span class="o">}</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
+        <span class="n">rep</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
+        <span class="n">back</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isFull</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">size</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCount</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">count</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSize</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">size</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">put</span><span class="o">(</span><span class="n">Object</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isFull</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">back</span><span class="o">++;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">back</span> <span class="o">&gt;=</span> <span class="n">size</span><span class="o">)</span>
+                <span class="n">back</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+            <span class="n">rep</span><span class="o">[</span><span class="n">back</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+            <span class="n">count</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">rep</span><span class="o">[</span><span class="n">front</span><span class="o">];</span>
+            <span class="n">rep</span><span class="o">[</span><span class="n">front</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">front</span><span class="o">++;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">front</span> <span class="o">&gt;=</span> <span class="n">size</span><span class="o">)</span>
+                <span class="n">front</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+            <span class="n">count</span><span class="o">--;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">BoundedQueue</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BoundedQueue</span><span class="o">(</span><span class="n">10</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="o">!</span><span class="n">queue</span><span class="o">.</span><span class="na">isFull</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">queue</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;put: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">while</span> <span class="o">(!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;get: &#34;</span> <span class="o">+</span> <span class="n">queue</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In the course of SWE619, we are required to make the class <code>BoundedQueue</code> generic (size bounded collection). We also need to eliminate all the compiler warnings, unnecessary instance variable, and add necessary exception handling.<br>
+From the perspective of designer, we don&rsquo;t know which type would be put into collection; therefore, we would use generic type to define class first, e.g. <code>BoundedQueue &lt;E&gt;</code>. Based on Bloch28: prefer lists to arrays, we change variable <code>Object rep[];</code> to <code>List&lt;E&gt; rep;</code> and use ArrayList to implement it in constructor <code>rep = new ArrayList&lt;E&gt;();</code>. To change <code>put()</code> to a generic method, start from the parameter:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Bloch30: generic method
+</span><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">put</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">(</span><span class="s">&#34;e should not be null&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">isFull</span><span class="o">()){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;queue is full&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">rep</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="n">count</span><span class="o">++;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Due to the fact that we use ArrayList to implement BoundedQueue, we don&rsquo;t need <code>front</code> and <code>back</code> to help us index anymore. We would also eliminate two variables from above. Next, we are going to change <code>get()</code> to a generic method:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Bloch30: generic method
+</span><span class="c1"></span><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NoSuchElementException</span><span class="o">(</span><span class="s">&#34;Queue is empty&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+    <span class="n">rep</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+    <span class="n">count</span><span class="o">--;</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The change to <code>get()</code> is similar to <code>put()</code>, so I won&rsquo;t go into the detail. Here, we are required to add two more methods: <code>putAll()</code> and <code>getAll()</code>. These two methods are different from <code>put()</code> and <code>get()</code> methods, they would iterate the collection and take action on each elements.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Bloch31
+</span><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">putAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">){</span>
+    <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">count</span> <span class="o">+</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="o">.</span><span class="na">size</span><span class="o">()){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Queue is full&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">for</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">list</span><span class="o">){</span>
+        <span class="n">push</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">getAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">col</span><span class="o">){</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">isEmpty</span><span class="o">()){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Queue is empty&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">while</span><span class="o">(!</span><span class="n">isEmpty</span><span class="o">()){</span>
+        <span class="n">col</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">get</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Here you must be confused, why not use <code>Collection&lt;E&gt;</code> as the parameter? First of all, we should get into a question: Can <code>List&lt;Integer&gt;</code> be put into <code>List&lt;Number&gt;</code> as parameter? Based on our common sense, this should be work because Integer is subtype of Number. However, the answer is <strong>NO</strong> due to the <strong>incovariance</strong> of generic type. Incovariance means that any <code>List&lt;type1&gt;</code> would not be subtype or supertype of any <code>List&lt;type2&gt;</code>. When we new the class in main function, we should use parameterized type instead of generic type <code>E</code>. Although using <code>Collection&lt;E&gt;</code> won&rsquo;t cause to the compiler warning, but the best choice is using <strong>bounded wildcard type</strong>. Bounded wildcard type can make it implemented based on the common sense, e.g. we can call <code>getAll()</code> to add from <code>BoundedQueue&lt;Number&gt;</code> to <code>Collection&lt;Object&gt;</code>. Secondly, someone might be interested in the use of <code>extends</code> or <code>super</code> in bounded wildcard type. The use of <code>extends</code> and <code>super</code> is based on PECS mnemonic: Producer-Extends Consumer-super. I would use two samples above to explain the rule: In <code>putAll()</code>, <code>list</code> is the producer of E instance, so we should use <code>extends</code>. In <code>getAll()</code>, <code>col</code> is the consumer to get E instance, so we should use <code>super</code>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Now we have understood the importance of generic type. We should use generic type instead of raw type to avoid <code>ClassCastException</code> of runtime error. Generic type is the way to keep application typesafe. In addition to the example I gave above, I strongly recommend to read through the Chapter5.Generics of Effective-Java-3rd, there are more details worth getting into.</p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="" rel="">Effective-Java-3rd</a></li>
+<li><a href="https://cs.gmu.edu/~pammann/619/code/BoundedQueue.java" target="_blank" rel="noopener noreffer">BoundedQueue.java</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2020-04-07</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/2020-04-07-make-it-generic/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" data-title="Make it Generic" data-via="1pwnch" data-hashtags="Obj Oriented in java,Generic"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" data-hashtag="Obj Oriented in java"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" data-title="Make it Generic" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" data-title="Make it Generic"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" data-title="Make it Generic"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" data-title="Make it Generic" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" data-title="Make it Generic" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/" data-title="Make it Generic"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/obj-oriented-in-java/">Obj Oriented in java</a>,&nbsp;<a href="/tags/generic/">Generic</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2020-02-13-conversion-from-mutable-to-immutable-class/" class="prev" rel="prev" title="Conversion from mutable to immutable class"><i class="fas fa-angle-left fa-fw"></i>Conversion from mutable to immutable class</a>
+            <a href="/posts/2020-04-10-amortized-analysis/" class="next" rel="next" title="Amortized analysis">Amortized analysis<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">1pwnch</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"Copy to clipboard","maxShownLines":100},"comment":{},"headerMode":{"desktop":"fixed","mobile":"auto"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

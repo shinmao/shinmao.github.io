@@ -1,0 +1,58 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - 1pwnch</title>
+        <link>http://blog.1pwnch.com/posts/</link>
+        <description>All Posts | 1pwnch</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 28 Apr 2020 02:42:35 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Some Points to design Classes and Interfaces</title>
+    <link>http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/</link>
+    <pubDate>Tue, 28 Apr 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>]]></description>
+</item><item>
+    <title>Functions You always need to Override</title>
+    <link>http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/</link>
+    <pubDate>Wed, 22 Apr 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p>]]></description>
+</item><item>
+    <title>Amortized analysis</title>
+    <link>http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/</link>
+    <pubDate>Fri, 10 Apr 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/</guid>
+    <description><![CDATA[<h1 id="why-we-need-amortized-analysis">Why we need amortized analysis?</h1>
+<p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes O(n) of time complexity in worst case, then the sequence of n operations takes O(n^2) time. But how if there is only one O(n) and the rest of them are all O(1)? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>]]></description>
+</item><item>
+    <title>Make it Generic</title>
+    <link>http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/</link>
+    <pubDate>Tue, 07 Apr 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements <strong>while reading them in collection</strong>. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn&rsquo;t it?</p>]]></description>
+</item><item>
+    <title>Conversion from mutable to immutable class</title>
+    <link>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</link>
+    <pubDate>Thu, 13 Feb 2020 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>When it comes to immutability of java, it&rsquo;s important for us to know about data type of <strong>String</strong>. Each time we try to modify the string, it would create a new object with new value. When it comes to mutability of java, the sample data type for it would be such like array, and we can modify the elements on specific index. However, it is a more interesting topic in this article: <strong>How to create an immutable class by ourselves?</strong></p>]]></description>
+</item><item>
+    <title>Analysis and Mitigation of CVE-2018-13379</title>
+    <link>http://blog.1pwnch.com/posts/2019-10-14-analysis-and-mitigation-of-cve-2018-13379/</link>
+    <pubDate>Mon, 14 Oct 2019 02:42:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/2019-10-14-analysis-and-mitigation-of-cve-2018-13379/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>In CVE-2018-13379, untrusted user could use the feature of <code>snprintf()</code> to launch the attack of <strong>arbitrary file reading</strong>.<br>
+Isn&rsquo;t <code>snprintf()</code> already a safer function?<br>
+What kind of the feature can be used to bypass the limitation of file extension?<br>
+In this article, I would not only analyze the way of launching an attack, but also share some ideas of mitigation!</p>]]></description>
+</item></channel>
+</rss>
