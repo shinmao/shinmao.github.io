@@ -132,10 +132,19 @@ This article would focus on access control of class, importance of mutability, c
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#minimize-accessibility-and-mutability">Minimize accessibility and mutability</a></li>
+    <li><a href="#favor-composition-over-inheritance">Favor composition over inheritance</a></li>
+    <li><a href="#dont-call-overridable-methods-in-constructor">Don&rsquo;t call overridable methods in constructor</a></li>
+    <li><a href="#prefer-interface-to-abstract-class">Prefer Interface to Abstract class</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="introduction">Introduction</h2>
 <p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>
-<h1 id="minimize-accessibility-and-mutability">Minimize accessibility and mutability</h1>
+<h2 id="minimize-accessibility-and-mutability">Minimize accessibility and mutability</h2>
 <p>Most people would use modifier such as <code>private</code>, <code>default</code>, <code>protected</code>, or <code>public</code> to control the accessibility of classes or members. Otherwise, using <code>final</code> can prevent even the state of public member from being modified. However, there is a potential security hole:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -199,7 +208,7 @@ We always like to use <code>final</code> to make sure of this point; however, so
 <li>Set all fields private</li>
 <li>Ensure exclusive access to any mutable components</li>
 </ol>
-<h1 id="favor-composition-over-inheritance">Favor composition over inheritance</h1>
+<h2 id="favor-composition-over-inheritance">Favor composition over inheritance</h2>
 <p>We all love java, and love the inheritance of java. However, inheritance would break encapsulation. Assume a subclass extends to a superclass. When the version code of superclass is updated and subclass isn&rsquo;t updated accordingly, it would cause error disaster to subclass. For example:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -356,7 +365,7 @@ The answer is No. Assume there are two instances of <code>InstrumentedCollection
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Let&rsquo;s look more deeply into this example. After we pass the hashset into the constructor of <code>InstrumentedCollection</code>, <code>s.equals()</code> would call equals method in <code>ForwardingCollection</code>. Take a look at the function body of <code>equals</code>, it returns <code>s.equals(o)</code> which means hashset.equals(o) in this example. Therefore, it would check the parameter of <code>equals()</code> is also set or not; however, <code>s</code> implements the interface of <code>Collection</code>. The result must be false.</p>
-<h1 id="dont-call-overridable-methods-in-constructor">Don&rsquo;t call overridable methods in constructor</h1>
+<h2 id="dont-call-overridable-methods-in-constructor">Don&rsquo;t call overridable methods in constructor</h2>
 <p>Constructor mustn&rsquo;t call overridable method directly or indirectly. Before we take a look at example, we need to make sure you know how to invoke right method:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -447,7 +456,7 @@ The answer is No. Assume there are two instances of <code>InstrumentedCollection
 </div>
 </div><p>When constructor of <code>Super</code> tries to call <code>overrideMe()</code> of <code>Sub</code>, <code>Super</code> cannot find the private <code>instant</code>. Therefore, <code>instant</code> is a null object for <code>Super</code>, the it would print out <code>null</code> at the first time. In fact, it would always cause to <code>NullPointerException</code>, it can print null here because <code>println()</code> accepts null as parameters.<br>
 In addition, <code>clone()</code> and <code>readObject()</code> should also not call overridable methods because they are simaliar to constructor.</p>
-<h1 id="prefer-interface-to-abstract-class">Prefer Interface to Abstract class</h1>
+<h2 id="prefer-interface-to-abstract-class">Prefer Interface to Abstract class</h2>
 <p>If you still don&rsquo;t know what the abstract class is, it is the class which includes abstract method. They are the only two things able to have blank function body in Java. The methods in abstract class isn&rsquo;t necessary to be abstract, but abstract funcions should be in abstract class. In addition, abstract class can only be extended but cannot be instantialized. Back to the points of methods, we can define the default behavior of function in abstract class, but Interface prohibit it strictly (However, it is also permitted in Java8&hellip;). Here are some reasons for preferring Interface to Abstract class:</p>
 <ol>
 <li>Existing class can be easily retrofitted into a new interface, but not for abstract class because we cannot extends to multiple classes at the same time.</li>
@@ -527,7 +536,7 @@ In addition, <code>clone()</code> and <code>readObject()</code> should also not 
 </code></pre></td></tr></table>
 </div>
 </div><p>With abstract interface, in abstract class which implements interface, we can define the necessary methods as abstract methods because they should be overriden. Otherwise, we can define the default body of the method which is not necessary for some subclasses. We would like to apply this trick to the Interface which provides several methods such like <code>AbstractList</code> for <code>List</code> interface.</p>
-<h1 id="reference">Reference</h1>
+<h2 id="reference">Reference</h2>
 <ol>
 <li><a href="" rel="">Effective-java Item 15~22</a></li>
 <li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html#equals%28java.lang.Object%29" target="_blank" rel="noopener noreffer">@Javadoc Set.equals()</a></li>

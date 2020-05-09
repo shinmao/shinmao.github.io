@@ -1,10 +1,10 @@
 # Some Points to design Classes and Interfaces
 
 
-# Introduction
+## Introduction
 This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it! <!--more-->
 
-# Minimize accessibility and mutability
+## Minimize accessibility and mutability
 Most people would use modifier such as `private`, `default`, `protected`, or `public` to control the accessibility of classes or members. Otherwise, using `final` can prevent even the state of public member from being modified. However, there is a potential security hole:  
 ```java
 public static final Type[] values = {...};
@@ -37,7 +37,7 @@ public class Complex {
 4. Set all fields private  
 5. Ensure exclusive access to any mutable components  
 
-# Favor composition over inheritance
+## Favor composition over inheritance
 We all love java, and love the inheritance of java. However, inheritance would break encapsulation. Assume a subclass extends to a superclass. When the version code of superclass is updated and subclass isn't updated accordingly, it would cause error disaster to subclass. For example:  
 ```java
 public class InstrumentedHashSet<E> extends HashSet<E>{
@@ -119,7 +119,7 @@ assertTrue(s.equals(s));   // fail
 ```
 Let's look more deeply into this example. After we pass the hashset into the constructor of `InstrumentedCollection`, `s.equals()` would call equals method in `ForwardingCollection`. Take a look at the function body of `equals`, it returns `s.equals(o)` which means hashset.equals(o) in this example. Therefore, it would check the parameter of `equals()` is also set or not; however, `s` implements the interface of `Collection`. The result must be false.  
 
-# Don't call overridable methods in constructor
+## Don't call overridable methods in constructor
 Constructor mustn't call overridable method directly or indirectly. Before we take a look at example, we need to make sure you know how to invoke right method:  
 ```java
 public class Super {
@@ -166,7 +166,7 @@ public final class Sub extends Super{
 When constructor of `Super` tries to call `overrideMe()` of `Sub`, `Super` cannot find the private `instant`. Therefore, `instant` is a null object for `Super`, the it would print out `null` at the first time. In fact, it would always cause to `NullPointerException`, it can print null here because `println()` accepts null as parameters.  
 In addition, `clone()` and `readObject()` should also not call overridable methods because they are simaliar to constructor.  
 
-# Prefer Interface to Abstract class
+## Prefer Interface to Abstract class
 If you still don't know what the abstract class is, it is the class which includes abstract method. They are the only two things able to have blank function body in Java. The methods in abstract class isn't necessary to be abstract, but abstract funcions should be in abstract class. In addition, abstract class can only be extended but cannot be instantialized. Back to the points of methods, we can define the default behavior of function in abstract class, but Interface prohibit it strictly (However, it is also permitted in Java8...). Here are some reasons for preferring Interface to Abstract class:  
 1. Existing class can be easily retrofitted into a new interface, but not for abstract class because we cannot extends to multiple classes at the same time.  
 2. We can merge several interfaces into an existing class as optional functionality, but we can't do that for abstract class also because not able to extend to multiple classes at the same time.  
@@ -210,7 +210,7 @@ public class H2 extends Hi {
 With abstract interface, in abstract class which implements interface, we can define the necessary methods as abstract methods because they should be overriden. Otherwise, we can define the default body of the method which is not necessary for some subclasses. We would like to apply this trick to the Interface which provides several methods such like `AbstractList` for `List` interface.
 
 
-# Reference
+## Reference
 1. [Effective-java Item 15~22]()  
 2. [@Javadoc Set.equals()](https://docs.oracle.com/javase/7/docs/api/java/util/Set.html#equals(java.lang.Object))  
 3. [@Javadoc Collection.equals()](https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html#equals(java.lang.Object))  
