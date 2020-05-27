@@ -51,4 +51,5 @@ q = q.deQueue();
 Therefore in the whole process, we take interaction with 4 IQ objects.
 
 ## Reference
-* [Class note of SWE619 Object oriented programming in java](https://cs.gmu.edu/~pammann/619.html)
+* [Class note of SWE619 Object oriented programming in java](https://cs.gmu.edu/~pammann/619.html)  
+* [Minimize accessibility and mutability (Recommend)](https://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/#minimize-accessibility-and-mutability)

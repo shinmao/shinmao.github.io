@@ -1,7 +1,7 @@
 # Some Points to design Classes and Interfaces
 
 
-## Introduction
+# Introduction  
 This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it! <!--more-->
 
 ## Minimize accessibility and mutability
@@ -171,9 +171,9 @@ If you still don't know what the abstract class is, it is the class which includ
 1. Existing class can be easily retrofitted into a new interface, but not for abstract class because we cannot extends to multiple classes at the same time.  
 2. We can merge several interfaces into an existing class as optional functionality, but we can't do that for abstract class also because not able to extend to multiple classes at the same time.  
 
-However, if interface provide with so many APIs which are not required for current application, it would cause to the blank implementation in implementer classes. Here comes with a solution: **Abstract Interface** whichs combine the advantages of both abstract class and interface.  
+However, if interface provides with so many APIs which are not required for current application, it would cause to the blank implementation in implementer classes. Here comes with a solution: **Abstract Interface** which combines the advantages of both abstract class and interface.  
 ```java
-// puesdo code
+// pseudo code
 Interface HelloWorld {
     method1(){}
     method2(){}

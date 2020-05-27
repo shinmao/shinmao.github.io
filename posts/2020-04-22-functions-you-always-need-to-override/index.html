@@ -132,10 +132,18 @@ We always can override non-final methods in parent class. However, we also need 
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#override-equals">Override equals</a></li>
+    <li><a href="#override-hashcode">Override hashCode</a></li>
+    <li><a href="#override-clone">Override clone</a></li>
+    <li><a href="#exercise">Exercise</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav></div>
             </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
 <p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p>
-<h1 id="override-equals">Override equals</h1>
+<h2 id="override-equals">Override equals</h2>
 <p>It is not necessary to override the equals method each time in child class. But if we really need overriding <code>equals()</code> to solve our problems, our <code>equals()</code> need to obey following contracts:</p>
 <ul>
 <li>Relexive: <code>x.equals(x) = true</code></li>
@@ -251,7 +259,7 @@ Then here comes a sample <code>equals()</code> method:</p>
 </code></pre></td></tr></table>
 </div>
 </div><p>At the end, <code>URL.equals()</code> might violates the consistency requirement of equals. When connected to the Internet, the <code>equals()</code> method follows the steps decribed in java API; when disconnected, it performs a string compare on the two URLS [3]. In addition, you should also remember to override <code>hashCode()</code> method after you override the <code>equals()</code>.</p>
-<h1 id="override-hashcode">Override hashCode</h1>
+<h2 id="override-hashcode">Override hashCode</h2>
 <p>I would only describe an interesting problem in this section:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -266,7 +274,7 @@ Then here comes a sample <code>equals()</code> method:</p>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Why the result of <code>map.get(new Phone(123))</code> not <code>str</code>? The answer is simple: two key are put into the different hash buckets because two keys have different hashcode! The solution is <strong>override hashCode() method</strong> with matching significant fields.</p>
-<h1 id="override-clone">Override clone</h1>
+<h2 id="override-clone">Override clone</h2>
 <p>Here comes the contract we should obey while overriding <code>clone()</code> method:</p>
 <ul>
 <li><code>x.clone() != x</code></li>
@@ -434,7 +442,7 @@ e.g. Copy Constructor</p>
 </div><blockquote>
 <p>I was confused about the use of result.elements = elements.clone(); in example. The elements is the private property of class. Why can we access to the private property of other instance? The answer is the private modifier does not mean that only the same instance can access to the field, but only objects of the same class can access to it!! I think this is very important fact each developers should understand.</p>
 </blockquote>
-<h1 id="exercise">Exercise</h1>
+<h2 id="exercise">Exercise</h2>
 <p>Here is the class exercise of <code>IntSet</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -539,7 +547,7 @@ e.g. Copy Constructor</p>
 </code></pre></td></tr></table>
 </div>
 </div><p>Someone would implement <code>clone()</code> with <code>return new IntSet(new ArrayList&lt;Integer&gt;(els));</code>. However, it is wrong way. I assume <code>IntChild</code> is a subclass extending to <code>IntSet</code>. If <code>IntChild</code> doesn&rsquo;t override the <code>clone()</code> method and I try to call <code>IntChild.clone()</code>, it would call <code>IntSet.clone()</code> and return the wrong type of object.</p>
-<h1 id="reference">Reference</h1>
+<h2 id="reference">Reference</h2>
 <ol>
 <li><a href="" rel="">Effective-java-3rd: Chapter10~13</a></li>
 <li><a href="https://cs.gmu.edu/~pammann/619/inClass/IntSet.java" target="_blank" rel="noopener noreffer">IntSet.java</a></li>

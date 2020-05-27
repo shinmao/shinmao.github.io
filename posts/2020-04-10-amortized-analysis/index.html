@@ -8,7 +8,7 @@
         <title>Amortized analysis - 1pwnch</title>
         <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Amortized analysis" />
 <meta property="og:description" content="Why we need amortized analysis?
-We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes O(n) of time complexity in worst case, then the sequence of n operations takes O(n^2) time. But how if there is only one O(n) and the rest of them are all O(1)? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis." />
+We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
@@ -19,7 +19,7 @@ We always use worst case analysis (big-O) to calculate time complexity. However,
 
 <meta name="twitter:title" content="Amortized analysis"/>
 <meta name="twitter:description" content="Why we need amortized analysis?
-We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes O(n) of time complexity in worst case, then the sequence of n operations takes O(n^2) time. But how if there is only one O(n) and the rest of them are all O(1)? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis."/>
+We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis."/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -37,7 +37,7 @@ We always use worst case analysis (big-O) to calculate time complexity. However,
                 "url": "http:\/\/blog.1pwnch.com\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "amortized analysis","wordcount":  700 ,
+            },"genre": "posts","keywords": "amortized analysis","wordcount":  710 ,
         "url": "http:\/\/blog.1pwnch.com\/posts\/2020-04-10-amortized-analysis\/","datePublished": "2020-04-10T02:42:35+08:00","dateModified": "2020-04-10T02:42:35+08:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
@@ -125,7 +125,7 @@ We always use worst case analysis (big-O) to calculate time complexity. However,
                                 <i class="far fa-folder fa-fw"></i>Algorithm
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-04-10>2020-04-10</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 700 words&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 710 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>4 min&nbsp;</div>
         </div><div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
@@ -137,112 +137,59 @@ We always use worst case analysis (big-O) to calculate time complexity. However,
     <li><a href="#aggregate-method">Aggregate method</a></li>
     <li><a href="#accounting-method">Accounting method</a></li>
     <li><a href="#potential-method">Potential method</a></li>
+    <li><a href="#reference">Reference</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="why-we-need-amortized-analysis">Why we need amortized analysis?</h1>
-<p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes O(n) of time complexity in worst case, then the sequence of n operations takes O(n^2) time. But how if there is only one O(n) and the rest of them are all O(1)? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>
+<p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>
 <blockquote>
 <p>Amortized analysis helps us to obtain a more accurate bound of worst case&hellip;</p>
 </blockquote>
 <h2 id="aggregate-method">Aggregate method</h2>
-<p>Sum up the all cost of operations (<code>T(n)</code>) and divide it by number of operations <code>n</code>. Take the stack for example,</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Npop + Nmultipop takes at most O(Npush)
-total cost: T(n) = Npush * O(1) + O(Npush) = O(n) ... linear time
-per cost: O(n) / n = O(1) ... constant time
-</code></pre></td></tr></table>
-</div>
-</div><p>In aggregate method, we would get same amortized cost on each operations.</p>
+<p>Sum up the all cost of operations $ T(n) $ and divide it by number of operations $ n $. Take the stack for example,<br>
+$ Npop + Nmultipop $ takes at most: $ O(Npush) $<br>
+total cost: $ T(n) = Npush * O(1) + O(Npush) = O(n) $ &hellip; linear time<br>
+per cost: $ O(n) / n = O(1) $ &hellip; constant time<br>
+In aggregate method, we would get same amortized cost on each operations.</p>
 <h2 id="accounting-method">Accounting method</h2>
-<p>Save credits from the operations which takes less cost and used for future operation that take more cost. Take the stack for example,</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">actual cost:
-push: 1
-pop: 1
-multipop: min(|S|, k)
-// assign each operation a valid amortized cost
-push: 2
-pop: 0
-multipop: 0
-// validity check: credit always sufficient
-// amortized cost sum (c1&#39; + c2&#39; + c3&#39; + ... + cn&#39;) &gt;= actual cost sum (c1 + c2 + c3 + ... + cn)
-if you want to pop or multipop, you need to push first. so you won&#39;t run into bankruptcy forever:)
-* you should explain this
-// calculate total amortized cost
-O(n) * 2 = O(n) ... linear time   (The largest time of push is n)
-O(n) / n = O(1)
-</code></pre></td></tr></table>
-</div>
-</div><p>Be careful, check that you won&rsquo;t run into bankruptcy no matter which situation. If amortized cost is bigger than actual lost, the difference becomes a credit, otherwise it would become a withdrawl. What is different from aggregate method, each operation can have different amortized cost.</p>
+<p>Save credits from the operations which takes less cost and used for future operation that take more cost. Take the stack for example,<br>
+<code>actual cost:</code>
+$$ push: 1 $$
+$$ pop: 1 $$
+$$ multipop: min(|S|, k) $$
+<code>assign each operation a valid amortized cost</code>
+$$ push: 2 $$
+$$ pop: 0 $$
+$$ multipop: 0 $$
+<code>validity check: credit always sufficient</code><br>
+$$ c1&rsquo; + c2&rsquo; + c3&rsquo; + &hellip; + cn&rsquo; &gt;= c1 + c2 + c3 + &hellip; + cn $$
+if you want to pop or multipop, you need to push first. so you won&rsquo;t run into bankruptcy forever:)<br>
+<strong>you should explain this</strong><br>
+<code>calculate total amortized cost</code><br>
+$ O(n) * 2 = O(n) $ &hellip; linear time   (The largest time of push is n)<br>
+$ O(n) / n = O(1) $<br>
+Be careful, check that you won&rsquo;t run into bankruptcy no matter which situation. If amortized cost is bigger than actual lost, the difference becomes a credit, otherwise it would become a withdrawl. What is different from aggregate method, each operation can have different amortized cost.</p>
 <h2 id="potential-method">Potential method</h2>
-<p>The core of potential method is potential function Φ(Di) <code>phi</code>. Do: the initial state of data structure, Di: the state after ith operation, ci: the actual cost of ith operation, ci&rsquo;: the amortized cost of ith operation which is <code>ci + Φ(Di) - Φ(Di-1)</code>. Take the stack for example:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">// design potential function
-Φ(Di): the number of elements on stack after ith operation
-// validity check
-Sum(ci&#39;) = Sum(ci + Φ(Di) - Φ(Di-1))
-= Sum(ci) + Φ(Dn) - Φ(Dn-1) + Φ(Dn-1) - Φ(Dn-2) + Φ(Dn-2) - Φ(Dn-3) + ... Φ(D1) - Φ(D0)
-= Sum(ci) + Φ(Dn) - Φ(D0)
-=&gt; Φ(Di) - Φ(D0) &gt;= 0   (we usually make it Φ(D0) = 0, and Φ(Di) &gt;= 0)
-
-In this example, Φ(D0) = 0 elements, and Φ(Di) &gt;= 0 elements. Great!
-// calculate each operation amortized cost: ci + Φ(Di) - Φ(Di-1)
-push: 1 + (|s| + 1) - (|s|) = 2
-pop: 1 + (|s| - 1) - (|s|) = 0
-multipop: min(|s|, k) + (|s| - min(|s|, k)) - (|s|) = 0
-// calculate total amortized cost
-all operations has O(1) amortized cost
-total O(n)
-</code></pre></td></tr></table>
-</div>
-</div><p>What&rsquo;s different from accounting method, the credit is assigned to data structure itself.</p>
+<p>The core of potential method is potential function $ \Phi(Di) $. Do: the initial state of data structure, Di: the state after ith operation, ci: the actual cost of ith operation, ci&rsquo;: the amortized cost of ith operation which is $ ci + \Phi(Di) - \Phi(Di-1) $. Take the stack for example:<br>
+<code>design potential function</code>
+$$ \Phi(Di) $$ <code>the number of elements on stack after ith operation</code><br>
+<code>validity check</code><br>
+$$ Sum(ci&rsquo;) = Sum(ci + \Phi(Di) - \Phi(Di-1)) $$
+$$ = Sum(ci) + Φ(Dn) - Φ(Dn-1) + Φ(Dn-1) - Φ(Dn-2) + Φ(Dn-2) - Φ(Dn-3) + &hellip; Φ(D1) - Φ(D0) $$
+$$ = Sum(ci) + Φ(Dn) - Φ(D0) $$
+$$ =&gt; Φ(Di) - Φ(D0) &gt;= 0 $$
+<code>we usually make it Φ(D0) = 0, and Φ(Di) &gt;= 0</code></p>
+<p><code>In this example, Φ(D0) = 0 elements, and Φ(Di) &gt;= 0 elements. Great!</code></p>
+<p><code>Calculate each operation amortized cost:</code> $ ci + \Phi(Di) - \Phi(Di-1) $
+$$ push: 1 + (|s| + 1) - (|s|) = 2 $$
+$$ pop: 1 + (|s| - 1) - (|s|) = 0 $$
+$$ multipop: min(|s|, k) + (|s| - min(|s|, k)) - (|s|) = 0 $$
+Calculate total amortized cost, all operations has O(1) amortized cost, total O(n).</p>
+<p>What&rsquo;s different from accounting method, the credit is assigned to data structure itself.</p>
 <blockquote>
 <p>Is it possible for amortized cost to be negative? Yes, it is possible for single operation to have negative amortized cost. But for n operations, total amortized cost should always be non-negative.</p>
 </blockquote>
-<h1 id="reference">Reference</h1>
+<h2 id="reference">Reference</h2>
 <ul>
 <li><a href="http://ds09.wikidot.com/forum/t-194836/amortized-cost-can-it-be-negative" target="_blank" rel="noopener noreffer">Amortized Cost - can it be negative?</a></li>
 </ul></div><div class="post-footer" id="post-footer">

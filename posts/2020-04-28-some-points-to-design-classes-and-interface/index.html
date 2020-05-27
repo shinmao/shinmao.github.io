@@ -134,7 +134,6 @@ This article would focus on access control of class, importance of mutability, c
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#introduction">Introduction</a></li>
     <li><a href="#minimize-accessibility-and-mutability">Minimize accessibility and mutability</a></li>
     <li><a href="#favor-composition-over-inheritance">Favor composition over inheritance</a></li>
     <li><a href="#dont-call-overridable-methods-in-constructor">Don&rsquo;t call overridable methods in constructor</a></li>
@@ -142,7 +141,7 @@ This article would focus on access control of class, importance of mutability, c
     <li><a href="#reference">Reference</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="introduction">Introduction</h2>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
 <p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>
 <h2 id="minimize-accessibility-and-mutability">Minimize accessibility and mutability</h2>
 <p>Most people would use modifier such as <code>private</code>, <code>default</code>, <code>protected</code>, or <code>public</code> to control the accessibility of classes or members. Otherwise, using <code>final</code> can prevent even the state of public member from being modified. However, there is a potential security hole:</p>
@@ -462,7 +461,7 @@ In addition, <code>clone()</code> and <code>readObject()</code> should also not 
 <li>Existing class can be easily retrofitted into a new interface, but not for abstract class because we cannot extends to multiple classes at the same time.</li>
 <li>We can merge several interfaces into an existing class as optional functionality, but we can&rsquo;t do that for abstract class also because not able to extend to multiple classes at the same time.</li>
 </ol>
-<p>However, if interface provide with so many APIs which are not required for current application, it would cause to the blank implementation in implementer classes. Here comes with a solution: <strong>Abstract Interface</strong> whichs combine the advantages of both abstract class and interface.</p>
+<p>However, if interface provides with so many APIs which are not required for current application, it would cause to the blank implementation in implementer classes. Here comes with a solution: <strong>Abstract Interface</strong> which combines the advantages of both abstract class and interface.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -500,7 +499,7 @@ In addition, <code>clone()</code> and <code>readObject()</code> should also not 
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// puesdo code
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// pseudo code
 </span><span class="c1"></span><span class="n">Interface</span> <span class="n">HelloWorld</span> <span class="o">{</span>
     <span class="n">method1</span><span class="o">(){}</span>
     <span class="n">method2</span><span class="o">(){}</span>
