@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Stock Problem on Leetcode - 1pwnch</title>
+        <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Stock Problem on Leetcode" />
+<meta property="og:description" content="Introduction
+I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" />
+<meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
+<meta property="article:published_time" content="2020-06-03T18:47:17+08:00" />
+<meta property="article:modified_time" content="2020-06-03T18:47:17+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
+
+<meta name="twitter:title" content="Stock Problem on Leetcode"/>
+<meta name="twitter:description" content="Introduction
+I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" /><link rel="prev" href="http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Stock Problem on Leetcode",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.1pwnch.com\/posts\/stock-problem-on-leetcode\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Leetcode, Dynamic Programming, Best Time to Buy and Sell Stock","wordcount":  2438 ,
+        "url": "http:\/\/blog.1pwnch.com\/posts\/stock-problem-on-leetcode\/","datePublished": "2020-06-03T18:47:17+08:00","dateModified": "2020-06-03T18:47:17+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "1pwnch"
+            },"description": ""
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="1pwnch">1pwnch</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="1pwnch">1pwnch</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Stock Problem on Leetcode</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>1pwnch</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/algorithm/">
+                                <i class="far fa-folder fa-fw"></i>Algorithm
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-06-03>2020-06-03</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 2438 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>12 min&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#121-best-time-to-buy-and-sell-stock">121. Best Time to Buy and Sell Stock</a></li>
+    <li><a href="#122-best-time-to-buy-and-sell-stock-ii">122. Best Time to Buy and Sell Stock II</a></li>
+    <li><a href="#123-best-time-to-buy-and-sell-stock-iii">123. Best Time to Buy and Sell Stock III</a></li>
+    <li><a href="#188-best-time-to-buy-and-sell-stock-iv">188. Best Time to Buy and Sell Stock IV</a></li>
+    <li><a href="#309-best-time-to-buy-and-sell-stock-with-cooldown">309. Best Time to Buy and Sell Stock with Cooldown</a></li>
+    <li><a href="#714-best-time-to-buy-and-sell-stock-with-transaction-fee">714. Best Time to Buy and Sell Stock with Transaction Fee</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p>I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!</p>
+<ul>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener noreffer">121. Best Time to Buy and Sell Stock</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener noreffer">122. Best Time to Buy and Sell Stock II</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener noreffer">123. Best Time to Buy and Sell Stock III</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener noreffer">188. Best Time to Buy and Sell Stock IV</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/" target="_blank" rel="noopener noreffer">309. Best Time to Buy and Sell Stock with Cooldown</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/" target="_blank" rel="noopener noreffer">714. Best Time to Buy and Sell Stock with Transaction Fee</a></li>
+</ul>
+<p>Pay attention! The writeup shown in this article won&rsquo;t include exception handling!</p>
+<h2 id="121-best-time-to-buy-and-sell-stock">121. Best Time to Buy and Sell Stock</h2>
+<p>In this problem, we can only make at most one transaction to find the max profit. In this series of problem, if we buy stock on the first day, it&rsquo;s not necessary for us to sell on next day. We can choose one of the following days to get the max profit.<br>
+Idea: If we can only make one transaction, we should try to find biggest price gap which is <code>prices[n] - prices[m]</code> for <code>m = n+1, n+2, ... the last day</code>. Therefore, we use two variables: <code>mp</code> to store the least price so far, and <code>max</code> to store the biggest price gap so far.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">mp</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">mp</span><span class="o">){</span>
+        <span class="n">mp</span> <span class="o">=</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+    <span class="o">}</span>
+    
+    <span class="k">if</span><span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">mp</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">){</span>
+        <span class="n">max</span> <span class="o">=</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">mp</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">return</span> <span class="n">max</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If the biggest price gap for current price is bigger than max, then we can change it to be the max value. To the last day, we can get the max profit for making at most one transaction.<br>
+Luckily, this problem is at the easy level, and my writeup beats over 99% of submission on leetcode.</p>
+<h2 id="122-best-time-to-buy-and-sell-stock-ii">122. Best Time to Buy and Sell Stock II</h2>
+<p>In this problem, we can make many transactions as we can. Before coming up with idea, we need to figure out the strategy for this problem. Following is the visualization of prices:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">^                  ^
+|      ./          |           .
+|     ./           |    .     /
+|    ./            |  ./ \   /
+|   ./             |      \./
+|------------      |---------------
+</code></pre></td></tr></table>
+</div>
+</div><p>There are two maps for <code>p1, p2, p3, p4</code> in above. How can we choose buy and sell for the max profit? If we look at the second picture, the max profit would be <code>(p2 - p1) + (p4 - p3)</code> which is bigger than <code>(p4 - p1)</code>. If we look at the first picture, the max profit would be <code>(p2 - p1) + (p3 - p2) + (p4 - p3)</code> which is equal to <code>(p4 - p1)</code>. In other words, we only need to consider one day for each time. If the unit price gap is positive, then we can add to the profit.<br>
+Idea: If the price on the second day is bigger than the first day, buy it on the first day and sell it on the second day. Add the price gap to the max profit.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">]){</span>
+        <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">return</span> <span class="n">profit</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Luckily, this problem is also at the easy level, and my writeup beats over 93% of submission on leetcode.</p>
+<h2 id="123-best-time-to-buy-and-sell-stock-iii">123. Best Time to Buy and Sell Stock III</h2>
+<p>In this problem, we can make at most two transactions. This is a classic DP problem. Following are several ways to define the subproblem:<br>
+Idea: <code>dp[i][j]</code>: the max profit for completing i transactions before day j. There are two cases on the jth day: 1. <strong>We do nothing on the jth day, so the profit remain the same</strong>. 2. <strong>We sell stock on the jth day, the possible day for us to buy such stock would be from 0 to (j-1)</strong>. (We don&rsquo;t need to consider the case of buying on jth day because it must decrease the profit.) Therefore, our max profit can be found from following:
+$$ dp[i][j-1] $$
+$$ dp[i-1][0] + prices[j] - prices[0] $$
+$$ dp[i-1][1] + prices[j] - prices[1] $$
+$$ &hellip; $$
+$$ dp[i-1][j-1] + prices[j] - prices[j-1] $$
+The first one is the case 1, we do nothing on jth day, which means we already complete i transactions on (j-1)th day. From the second one to the last one is for case 2. Following is the source code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">3</span><span class="o">][</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="n">dp</span><span class="o">[</span><span class="n">0</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">3</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kt">int</span> <span class="n">maxprofit</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++){</span>
+        <span class="n">maxprofit</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">1</span><span class="o">]);</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">;</span> <span class="n">k</span><span class="o">++){</span>
+            <span class="n">maxprofit</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span>
+                <span class="n">maxprofit</span><span class="o">,</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">][</span><span class="n">k</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">k</span><span class="o">]</span>
+            <span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">maxprofit</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">2</span><span class="o">][</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="n">1</span><span class="o">];</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>However, this solution only beats over 6% of submission on leetcode because of high time complexity: O(n^2k). After reading the discussion board, I think I can swap two loops to make it faster:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">for</span><span class="o">(...</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span> <span class="o">...){</span>
+    <span class="k">for</span><span class="o">(...</span> <span class="n">i</span> <span class="o">&lt;=</span><span class="n">2</span> <span class="o">...){</span>
+        <span class="c1">// function body would also be changed
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The reason for being faster is that the first one switches to the next loop each time for O(n) while the next one switches to the next loop each time for O(1). However, I am still not satisfied with the solution.<br>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you are still not satisfied with the solution, define more subproblem with lower dimension. Take this problem for example, two dimensions for subproblem of first solution are number of transactions and time. If we try to lower the dimension, it could be <code>dp[transaction]</code>, <code>dp[time]</code>, or even just a variable!</div>
+        </div>
+    </div><br>
+Idea: If we define subproblem to be <code>dp[i]</code>: maxprofit got until ith day, it would be hard to define first transaction and the second transaction. However, we don&rsquo;t need to define array for maxprofit got until each transactions. There are four states in this problem, <strong>buy 1nd stock -&gt; sell 1nd stock -&gt; buy 2nd stock -&gt; sell 2nd stock</strong>. We eager to get the max profit on each state. For each state, we have two choices, one is remain the same, the other one is do the operation, find the choice for the bigger profit. Following is the source code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="n">buy1</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">,</span> <span class="n">sell1</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">buy2</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">,</span> <span class="n">sell2</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">:</span> <span class="n">prices</span><span class="o">){</span>
+    <span class="n">buy1</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">buy1</span><span class="o">,</span> <span class="o">-</span><span class="n">i</span><span class="o">);</span>
+    <span class="n">sell1</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">sell1</span><span class="o">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">buy1</span><span class="o">);</span>
+    <span class="n">buy2</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">buy2</span><span class="o">,</span> <span class="n">sell1</span> <span class="o">-</span> <span class="n">i</span><span class="o">);</span>
+    <span class="n">sell2</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">sell2</span><span class="o">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">buy2</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="k">return</span> <span class="n">sell2</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Take a look at the line 5, we eager to find the max profit for buying stock on first transaction. Therefore, our two choices are: 1. remain the same as previous, which is <code>buy1</code> 2. <code>0 - prices[i]</code>, which is <code>-i</code>.<br>
+Interesting, with this solution, we can beat over 92% of submission on leetcode.</p>
+<h2 id="188-best-time-to-buy-and-sell-stock-iv">188. Best Time to Buy and Sell Stock IV</h2>
+<p>In this problem, we can make at most k transactions. It is very similiar to the previous problem, so I use the same idea: <code>buy[0]</code>, <code>sell[0]</code>, <code>buy[1]</code>, <code>sell[1]</code>, &hellip; <code>buy[k]</code>, <code>sell[k]</code>. Following is the source code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">buy</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">k</span> <span class="o">+</span> <span class="n">1</span><span class="o">];</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">sell</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">k</span> <span class="o">+</span> <span class="n">1</span><span class="o">];</span>
+<span class="n">buy</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="n">buy</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="n">sell</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="o">;</span> <span class="n">j</span><span class="o">++){</span>
+        <span class="n">buy</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">buy</span><span class="o">[</span><span class="n">j</span><span class="o">],</span> <span class="n">sell</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">1</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="n">sell</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">sell</span><span class="o">[</span><span class="n">j</span><span class="o">],</span> <span class="n">buy</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">return</span> <span class="n">sell</span><span class="o">[</span><span class="n">k</span><span class="o">];</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>buy[0]</code> and <code>sell[0]</code> are defined for the convenience, one reason is for easy understanding, another reason is for convenience. Everything seems perfect; however, there are a trap hidden in this problem. I found that if k is so big, memory time limit would be exceeded. In fact, if <code>k*2 &gt;= prices.length</code>, we can reduce our time complexity from <code>O(n^2)</code> to <code>O(n)</code> because we can make transaction on each day, then the problem is same as &lt;122. Best Time to Buy and Sell Stock II&gt;.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span><span class="o">(</span><span class="n">k</span><span class="o">*</span><span class="n">2</span> <span class="o">&gt;=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">){</span>
+    <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">]){</span>
+            <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">profit</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>With this solution, we can beat over 95% of submission on leetcode.</p>
+<h2 id="309-best-time-to-buy-and-sell-stock-with-cooldown">309. Best Time to Buy and Sell Stock with Cooldown</h2>
+<p>There is no limit times for transactions, but there must be a cooldown day after each sell operations.<br>
+Idea: The problem is different from the previous one which is limited by k times. Therefore, I define the subproblem as <code>buy[i]</code>: max profit for holding stock on ith day and <code>sell[i]</code>: max profit for not holding stock on ith day. Following is the source code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">buy</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">sell</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+
+<span class="n">buy</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+<span class="n">sell</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="n">buy</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span>
+        <span class="n">buy</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">],</span>
+        <span class="o">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">1</span> <span class="o">?</span> <span class="n">sell</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">2</span><span class="o">]</span> <span class="o">:</span> <span class="n">0</span><span class="o">)</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>    
+    <span class="o">);</span>
+    <span class="n">sell</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span>
+        <span class="n">sell</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">],</span>
+        <span class="n">buy</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>
+    <span class="o">);</span>
+<span class="o">}</span>
+<span class="k">return</span> <span class="n">sell</span><span class="o">[</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="n">1</span><span class="o">];</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>First, there are two possibilities for holding stock on today: One is <strong>already holding on yesterday</strong>, which is <code>buy[i-1]</code>. Second is <strong>not holding on two days before and buying on today</strong>, which is <code>sell[i-2] - prices[i]</code>. However, index need to be larger than 1.<br>
+Second, there are also two possibilities for not holding stock on today: One is <strong>already not holding on yesterday</strong>, which is <code>sell[i-1]</code>. Second is <strong>hold on yesterday and sell on today</strong>, which is <code>buy[i-1] + prices[i]</code>.<br>
+However, this solution only beats over 61% of submission on leetcode.<br>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">After reading the discussion board, I think changing the name of array from <code>buy[]</code> and <code>sell[]</code> to <code>hold[]</code> and <code>not_hold[]</code> can help more people figure it out.</div>
+        </div>
+    </div><br>
+But, I am still not satisfied with current solution. Dig into the detail of the solution above, and I found that we can just use several variables instead of using arrays. <code>buy[i]</code> is only related with <code>buy[i-1]</code> and <code>sell[i-2]</code>. <code>sell[i]</code> is only related with <code>sell[i-1]</code> and <code>buy[i-1]</code>.<br>
+Idea: For the purpose of better understanding, I would like to change name to <code>hold</code> and <code>not_hold</code> now. The relationship between <code>hold[i]</code> and <code>hold[i-1]</code> can be defined as updating the value if bigger, and same for <code>not_hold</code>. In addition, we need another variable to store the <code>sell[i-2]</code>, which is called as <code>pre_not_hold</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="n">hold</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">not_hold</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">pre_not_hold</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span> <span class="o">:</span> <span class="n">prices</span><span class="o">){</span>
+    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">not_hold</span><span class="o">;</span>
+    <span class="n">hold</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">hold</span><span class="o">,</span> <span class="n">pre_not_hold</span> <span class="o">-</span> <span class="n">price</span><span class="o">);</span>
+    <span class="n">not_hold</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">not_hold</span><span class="o">,</span> <span class="n">hold</span> <span class="o">+</span> <span class="n">price</span><span class="o">);</span>
+    <span class="n">pre_not_hold</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="k">return</span> <span class="n">not_hold</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Following is my explanation for the solution above:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">dayi        dayi+1         dayi+2
+hold        hold
+not hold    not hold
+ |_______&gt; pre_not_hold
+</code></pre></td></tr></table>
+</div>
+</div><p>Nice, now our solution beats 100% of submission on leetcode!!</p>
+<h2 id="714-best-time-to-buy-and-sell-stock-with-transaction-fee">714. Best Time to Buy and Sell Stock with Transaction Fee</h2>
+<p>There is no limit times for transactions, but there is transaction fee with each transaction <strong>after sell the stock</strong>. Therefore, I would combine operation of sell and paying for fee to one state.<br>
+Idea: I use the same idea for array in the previous problem.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">hold</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">not_hold</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+<span class="n">hold</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+<span class="n">not_hold</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="c1">// today hold:
+</span><span class="c1"></span>    <span class="c1">// 1. yesterday already hold and today do nothing
+</span><span class="c1"></span>    <span class="c1">// 2. yesterday not hold and today buy
+</span><span class="c1"></span>    <span class="n">hold</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">hold</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">],</span> <span class="n">not_hold</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+    <span class="c1">// today not hold:
+</span><span class="c1"></span>    <span class="c1">// 1. yesterday already not hold and today do nothing
+</span><span class="c1"></span>    <span class="c1">// 2. yesterday buy and today sell and pay for transaction fee
+</span><span class="c1"></span>    <span class="n">not_hold</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">not_hold</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">],</span> <span class="n">hold</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">1</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">fee</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="k">return</span> <span class="n">not_hold</span><span class="o">[</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="n">1</span><span class="o">];</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>However, I am not satisfied with my solution because it only beats over 53% of submission on leetcode. Therefore, I would make a same change as previous problem to my solution. Following is my source code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="n">not_hold</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">hold</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+<span class="kt">int</span> <span class="n">pre_hold</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span> <span class="o">:</span> <span class="n">prices</span><span class="o">){</span>
+    <span class="n">hold</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">hold</span><span class="o">,</span> <span class="n">not_hold</span> <span class="o">-</span> <span class="n">price</span><span class="o">);</span>
+    <span class="n">not_hold</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">not_hold</span><span class="o">,</span> <span class="n">pre_hold</span> <span class="o">+</span> <span class="n">price</span> <span class="o">-</span> <span class="n">fee</span><span class="o">);</span>
+    <span class="n">pre_hold</span> <span class="o">=</span> <span class="n">hold</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="k">return</span> <span class="n">not_hold</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now, my solution beats over 94% of submission on leetcode!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>When we run into a problem, the first thing we should do is to draw a state machine map. How many states does the problem have? What is the relationship between these states? Then how to define subproblem? Which kind of subproblem can lead us to a convenient solution? Don&rsquo;t pursuit the most efficient solution at first, but implement with the solution which is easy to understand at first, and try to simplify our first solution to get higher grade.<br>
+To summarize this series of problems, I find that if number of transactions is limited, we need to define subproblem of each time transaction, e.g. <code>buy1</code>, <code>sell1</code>, <code>buy2</code>, <code>sell2</code> &hellip; <code>buyk</code>, <code>sellk</code>. Also we can turn it back to the problem of arbitrary k if k is bigger then <sup>prices.length</sup>/<sub>2</sub>! If k is arbitrary, we can use <code>hold1</code>, <code>not_hold1</code> &hellip; <code>holdi</code>, <code>not_holdi</code> where i is the day of price to define the subproblem, then update the max value of <code>hold</code> and <code>not_hold</code> on each day.<br>
+When I read through the solution on discussion board, some solution comes up with the most votes; however, it is hard for me to understand. Therefore, I think solution is not absolute, but we should choose presonally the one which is easy to understand for us.</p>
+<p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems" target="_blank" rel="noopener noreffer">This is also a good article to read for this series of stock problem</a></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2020-06-03</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/stock-problem-on-leetcode/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" data-title="Stock Problem on Leetcode" data-via="1pwnch" data-hashtags="Leetcode,Dynamic Programming,Best Time to Buy and Sell Stock"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" data-hashtag="Leetcode"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" data-title="Stock Problem on Leetcode" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" data-title="Stock Problem on Leetcode"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" data-title="Stock Problem on Leetcode"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" data-title="Stock Problem on Leetcode" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" data-title="Stock Problem on Leetcode" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/stock-problem-on-leetcode/" data-title="Stock Problem on Leetcode"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leetcode/">Leetcode</a>,&nbsp;<a href="/tags/dynamic-programming/">Dynamic Programming</a>,&nbsp;<a href="/tags/best-time-to-buy-and-sell-stock/">Best Time to Buy and Sell Stock</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2020-04-28-some-points-to-design-classes-and-interface/" class="prev" rel="prev" title="Some Points to design Classes and Interfaces"><i class="fas fa-angle-left fa-fw"></i>Some Points to design Classes and Interfaces</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">1pwnch</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"Copy to clipboard","maxShownLines":100},"comment":{},"headerMode":{"desktop":"fixed","mobile":"auto"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
