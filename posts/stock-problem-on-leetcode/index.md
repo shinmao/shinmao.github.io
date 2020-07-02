@@ -1,7 +1,6 @@
 # Stock Problem on Leetcode
 
 
-# Introduction
 I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!<!--more-->  
 * [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)  
 * [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)

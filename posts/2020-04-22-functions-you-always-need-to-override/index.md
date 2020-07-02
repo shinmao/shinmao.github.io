@@ -1,7 +1,6 @@
 # Functions You always need to Override
 
 
-# Introduction
 We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.<!--more-->
 
 ## Override equals

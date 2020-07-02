@@ -9,8 +9,7 @@
     <pubDate>Mon, 14 Oct 2019 02:42:35 &#43;0800</pubDate>
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/2019-10-14-analysis-and-mitigation-of-cve-2018-13379/</guid>
-    <description><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>In CVE-2018-13379, untrusted user could use the feature of <code>snprintf()</code> to launch the attack of <strong>arbitrary file reading</strong>.<br>
+    <description><![CDATA[<p>In CVE-2018-13379, untrusted user could use the feature of <code>snprintf()</code> to launch the attack of <strong>arbitrary file reading</strong>.<br>
 Isn&rsquo;t <code>snprintf()</code> already a safer function?<br>
 What kind of the feature can be used to bypass the limitation of file extension?<br>
 In this article, I would not only analyze the way of launching an attack, but also share some ideas of mitigation!</p>]]></description>

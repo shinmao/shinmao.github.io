@@ -9,7 +9,6 @@
     <pubDate>Wed, 03 Jun 2020 18:47:17 &#43;0800</pubDate>
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/stock-problem-on-leetcode/</guid>
-    <description><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!</p>]]></description>
+    <description><![CDATA[<p>I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!</p>]]></description>
 </item></channel>
 </rss>

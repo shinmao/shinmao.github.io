@@ -1,7 +1,6 @@
 # Amortized analysis
 
 
-# Why we need amortized analysis?
 We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be `number of operations * the largest cost of operations`. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.<!--more-->
 
 > Amortized analysis helps us to obtain a more accurate bound of worst case...

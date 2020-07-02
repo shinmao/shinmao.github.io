@@ -1,7 +1,6 @@
 # Conversion from mutable to immutable class
 
 
-# Introduction
 When it comes to immutability of java, it's important for us to know about data type of **String**. Each time we try to modify the string, it would create a new object with new value. When it comes to mutability of java, the sample data type for it would be such like array, and we can modify the elements on specific index. However, it is a more interesting topic in this article: **How to create an immutable class by ourselves?**<!--more-->
 
 ## Mutable first

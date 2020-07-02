@@ -9,7 +9,6 @@
     <pubDate>Tue, 07 Apr 2020 02:42:35 &#43;0800</pubDate>
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/</guid>
-    <description><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements <strong>while reading them in collection</strong>. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn&rsquo;t it?</p>]]></description>
+    <description><![CDATA[<p>Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements <strong>while reading them in collection</strong>. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn&rsquo;t it?</p>]]></description>
 </item></channel>
 </rss>

@@ -9,15 +9,13 @@
     <pubDate>Tue, 28 Apr 2020 02:42:35 &#43;0800</pubDate>
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/</guid>
-    <description><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>]]></description>
+    <description><![CDATA[<p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>]]></description>
 </item><item>
     <title>Conversion from mutable to immutable class</title>
     <link>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</link>
     <pubDate>Thu, 13 Feb 2020 02:42:35 &#43;0800</pubDate>
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</guid>
-    <description><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>When it comes to immutability of java, it&rsquo;s important for us to know about data type of <strong>String</strong>. Each time we try to modify the string, it would create a new object with new value. When it comes to mutability of java, the sample data type for it would be such like array, and we can modify the elements on specific index. However, it is a more interesting topic in this article: <strong>How to create an immutable class by ourselves?</strong></p>]]></description>
+    <description><![CDATA[<p>When it comes to immutability of java, it&rsquo;s important for us to know about data type of <strong>String</strong>. Each time we try to modify the string, it would create a new object with new value. When it comes to mutability of java, the sample data type for it would be such like array, and we can modify the elements on specific index. However, it is a more interesting topic in this article: <strong>How to create an immutable class by ourselves?</strong></p>]]></description>
 </item></channel>
 </rss>

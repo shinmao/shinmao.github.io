@@ -7,8 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Functions You always need to Override - 1pwnch</title>
         <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Functions You always need to Override" />
-<meta property="og:description" content="Introduction
-We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd." />
+<meta property="og:description" content="We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
@@ -18,8 +17,7 @@ We always can override non-final methods in parent class. However, we also need 
 <meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
 
 <meta name="twitter:title" content="Functions You always need to Override"/>
-<meta name="twitter:description" content="Introduction
-We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd."/>
+<meta name="twitter:description" content="We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd."/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -37,7 +35,7 @@ We always can override non-final methods in parent class. However, we also need 
                 "url": "http:\/\/blog.1pwnch.com\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "Obj Oriented in java, equals(), hashCode(), clone()","wordcount":  1338 ,
+            },"genre": "posts","keywords": "Obj Oriented in java, equals(), hashCode(), clone()","wordcount":  1337 ,
         "url": "http:\/\/blog.1pwnch.com\/posts\/2020-04-22-functions-you-always-need-to-override\/","datePublished": "2020-04-22T02:42:35+08:00","dateModified": "2020-04-22T02:42:35+08:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
@@ -125,7 +123,7 @@ We always can override non-final methods in parent class. However, we also need 
                                 <i class="far fa-folder fa-fw"></i>Java
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-04-22>2020-04-22</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 1338 words&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 1337 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>7 min&nbsp;</div>
         </div><div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
@@ -141,8 +139,7 @@ We always can override non-final methods in parent class. However, we also need 
     <li><a href="#reference">Reference</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
-<p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p>
+            </div><div class="content" id="content"><p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p>
 <h2 id="override-equals">Override equals</h2>
 <p>It is not necessary to override the equals method each time in child class. But if we really need overriding <code>equals()</code> to solve our problems, our <code>equals()</code> need to obey following contracts:</p>
 <ul>

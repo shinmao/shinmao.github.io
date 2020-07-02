@@ -1,7 +1,6 @@
 # Make it Generic
 
 
-# Introduction
 Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements **while reading them in collection**. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn't it?<!--more-->
 <!--more-->
 

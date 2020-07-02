@@ -1,7 +1,6 @@
 # Some Points to design Classes and Interfaces
 
-
-# Introduction  
+  
 This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it! <!--more-->
 
 ## Minimize accessibility and mutability

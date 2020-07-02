@@ -7,8 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Amortized analysis - 1pwnch</title>
         <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Amortized analysis" />
-<meta property="og:description" content="Why we need amortized analysis?
-We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis." />
+<meta property="og:description" content="We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
@@ -18,8 +17,7 @@ We always use worst case analysis (big-O) to calculate time complexity. However,
 <meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
 
 <meta name="twitter:title" content="Amortized analysis"/>
-<meta name="twitter:description" content="Why we need amortized analysis?
-We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis."/>
+<meta name="twitter:description" content="We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be number of operations * the largest cost of operations. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis."/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -37,7 +35,7 @@ We always use worst case analysis (big-O) to calculate time complexity. However,
                 "url": "http:\/\/blog.1pwnch.com\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "amortized analysis","wordcount":  710 ,
+            },"genre": "posts","keywords": "amortized analysis","wordcount":  705 ,
         "url": "http:\/\/blog.1pwnch.com\/posts\/2020-04-10-amortized-analysis\/","datePublished": "2020-04-10T02:42:35+08:00","dateModified": "2020-04-10T02:42:35+08:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
@@ -125,7 +123,7 @@ We always use worst case analysis (big-O) to calculate time complexity. However,
                                 <i class="far fa-folder fa-fw"></i>Algorithm
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-04-10>2020-04-10</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 710 words&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 705 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>4 min&nbsp;</div>
         </div><div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
@@ -140,8 +138,7 @@ We always use worst case analysis (big-O) to calculate time complexity. However,
     <li><a href="#reference">Reference</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="why-we-need-amortized-analysis">Why we need amortized analysis?</h1>
-<p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>
+            </div><div class="content" id="content"><p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>
 <blockquote>
 <p>Amortized analysis helps us to obtain a more accurate bound of worst case&hellip;</p>
 </blockquote>
