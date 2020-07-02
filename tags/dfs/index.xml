@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>DFS - Tag - 1pwnch</title>
+        <link>http://blog.1pwnch.com/tags/dfs/</link>
+        <description>DFS - Tag - 1pwnch</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Jul 2020 14:06:16 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/dfs/" rel="self" type="application/rss+xml" /><item>
+    <title>N Queens on Leetcode</title>
+    <link>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</link>
+    <pubDate>Thu, 02 Jul 2020 14:06:16 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</guid>
+    <description><![CDATA[Introduction I spend so much time on solving this problem. My challenge is not just solving this problem, but how to enhance the efficiency of my solution. The only one solution I come up with is DFS + check each of previous rows; however, this solution is too slow. Therefore, in following of my youtube video, I will explain four to five solutions, from idea building, coding by hands, and even debugging.]]></description>
+</item></channel>
+</rss>

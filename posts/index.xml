@@ -3,7 +3,14 @@
         <title>All Posts - 1pwnch</title>
         <link>http://blog.1pwnch.com/posts/</link>
         <description>All Posts | 1pwnch</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 03 Jun 2020 18:47:17 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Jul 2020 14:06:16 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>N Queens on Leetcode</title>
+    <link>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</link>
+    <pubDate>Thu, 02 Jul 2020 14:06:16 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</guid>
+    <description><![CDATA[Introduction I spend so much time on solving this problem. My challenge is not just solving this problem, but how to enhance the efficiency of my solution. The only one solution I come up with is DFS + check each of previous rows; however, this solution is too slow. Therefore, in following of my youtube video, I will explain four to five solutions, from idea building, coding by hands, and even debugging.]]></description>
+</item><item>
     <title>Stock Problem on Leetcode</title>
     <link>http://blog.1pwnch.com/posts/stock-problem-on-leetcode/</link>
     <pubDate>Wed, 03 Jun 2020 18:47:17 &#43;0800</pubDate>
