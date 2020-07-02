@@ -1,7 +1,6 @@
 # N Queens on Leetcode
 
 
-# Introduction
 I spend so much time on solving this problem. My challenge is not just solving this problem, but how to enhance the efficiency of my solution. The only one solution I come up with is **DFS + check each of previous rows**; however, this solution is too slow. Therefore, in following of my youtube video, I will explain four to five solutions, from idea building, coding by hands, and even debugging. Welcome to leave any comments on my video!
 
 ## Writeup
