@@ -3,7 +3,17 @@
         <title>1pwnch</title>
         <link>http://blog.1pwnch.com/</link>
         <description>This is My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Jul 2020 14:06:16 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 08 Jul 2020 02:35:31 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+    <title>Single Number II on Leetcode</title>
+    <link>http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/</link>
+    <pubDate>Wed, 08 Jul 2020 02:35:31 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/</guid>
+    <description><![CDATA[State machine is common and useful technique to be used in algorithm. I really recommend you to figure the last solution out thoroughly. Then try my extended problem!
+Writeup   The programming language in video is C++
+For the source code in video: Github
+Conclusion Solution 1 and 2 are similiar to each other, and they both try using 3*n + 1 to separate the single number from the others.]]></description>
+</item><item>
     <title>N Queens on Leetcode</title>
     <link>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</link>
     <pubDate>Thu, 02 Jul 2020 14:06:16 &#43;0800</pubDate>
