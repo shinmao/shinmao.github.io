@@ -5,44 +5,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Single Number II on Leetcode - 1pwnch</title>
-        <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Single Number II on Leetcode" />
-<meta property="og:description" content="State machine is common and useful technique to be used in algorithm. I really recommend you to figure the last solution out thoroughly. Then try my extended problem!
+        <title>Count of Smaller Nums After Self - 1pwnch</title>
+        <meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Count of Smaller Nums After Self" />
+<meta property="og:description" content="I use modified-BST to solve this problem. Each time inserting a new node takes O(logn) and also updates the value of count, and there are n nodes; therefore, I think the time complexity of my solution is O(nlogn).
 Writeup   The programming language in video is C&#43;&#43;
 For the source code in video: Github
-Conclusion Solution 1 and 2 are similiar to each other, and they both try using 3*n &#43; 1 to separate the single number from the others." />
+Conclusion  Order of input: left to right or right to left? Definition of node: what member should we define for each nodes in tree?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" />
+<meta property="og:url" content="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
-<meta property="article:published_time" content="2020-07-08T02:35:31+08:00" />
-<meta property="article:modified_time" content="2020-07-08T02:35:31+08:00" />
+<meta property="article:published_time" content="2020-07-14T20:57:55+08:00" />
+<meta property="article:modified_time" content="2020-07-14T20:57:55+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
 
-<meta name="twitter:title" content="Single Number II on Leetcode"/>
-<meta name="twitter:description" content="State machine is common and useful technique to be used in algorithm. I really recommend you to figure the last solution out thoroughly. Then try my extended problem!
+<meta name="twitter:title" content="Count of Smaller Nums After Self"/>
+<meta name="twitter:description" content="I use modified-BST to solve this problem. Each time inserting a new node takes O(logn) and also updates the value of count, and there are n nodes; therefore, I think the time complexity of my solution is O(nlogn).
 Writeup   The programming language in video is C&#43;&#43;
 For the source code in video: Github
-Conclusion Solution 1 and 2 are similiar to each other, and they both try using 3*n &#43; 1 to separate the single number from the others."/>
+Conclusion  Order of input: left to right or right to left? Definition of node: what member should we define for each nodes in tree?"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" /><link rel="prev" href="http://blog.1pwnch.com/posts/n-queens-on-leetcode/" /><link rel="next" href="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" /><link rel="prev" href="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Single Number II on Leetcode",
+        "headline": "Count of Smaller Nums After Self",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http:\/\/blog.1pwnch.com\/posts\/single-number-ii-on-leetcode\/"
+            "@id": "http:\/\/blog.1pwnch.com\/posts\/count-of-smaller-nums-after-self\/"
         },"image": {
                 "@type": "ImageObject",
                 "url": "http:\/\/blog.1pwnch.com\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "Leetcode, Truth table, DFS","wordcount":  107 ,
-        "url": "http:\/\/blog.1pwnch.com\/posts\/single-number-ii-on-leetcode\/","datePublished": "2020-07-08T02:35:31+08:00","dateModified": "2020-07-08T02:35:31+08:00","publisher": {
+            },"genre": "posts","keywords": "Leetcode, BST","wordcount":  95 ,
+        "url": "http:\/\/blog.1pwnch.com\/posts\/count-of-smaller-nums-after-self\/","datePublished": "2020-07-14T20:57:55+08:00","dateModified": "2020-07-14T20:57:55+08:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -123,13 +123,13 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">Single Number II on Leetcode</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">Count of Smaller Nums After Self</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>1pwnch</a></span>&nbsp;
                     <span class="post-category">included in<a href="/categories/algorithm/">
                                 <i class="far fa-folder fa-fw"></i>Algorithm
                             </a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-07-08>2020-07-08</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 107 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-07-14>2020-07-14</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 95 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>1 min&nbsp;</div>
         </div><div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
@@ -142,44 +142,47 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>State machine is common and useful technique to be used in algorithm. I really recommend you to figure the last solution out thoroughly. Then try my extended problem!</p>
+            </div><div class="content" id="content"><p>I use modified-BST to solve this problem. Each time inserting a new node takes <code>O(logn)</code> and also updates the value of count, and there are n nodes; therefore, I think the time complexity of my solution is <code>O(nlogn)</code>.</p>
 <h2 id="writeup">Writeup</h2>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube-nocookie.com/embed/eqJ__mXU4DE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+  <iframe src="https://www.youtube-nocookie.com/embed/jpGzPwd0YqQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
 <p>The programming language in video is C++</p>
-<p>For the source code in video: <a href="https://github.com/shinmao/algorithm/blob/main/leetcode/leetcode137.cpp" target="_blank" rel="noopener noreffer">Github</a></p>
+<p>For the source code in video: <a href="https://github.com/shinmao/algorithm/blob/main/leetcode/leetcode315.cpp" target="_blank" rel="noopener noreffer">Github</a></p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Solution 1 and 2 are similiar to each other, and they both try using <code>3*n + 1</code> to separate the single number from the others. Solution 3 uses state machine and truth table to get the answer, with the solution we can even extend to other cases: e.g. my extended practice in video. Help this video can help you go through this challenge.</p>
+<ul>
+<li>Order of input: left to right or right to left?</li>
+<li>Definition of node: what member should we define for each nodes in tree?</li>
+<li>Two condition to be considered for this problem: whether there are left childs of root node or not?</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>The article was updated on 2020-07-08</span>
+                <span>The article was updated on 2020-07-14</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/posts/single-number-ii-on-leetcode/index.md" target="_blank">Read Markdown</a>
+                            <a class="link-to-markdown" href="/posts/count-of-smaller-nums-after-self/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" data-title="Single Number II on Leetcode" data-via="1pwnch" data-hashtags="Leetcode,Truth table,DFS"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" data-hashtag="Leetcode"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" data-title="Single Number II on Leetcode" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" data-title="Single Number II on Leetcode"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" data-title="Single Number II on Leetcode"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" data-title="Single Number II on Leetcode" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" data-title="Single Number II on Leetcode" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/" data-title="Single Number II on Leetcode"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" data-title="Count of Smaller Nums After Self" data-via="1pwnch" data-hashtags="Leetcode,BST"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" data-hashtag="Leetcode"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" data-title="Count of Smaller Nums After Self" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" data-title="Count of Smaller Nums After Self"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" data-title="Count of Smaller Nums After Self"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" data-title="Count of Smaller Nums After Self" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" data-title="Count of Smaller Nums After Self" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/" data-title="Count of Smaller Nums After Self"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leetcode/">Leetcode</a>,&nbsp;<a href="/tags/truth-table/">Truth table</a>,&nbsp;<a href="/tags/dfs/">DFS</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leetcode/">Leetcode</a>,&nbsp;<a href="/tags/bst/">BST</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/n-queens-on-leetcode/" class="prev" rel="prev" title="N Queens on Leetcode"><i class="fas fa-angle-left fa-fw"></i>N Queens on Leetcode</a>
-            <a href="/posts/count-of-smaller-nums-after-self/" class="next" rel="next" title="Count of Smaller Nums After Self">Count of Smaller Nums After Self<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/single-number-ii-on-leetcode/" class="prev" rel="prev" title="Single Number II on Leetcode"><i class="fas fa-angle-left fa-fw"></i>Single Number II on Leetcode</a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">

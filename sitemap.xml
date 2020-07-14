@@ -2,14 +2,16 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://blog.1pwnch.com/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://blog.1pwnch.com/categories/algorithm/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://blog.1pwnch.com/categories/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.1pwnch.com/</loc><lastmod>2020-07-14T20:57:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.1pwnch.com/categories/algorithm/</loc><lastmod>2020-07-14T20:57:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.1pwnch.com/tags/bst/</loc><lastmod>2020-07-14T20:57:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.1pwnch.com/categories/</loc><lastmod>2020-07-14T20:57:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/</loc><lastmod>2020-07-14T20:57:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.1pwnch.com/tags/leetcode/</loc><lastmod>2020-07-14T20:57:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.1pwnch.com/posts/</loc><lastmod>2020-07-14T20:57:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.1pwnch.com/tags/</loc><lastmod>2020-07-14T20:57:55&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.1pwnch.com/tags/dfs/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://blog.1pwnch.com/tags/leetcode/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://blog.1pwnch.com/posts/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://blog.1pwnch.com/tags/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.1pwnch.com/tags/truth-table/</loc><lastmod>2020-07-08T02:35:31&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.1pwnch.com/tags/bitwise-trick/</loc><lastmod>2020-07-02T14:06:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</loc><lastmod>2020-07-02T14:06:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
