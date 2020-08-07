@@ -3,7 +3,15 @@
         <title>1pwnch</title>
         <link>http://blog.1pwnch.com/</link>
         <description>This is My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 14 Jul 2020 20:57:55 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 07 Aug 2020 11:27:01 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+    <title>The Skyline Problem</title>
+    <link>http://blog.1pwnch.com/posts/the-skyline-problem/</link>
+    <pubDate>Fri, 07 Aug 2020 11:27:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/the-skyline-problem/</guid>
+    <description><![CDATA[UVa 105 - The Skyline Problem
+This problem tests the application of priority queue which is implemented with min-heap. Min-heap takes O(logn) to insert a new node. It takes O(1) to extract current minimum value and O(logn) to sort again. With this data structure, I can iterate the boundaries of building in ascending order. My idea is recording all boundaries and associated heights in priority queue and current existing height in multiset.]]></description>
+</item><item>
     <title>Count of Smaller Nums After Self</title>
     <link>http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/</link>
     <pubDate>Tue, 14 Jul 2020 20:57:55 &#43;0800</pubDate>
@@ -72,15 +80,5 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</guid>
     <description><![CDATA[<p>When it comes to immutability of java, it&rsquo;s important for us to know about data type of <strong>String</strong>. Each time we try to modify the string, it would create a new object with new value. When it comes to mutability of java, the sample data type for it would be such like array, and we can modify the elements on specific index. However, it is a more interesting topic in this article: <strong>How to create an immutable class by ourselves?</strong></p>]]></description>
-</item><item>
-    <title>Analysis and Mitigation of CVE-2018-13379</title>
-    <link>http://blog.1pwnch.com/posts/2019-10-14-analysis-and-mitigation-of-cve-2018-13379/</link>
-    <pubDate>Mon, 14 Oct 2019 02:42:35 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/2019-10-14-analysis-and-mitigation-of-cve-2018-13379/</guid>
-    <description><![CDATA[<p>In CVE-2018-13379, untrusted user could use the feature of <code>snprintf()</code> to launch the attack of <strong>arbitrary file reading</strong>.<br>
-Isn&rsquo;t <code>snprintf()</code> already a safer function?<br>
-What kind of the feature can be used to bypass the limitation of file extension?<br>
-In this article, I would not only analyze the way of launching an attack, but also share some ideas of mitigation!</p>]]></description>
 </item></channel>
 </rss>

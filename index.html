@@ -12,7 +12,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://blog.1pwnch.com/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
-<meta property="og:updated_time" content="2020-07-14T20:57:55+08:00" />
+<meta property="og:updated_time" content="2020-08-07T11:27:01+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
 
@@ -98,11 +98,23 @@
                 <div class="container"><div class="page home"><div class="home-profile"><div class="home-avatar"><a href="/posts/" title="Posts"><img
         class="lazyload"
         src="/svg/loading/small.min.svg"
-        data-src="/fb.jpg"
-        data-srcset="/fb.jpg, /fb.jpg 1.5x, /fb.jpg 2x"
+        data-src="/water"
+        data-srcset="/water, /water 1.5x, /water 2x"
         data-sizes="auto"
         alt="Posts"
-        title="Posts" /></a></div><h1 class="home-title">1pwnch</h1><div class="social-links"><a href="https://github.com/shinmao" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://linkedin.com/in/hung-mao-chen-a0850814b" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw"></i></a><a href="https://twitter.com/1pwnch" title="Twitter" target="_blank" rel="noopener noreffer me"><i class="fab fa-twitter fa-fw"></i></a><a href="mailto:shinmaox2016@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
+        title="Posts" /></a></div><h1 class="home-title">1pwnch</h1><div class="social-links"><a href="https://github.com/shinmao" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://linkedin.com/in/hung-mao-chen-a0850814b" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw"></i></a><a href="https://twitter.com/1pwnch" title="Twitter" target="_blank" rel="noopener noreffer me"><i class="fab fa-twitter fa-fw"></i></a><a href="https://www.youtube.com/channel/UC9jW5yQu-TsS2NYP0Ya2gIg" title="YouTube" target="_blank" rel="noopener noreffer me"><i class="fab fa-youtube fa-fw"></i></a><a href="mailto:shinmaox2016@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/the-skyline-problem/">The Skyline Problem</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>1pwnch</a></span>&nbsp;<span class="post-publish">
+            published on&nbsp;<time datetime=2020-08-07>2020-08-07</time>
+        </span>&nbsp;
+            <span class="post-category">included in<a href="/categories/algorithm/">
+                        <i class="far fa-folder fa-fw"></i>Algorithm
+                    </a></span></div><div class="content">UVa 105 - The Skyline Problem
+This problem tests the application of priority queue which is implemented with min-heap. Min-heap takes O(logn) to insert a new node. It takes O(1) to extract current minimum value and O(logn) to sort again. With this data structure, I can iterate the boundaries of building in ascending order. My idea is recording all boundaries and associated heights in priority queue and current existing height in multiset.</div><div class="post-footer">
+        <a href="/posts/the-skyline-problem/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/uva/">UVa</a>,&nbsp;<a href="/tags/priority-queue/">Priority Queue</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/count-of-smaller-nums-after-self/">Count of Smaller Nums After Self</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>1pwnch</a></span>&nbsp;<span class="post-publish">
@@ -163,17 +175,6 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
                     </a></span></div><div class="content"><p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p></div><div class="post-footer">
         <a href="/posts/2020-04-28-some-points-to-design-classes-and-interface/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/obj-oriented-in-java/">Obj Oriented in java</a>,&nbsp;<a href="/tags/mutability/">mutability</a>,&nbsp;<a href="/tags/composition/">composition</a>,&nbsp;<a href="/tags/inheritance/">inheritance</a>,&nbsp;<a href="/tags/abstract-class/">abstract class</a>,&nbsp;<a href="/tags/abstract-interface/">abstract interface</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2020-04-22-functions-you-always-need-to-override/">Functions You always need to Override</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>1pwnch</a></span>&nbsp;<span class="post-publish">
-            published on&nbsp;<time datetime=2020-04-22>2020-04-22</time>
-        </span>&nbsp;
-            <span class="post-category">included in<a href="/categories/java/">
-                        <i class="far fa-folder fa-fw"></i>Java
-                    </a></span></div><div class="content"><p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p></div><div class="post-footer">
-        <a href="/posts/2020-04-22-functions-you-always-need-to-override/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/obj-oriented-in-java/">Obj Oriented in java</a>,&nbsp;<a href="/tags/equals/">equals()</a>,&nbsp;<a href="/tags/hashcode/">hashCode()</a>,&nbsp;<a href="/tags/clone/">clone()</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item active">
                     <span class="page-link">

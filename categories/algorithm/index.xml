@@ -3,7 +3,15 @@
         <title>Algorithm - Category - 1pwnch</title>
         <link>http://blog.1pwnch.com/categories/algorithm/</link>
         <description>Algorithm - Category - 1pwnch</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 14 Jul 2020 20:57:55 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/algorithm/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 07 Aug 2020 11:27:01 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/algorithm/" rel="self" type="application/rss+xml" /><item>
+    <title>The Skyline Problem</title>
+    <link>http://blog.1pwnch.com/posts/the-skyline-problem/</link>
+    <pubDate>Fri, 07 Aug 2020 11:27:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/the-skyline-problem/</guid>
+    <description><![CDATA[UVa 105 - The Skyline Problem
+This problem tests the application of priority queue which is implemented with min-heap. Min-heap takes O(logn) to insert a new node. It takes O(1) to extract current minimum value and O(logn) to sort again. With this data structure, I can iterate the boundaries of building in ascending order. My idea is recording all boundaries and associated heights in priority queue and current existing height in multiset.]]></description>
+</item><item>
     <title>Count of Smaller Nums After Self</title>
     <link>http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/</link>
     <pubDate>Tue, 14 Jul 2020 20:57:55 &#43;0800</pubDate>
