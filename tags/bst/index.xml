@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>BST - Tag - 1pwnch</title>
+        <title>BST - Tag - Rafael</title>
         <link>http://blog.1pwnch.com/tags/bst/</link>
-        <description>BST - Tag - 1pwnch</description>
+        <description>BST - Tag - Rafael</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 14 Jul 2020 20:57:55 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/bst/" rel="self" type="application/rss+xml" /><item>
     <title>Count of Smaller Nums After Self</title>
     <link>http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/</link>

@@ -1,9 +1,26 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - 1pwnch</title>
+        <title>All Posts - Rafael</title>
         <link>http://blog.1pwnch.com/posts/</link>
-        <description>All Posts | 1pwnch</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 07 Aug 2020 11:27:01 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+        <description>All Posts | Rafael</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Feel Free to Contact Me</title>
+    <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
+    <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
+    <description><![CDATA[Nice to meet you, I am Rafael.
+So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>Explore Binary Search</title>
+    <link>http://blog.1pwnch.com/posts/explore-binary-search/</link>
+    <pubDate>Mon, 17 Aug 2020 17:30:05 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/explore-binary-search/</guid>
+    <description><![CDATA[查找一個數組裡面的目標，我們能夠想到最快的方法可能是hash table，然而當數組很大時，內存就會爆掉！第二個選擇則是binary search。Binary search的觀念看似很簡單，然而卻有多種實現方法！最近在做一些題目時(包括面試時)發現binary search的應用面其實很廣，只要dataset有單調性，我們都可以用binary search把時間複雜度縮小到對數等級。特別感謝Leetcode出了Explore篇章幫助我進行摸索。下面我也會針對Explore上的題目做出解析來整理Binary search的訣竅！
+解題過程  所有的元素為unique，尋找唯一的index
+ Explore Binary Search 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  class Solution { public: int search(vector&lt;int&gt;&amp; nums, int target) { if(target &lt; -9999 || target &gt; 9999) return -1; int start = 0, end = nums.size() - 1, mid = 0; while(start &lt;= end) { mid = start + ((end - start) &gt;&gt; 1); // remember your bracket  if(nums[mid] == target) return mid; if(nums[mid] &lt; target) start = mid + 1; else end = mid - 1; } return -1; } };   以上我的解法只有哪到66%的成績，但在我審了一遍前段的code之後，我推斷時間複雜度只差在I/O優化！]]></description>
+</item><item>
     <title>The Skyline Problem</title>
     <link>http://blog.1pwnch.com/posts/the-skyline-problem/</link>
     <pubDate>Fri, 07 Aug 2020 11:27:01 &#43;0800</pubDate>
@@ -66,19 +83,5 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/</guid>
     <description><![CDATA[<p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>]]></description>
-</item><item>
-    <title>Make it Generic</title>
-    <link>http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/</link>
-    <pubDate>Tue, 07 Apr 2020 02:42:35 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/2020-04-07-make-it-generic/</guid>
-    <description><![CDATA[<p>Since Java 5, generic type has become significant part of Java. Why should we prefer generic type to raw type? Before arise of generic type, we need to convert the type of elements <strong>while reading them in collection</strong>. However, if the conversion fails, it would cause to runtime error. With generic type, we can tell compiler what type should be limited for collection in advance. If there exists an error, get compiler error before it becomes a runtime error is much better, isn&rsquo;t it?</p>]]></description>
-</item><item>
-    <title>Conversion from mutable to immutable class</title>
-    <link>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</link>
-    <pubDate>Thu, 13 Feb 2020 02:42:35 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/2020-02-13-conversion-from-mutable-to-immutable-class/</guid>
-    <description><![CDATA[<p>When it comes to immutability of java, it&rsquo;s important for us to know about data type of <strong>String</strong>. Each time we try to modify the string, it would create a new object with new value. When it comes to mutability of java, the sample data type for it would be such like array, and we can modify the elements on specific index. However, it is a more interesting topic in this article: <strong>How to create an immutable class by ourselves?</strong></p>]]></description>
 </item></channel>
 </rss>

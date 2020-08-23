@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Truth table - Tag - 1pwnch</title>
+        <title>Truth table - Tag - Rafael</title>
         <link>http://blog.1pwnch.com/tags/truth-table/</link>
-        <description>Truth table - Tag - 1pwnch</description>
+        <description>Truth table - Tag - Rafael</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 08 Jul 2020 02:35:31 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/truth-table/" rel="self" type="application/rss+xml" /><item>
     <title>Single Number II on Leetcode</title>
     <link>http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/</link>

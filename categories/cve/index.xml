@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>CVE - Category - 1pwnch</title>
+        <title>CVE - Category - Rafael</title>
         <link>http://blog.1pwnch.com/categories/cve/</link>
-        <description>CVE - Category - 1pwnch</description>
+        <description>CVE - Category - Rafael</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 14 Oct 2019 02:42:35 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/cve/" rel="self" type="application/rss+xml" /><item>
     <title>Analysis and Mitigation of CVE-2018-13379</title>
     <link>http://blog.1pwnch.com/posts/2019-10-14-analysis-and-mitigation-of-cve-2018-13379/</link>

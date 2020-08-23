@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Explore Binary Search - Rafael</title>
+        <meta name="Description" content="If you are interested in my chinese article, read my first article to contact me :)"><meta property="og:title" content="Explore Binary Search" />
+<meta property="og:description" content="查找一個數組裡面的目標，我們能夠想到最快的方法可能是hash table，然而當數組很大時，內存就會爆掉！第二個選擇則是binary search。Binary search的觀念看似很簡單，然而卻有多種實現方法！最近在做一些題目時(包括面試時)發現binary search的應用面其實很廣，只要dataset有單調性，我們都可以用binary search把時間複雜度縮小到對數等級。特別感謝Leetcode出了Explore篇章幫助我進行摸索。下面我也會針對Explore上的題目做出解析來整理Binary search的訣竅！
+解題過程  所有的元素為unique，尋找唯一的index
+ Explore Binary Search 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  class Solution { public: int search(vector&lt;int&gt;&amp; nums, int target) { if(target &lt; -9999 || target &gt; 9999) return -1; int start = 0, end = nums.size() - 1, mid = 0; while(start &lt;= end) { mid = start &#43; ((end - start) &gt;&gt; 1); // remember your bracket  if(nums[mid] == target) return mid; if(nums[mid] &lt; target) start = mid &#43; 1; else end = mid - 1; } return -1; } };   以上我的解法只有哪到66%的成績，但在我審了一遍前段的code之後，我推斷時間複雜度只差在I/O優化！" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.1pwnch.com/posts/explore-binary-search/" />
+<meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
+<meta property="article:published_time" content="2020-08-17T17:30:05+08:00" />
+<meta property="article:modified_time" content="2020-08-17T17:30:05+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
+
+<meta name="twitter:title" content="Explore Binary Search"/>
+<meta name="twitter:description" content="查找一個數組裡面的目標，我們能夠想到最快的方法可能是hash table，然而當數組很大時，內存就會爆掉！第二個選擇則是binary search。Binary search的觀念看似很簡單，然而卻有多種實現方法！最近在做一些題目時(包括面試時)發現binary search的應用面其實很廣，只要dataset有單調性，我們都可以用binary search把時間複雜度縮小到對數等級。特別感謝Leetcode出了Explore篇章幫助我進行摸索。下面我也會針對Explore上的題目做出解析來整理Binary search的訣竅！
+解題過程  所有的元素為unique，尋找唯一的index
+ Explore Binary Search 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  class Solution { public: int search(vector&lt;int&gt;&amp; nums, int target) { if(target &lt; -9999 || target &gt; 9999) return -1; int start = 0, end = nums.size() - 1, mid = 0; while(start &lt;= end) { mid = start &#43; ((end - start) &gt;&gt; 1); // remember your bracket  if(nums[mid] == target) return mid; if(nums[mid] &lt; target) start = mid &#43; 1; else end = mid - 1; } return -1; } };   以上我的解法只有哪到66%的成績，但在我審了一遍前段的code之後，我推斷時間複雜度只差在I/O優化！"/>
+<meta name="application-name" content="Rafael">
+<meta name="apple-mobile-web-app-title" content="Rafael"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/explore-binary-search/" /><link rel="prev" href="http://blog.1pwnch.com/posts/the-skyline-problem/" /><link rel="next" href="http://blog.1pwnch.com/posts/feel-free-to-contact-me/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Explore Binary Search",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.1pwnch.com\/posts\/explore-binary-search\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Leetcode, Binary Search","wordcount":  1682 ,
+        "url": "http:\/\/blog.1pwnch.com\/posts\/explore-binary-search\/","datePublished": "2020-08-17T17:30:05+08:00","dateModified": "2020-08-17T17:30:05+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "Rafael"
+            },"description": ""
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rafael">1pwnch</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rafael">1pwnch</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Explore Binary Search</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/algorithm/">
+                                <i class="far fa-folder fa-fw"></i>Algorithm
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-08-17>2020-08-17</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 1682 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>8 min&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#解題過程">解題過程</a>
+      <ul>
+        <li><a href="#explore-binary-searchhttpsleetcodecomexplorelearncardbinary-search138background1038"><a href="https://leetcode.com/explore/learn/card/binary-search/138/background/1038/">Explore Binary Search</a></a></li>
+        <li><a href="#find-first-and-last-position-of-element-in-sorted-arrayhttpsleetcodecomproblemsfind-first-and-last-position-of-element-in-sorted-array"><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">Find First and Last Position of Element in Sorted Array</a></a></li>
+        <li><a href="#first-bad-versionhttpsleetcodecomproblemsfirst-bad-version"><a href="https://leetcode.com/problems/first-bad-version/">First Bad Version</a></a></li>
+        <li><a href="#find-peak-elementhttpsleetcodecomproblemsfind-peak-element"><a href="https://leetcode.com/problems/find-peak-element/">Find peak element</a></a></li>
+        <li><a href="#find-minimum-in-rotated-sorted-arrayhttpsleetcodecomproblemsfind-minimum-in-rotated-sorted-array"><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/">Find minimum in rotated sorted array</a></a></li>
+        <li><a href="#find-first-and-last-position-of-element-in-sorted-arrayhttpsleetcodecomproblemsfind-first-and-last-position-of-element-in-sorted-array-1"><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">Find First and Last Position of Element in Sorted Array</a></a></li>
+        <li><a href="#find-k-closest-elementshttpsleetcodecomproblemsfind-k-closest-elements"><a href="https://leetcode.com/problems/find-k-closest-elements/">Find K Closest Elements</a></a></li>
+        <li><a href="#cloest-binary-search-tree-valuehttpsleetcodecomproblemsclosest-binary-search-tree-valuesubmissions"><a href="https://leetcode.com/problems/closest-binary-search-tree-value/submissions/">Cloest Binary Search Tree value</a></a></li>
+        <li><a href="#search-in-a-sorted-array-of-unknown-sizehttpsleetcodecomproblemssearch-in-a-sorted-array-of-unknown-sizesubmissions"><a href="https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/submissions/">Search in a Sorted Array of Unknown Size</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#九章大神模板---試解析">九章大神模板 - 試解析</a></li>
+    <li><a href="#結論">結論</a></li>
+    <li><a href="#參考">參考</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>查找一個數組裡面的目標，我們能夠想到最快的方法可能是hash table，然而當數組很大時，內存就會爆掉！第二個選擇則是binary search。Binary search的觀念看似很簡單，然而卻有多種實現方法！最近在做一些題目時(包括面試時)發現binary search的應用面其實很廣，只要dataset有單調性，我們都可以用binary search把時間複雜度縮小到對數等級。特別感謝Leetcode出了Explore篇章幫助我進行摸索。下面我也會針對Explore上的題目做出解析來整理Binary search的訣竅！</p>
+<h2 id="解題過程">解題過程</h2>
+<blockquote>
+<p>所有的元素為unique，尋找唯一的index</p>
+</blockquote>
+<h3 id="explore-binary-searchhttpsleetcodecomexplorelearncardbinary-search138background1038"><a href="https://leetcode.com/explore/learn/card/binary-search/138/background/1038/" target="_blank" rel="noopener noreffer">Explore Binary Search</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">search</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">9999</span> <span class="o">||</span> <span class="n">target</span> <span class="o">&gt;</span> <span class="mi">9999</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>   <span class="c1">// remember your bracket
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="k">return</span> <span class="n">mid</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> 
+                <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>以上我的解法只有哪到66%的成績，但在我審了一遍前段的code之後，我推斷時間複雜度只差在I/O優化！</p>
+<h3 id="find-first-and-last-position-of-element-in-sorted-arrayhttpsleetcodecomproblemsfind-first-and-last-position-of-element-in-sorted-array"><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" rel="noopener noreffer">Find First and Last Position of Element in Sorted Array</a></h3>
+<p>我一開始的想法是先找到旋轉sorted array的pivot，再透過這個pivot判斷目標應該在哪邊。獲取了69.9%的成績。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">search</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// find rotate pivot
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">rotate</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="n">rotate</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">rotate</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// if rotated, divide by rotate pivot
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">rotate</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="k">return</span> <span class="n">rotate</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">rotate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="n">target</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">rotate</span><span class="p">])</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&lt;=</span> <span class="o">*</span><span class="p">(</span><span class="o">--</span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">()))</span> <span class="n">start</span> <span class="o">=</span> <span class="n">rotate</span><span class="p">;</span>   <span class="c1">// remember *(--nums.end()) instead of *(nums.end())...
+</span><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&gt;=</span> <span class="o">*</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">()))</span> <span class="n">end</span> <span class="o">=</span> <span class="n">rotate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// BS
+</span><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="k">return</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>看這成績就知道，我的解法肯定可以優化。我認為我在尋找pivot的時候花了多餘的時間:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="p">...</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="n">rotate</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>事實上，我可以把這段合併進while-loop。每一次iteration選取中點時，中點的左右狀況只可能是 <code>&lt;升序/混序&gt;</code>，<code>&lt;混序/升序&gt;</code>，或是<code>&lt;升序/升序&gt;</code>。而要判斷目前的段落是哪一種序別，我只需要比較兩個端點的大小！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="p">...</span>
+<span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="k">return</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">])</span> <span class="p">{</span>
+        <span class="c1">// left is in order
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">target</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">])</span> <span class="p">{</span>
+            <span class="c1">// target is in left section
+</span><span class="c1"></span>            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>   
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// right is in order
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">target</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">])</span> <span class="p">{</span>
+            <span class="c1">// target is in right section
+</span><span class="c1"></span>            <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>所以我的思路是</p>
+<ol>
+<li>先選取升序的一邊</li>
+<li>判斷target有沒有可能在裡面</li>
+<li>如果可能，再用binary search去搜；否則，target就在另外一邊或者根本沒有它</li>
+<li>回到第一步&hellip;</li>
+</ol>
+<p>太棒了！這樣修改之後我的成績高達96.5%。估計是因為少了<code>O(n)</code>的時間&hellip;</p>
+<blockquote>
+<p>元素可不為unique，access當前index和他右邊的鄰居，用右邊的鄰居來選邊</p>
+</blockquote>
+<h3 id="first-bad-versionhttpsleetcodecomproblemsfirst-bad-version"><a href="https://leetcode.com/problems/first-bad-version/" target="_blank" rel="noopener noreffer">First Bad Version</a></h3>
+<p>這個part裡的題目又有了些變化，但是我們還是可以發現單調性。下面是我AC 100%的解法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">firstBadVersion</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">isBadVersion</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isBadVersion</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">isBadVersion</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">?</span> <span class="nl">start</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>這個解法中最需要注意的是我不能使用<strong>start &lt;= end</strong>，因為這樣會導致死循環。讓我們來看看為何會有死循環: <code>start</code>我定義為第一個bad version。悲劇會發生在<code>start == end</code>時並且他們都回傳<code>true</code>。<code>start == (end = mid)</code>的條件會永遠成立因為end會永遠選mid那邊！</p>
+<h3 id="find-peak-elementhttpsleetcodecomproblemsfind-peak-element"><a href="https://leetcode.com/problems/find-peak-element/" target="_blank" rel="noopener noreffer">Find peak element</a></h3>
+<p>下一個挑戰需要注意題目說的<code>nums[-1] = nums[n] = -∞</code>，所以題目不管怎樣都至少會有一個peak！那我要如何在每一個binary search選邊蒐呢？我開始分析每一種可能的情況，在選定一個中點時，中點的鄰居只有四種情況:</p>
+<ol>
+<li>升序 -&gt; pivot point -&gt; 升序</li>
+<li>降序 -&gt; pivot point -&gt; 升序</li>
+<li>降序 -&gt; pivot point -&gt; 降序</li>
+<li>升序 -&gt; pivot point -&gt; 降序 =&gt; pivot正是peak!</li>
+</ol>
+<p>在情況1和2，我會選擇右邊下去搜，或者至少我可以把tail當成peak。在情況3，我會選擇左邊下去搜：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">findPeakElement</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">start</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我的思路: <code>start</code>被定義為peak。注意到這行程式碼: <code>else end = mid</code>，這行涵蓋了狀況3和4的邏輯。我們也不需要擔心這行會忽略第四種情況的邏輯，因為while loop在<code>start == end = mid</code>時就會break了! 我的解法獲取了86.7%的成績。</p>
+<h3 id="find-minimum-in-rotated-sorted-arrayhttpsleetcodecomproblemsfind-minimum-in-rotated-sorted-array"><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener noreffer">Find minimum in rotated sorted array</a></h3>
+<p>這個challenge裡，我的AC解也只有拿到61%。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">findMin</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="o">&lt;</span> <span class="o">*</span><span class="p">(</span><span class="o">--</span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">()))</span> <span class="k">return</span> <span class="o">*</span><span class="n">min_element</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">])</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在我尋找可以優化的地方時，我發現了這行:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="o">&lt;</span> <span class="o">*</span><span class="p">(</span><span class="o">--</span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">()))</span> <span class="k">return</span> <span class="o">*</span><span class="n">min_element</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>最一開始，我用這句去處理沒有rotate的例外情況。然而，他其實不是例外情況，當我們選完邊的時候，那個段落也可能是沒rotate過的，更棒的是如果選取到的段落是升序，那我們直接取這個段落的開頭，就是我們要的最小元素了！因此，這個邏輯可以合併進迴圈並且加速判斷找出我們的最小值。Input肯定是<code>升序 -&gt; pivot...小降 -&gt; 升序</code>的形式，而我們的步驟可以整理成下面幾步:</p>
+<ol>
+<li>升序 -&gt; piv..小降 -&gt; 升序</li>
+<li>選完邊後段落的三種情況:
+升序 -&gt; piv&hellip;小降 -&gt; 升序
+piv&hellip;小降 -&gt; 升序
+升序<br>
+在步驟2中，如果是第三種情況，我們可以直接回傳段落的head。其他的狀況的話則繼續用binary search來選邊搜就好。下面是我合併完的code:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="p">...</span>
+<span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">])</span> <span class="k">break</span><span class="p">;</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">])</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>簡直好太多了，AC 94%!</p>
+<h3 id="find-first-and-last-position-of-element-in-sorted-arrayhttpsleetcodecomproblemsfind-first-and-last-position-of-element-in-sorted-array-1"><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" rel="noopener noreffer">Find First and Last Position of Element in Sorted Array</a></h3>
+<p>這一個問題讓我花了一段時間思考。我剛開始一直固執得想要同時找到第一個位置和最後一個位置。最後才發現實在不行，因為第一個和第二個搜索的方向並不一樣，不過先找到第一個位置，然後再從剩下的段落中進行binary search聽起來也不賴！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">searchRange</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">});</span> 
+    <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&lt;</span> <span class="o">*</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="o">||</span> <span class="n">target</span> <span class="o">&gt;</span> <span class="o">*</span><span class="p">(</span><span class="o">--</span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">()))</span> <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">});</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">});</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">)</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">end</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>遺憾的是，這AC解只有65％！還是跟大家說明一下我的思路，<code>start</code>和<code>end</code>的定義各別是第一個位置和最後一個位置，而我的search space只有保留一個位置，結束迴圈的條件是<code>start &gt; end</code>。大略上的步驟已經在上面說明過了&lt;1. 找出第一個位置&gt;:
+pick一個中點，如果中點是小於我們的目標的，則從下一個位置繼續找，若是中點是大於目標的，則我們的結束位置絕對至少是中點的前一個位置，這時候我們或許會疑惑，若是中點等於目標，我這樣處理會不會漏掉解呢？<strong>我們在這裡回傳的是start，end只是來幫我們縮小範圍的</strong>。e.g. 假設我們現今start和end都指到了目標，下一步end比start小就會結束迴圈了，start還是我們的答案！但是這是有例外情況的，由於<code>start &gt; end</code>是我們的while終止條件，儘管我們沒有找到目標，while還是會終止回傳給我們的start！因此我們必須確認：<code>start</code>上是不是真的就是我們的目標？為了確保這點，我們還要確保這個index沒有out of bound。如果不是目標，代表我們連第一個位置都沒找到，那我們就可以直接結束這回合囉！&lt;2. 找到最後一個位置&gt;，我們的段落會是長成這副德性:
+<code>&lt;target, target.... , rest of this section&gt;</code>。所以while中也只有兩種狀況需要我們判斷，一種是大於目標，另一種是等於目標。我們要回傳的是<code>end</code>，當中點大於目標的時候，最後一個位置要往前定位，當中點等於目標的時候，我們的<code>start</code>則往後定位。跟上面一樣，我們也不用擔心這樣會漏掉<code>start == end</code>時的解，<code>start</code>比<code>end</code>大就會跳出while迴圈，<code>end</code>還是我們的答案！<br>
+我又花了一段時間改造成<code>start &lt; end</code>的形式，發現找出第一個位置還好說，找出最後一個位置實在太折磨人了 😰 ，很容易就造成TLE！後來我學習了九章大神的模板，終於拿到AC 99%了！我後面會再開一個段落去解析這個模板，一下先附上小弟的code：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">searchRange</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">});</span> 
+    <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&lt;</span> <span class="o">*</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="o">||</span> <span class="n">target</span> <span class="o">&gt;</span> <span class="o">*</span><span class="p">(</span><span class="o">--</span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">()))</span> <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">});</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">end</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">});</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">end</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其實把小於target和大於target的情況改成<code>mid + 1</code>和<code>mid - 1</code>是無任何大礙，不過時間複雜度也沒有差到一個迴圈&hellip;</p>
+<h3 id="find-k-closest-elementshttpsleetcodecomproblemsfind-k-closest-elements"><a href="https://leetcode.com/problems/find-k-closest-elements/" target="_blank" rel="noopener noreffer">Find K Closest Elements</a></h3>
+<p>這題也是很容易就看出了binary search的特性，不過如果不知道**sliding window(滑動窗口)**的思路，這題會變得很複雜。首先附上我第一個解法，第一個算是我仰仗著這個window至少有k的大小，所以從input兩端邊量測距離邊裁減，最後一定會得出size為k的window。這大概只能拿到6%左右的成績，推測複雜度有<code>O(n)</code>吧&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findClosestElements</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="o">*</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="o">&gt;</span> <span class="o">*</span><span class="p">(</span><span class="o">--</span><span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
+        <span class="k">else</span> <span class="n">res</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>後來又發現這個解法其實沒有想像中那麼糟&hellip; 上面是爛在我使用了erase直接把開頭刪掉，程式為了繼續維護vector就把全部的元素又往前移，相當於另外花了<code>O(n)</code>的時間。我可以改成用兩個指標去維護答案的開頭和結尾，思路還是一樣的，但成績能提升到85%左右！！<br>
+想要把線性時間降低到對數等級，看來還是需要我們的binary search出馬 🐴 ！原本我應用binary search的思路是先找出一個最靠近<code>x</code>的數字，然後從開點向左向右擴展，直到<code>res</code>的size為<code>k</code>為只。Discussion board上<code>@lee215</code>的解法就更神了，他應用了<strong>binary search + sliding window</strong>來解這道題目，以下附上程式碼：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findClosestElements</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">k</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">start</span><span class="p">,</span> <span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">start</span> <span class="o">+</span> <span class="n">k</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我滴天啊，簡直簡短俐落！注意這裡的binary search是用來找我們window的開頭。舉個<code>&lt;1, 2, 3, 4, 5, 6, 7&gt;</code>然後<code>k = 3, x = 5</code>的例子，一開始<code>mid</code>為3，那我們要怎麼取決要不要向右移呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span>
+    <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span> <span class="o">&gt;</span>
+       <span class="o">&lt;</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span> <span class="o">&gt;</span>
+         <span class="o">&lt;</span>  <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span> <span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其實<code>&lt;3, 4, 5&gt;</code>和<code>&lt;4, 5, 6&gt;</code>之間的比較可以理解為<code>&lt;3, 4, 5, 6&gt;</code>究竟要去頭還是去尾，這點從我的第一個解法就可以看出來。因此我們的5就去跟開頭的3<code>(mid)</code>和尾巴的6比較<code>(mid + k)</code>，後來發現我們的3比較遠，因此選擇<code>&lt;4, 5, 6&gt;</code>。再次強調一下：<strong>我們現在打算用(k + 1)個元素的區間去頭或去尾來縮小搜索開頭的範圍</strong>！再來就是討論各種情況了，<code>x</code>可以在我們當前區間內，也有可能不在：</p>
+<ol>
+<li>x不在區間內：
+x在<code>&lt;mid, mid + k&gt;</code>的左邊：刪除尾巴，我們的開頭<strong>至多</strong>只能是目前的mid，不能再往右移了，因此<code>end = mid</code>。
+x在<code>&lt;mid, mid + k&gt;</code>的右邊：刪除開頭，我們的開頭<strong>至少</strong>要是mid + 1，不能再向左移了，因此<code>start = mid + 1</code>。</li>
+<li>x在區間內：
+x在<code>&lt;mid, mid + k&gt;</code>中靠左：刪除尾巴&hellip;上面的第一種情況。
+x在<code>&lt;mid, mid + k&gt;</code>中靠右：刪除開頭&hellip;上面的第二種情況。
+x在<code>&lt;mid, mid + k&gt;</code>的中間：刪除尾巴&hellip;由於題目要求如果tied，則選擇比較小的數字，因此跟第一種情況一樣。</li>
+</ol>
+<p>這邊另外再討論一下為何比較距離不是用<code>|x - arr[mid]|</code>，<code>|x - arr[mid + k]|</code>？這在<code>x</code>和<code>arr[mid]</code>，<code>arr[mid + k]</code>距離都ㄧ樣的時候會有很大概率的錯誤。e.g. <code>&lt;1, 1, 2, 2, 2, 2, 2, 3, 3&gt;</code>以及<code>x = 3</code>和<code>k = 3</code>，x在一開始的區間右邊，理當往右移，可是根據絕對值的邏輯，我們卻要向左移！老實說這個case真的很難想到&hellip; 總之這裏我們需要知道<code>x</code>在區間的哪個方向，因此不能用絕對值來判斷。最後以<code>O(log(N - k))</code>的時間就能找到我們的最優開頭，也是這題的最佳解！<br>
+老實說我覺得Leetcode-cn上的解答比較親民，這邊分享一下連結給大家：<a href="https://leetcode-cn.com/problems/find-k-closest-elements/solution/pai-chu-fa-shuang-zhi-zhen-er-fen-fa-python-dai-ma/" target="_blank" rel="noopener noreffer">排除法（双指针）+ 二分法（Java、Python</a></p>
+<blockquote>
+<p>迷思++：還是想不通為何是end = mid嗎？那你可能誤會了一些觀念：我們是用start和end來找mid，mid和mid + k只是幫助我們來模擬區間，真正的開頭還是在mid這邊。刪除尾巴的話，我們的開頭當然還是不動的，畢竟只是回到k的元素的狀態，我們只能限制開頭待在目前的位置。
+另外我也有思考過，若是用start + 1 &lt; end去找這個區間的最佳中點呢？其實這樣也會把問題複雜化，這個中點究竟是區間的偏左還是偏右呢，指標都不知道要往左往右跨多少，還不如直接指定端點，然後+k即可！</p>
+</blockquote>
+<h3 id="cloest-binary-search-tree-valuehttpsleetcodecomproblemsclosest-binary-search-tree-valuesubmissions"><a href="https://leetcode.com/problems/closest-binary-search-tree-value/submissions/" target="_blank" rel="noopener noreffer">Cloest Binary Search Tree value</a></h3>
+<p>這道題目被歸類在easy的等級，但是太過直觀的想法會得到不好的成績。我最初的思路是用binary search直接把tree上的node找過一遍，找最小距離的就好，這樣出來只有beat 69%左右。接下來我換個思路，找upperbound和lowerbound。以下附上小弟的代碼:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">lb</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ub</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lb</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">ub</span> <span class="o">-</span> <span class="n">target</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">abs</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">lb</span><span class="p">)</span> <span class="o">?</span> <span class="nl">lb</span> <span class="p">:</span> <span class="n">ub</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意這邊一定要先把兩個邊界都先初始化為<code>root</code>。如果一開始要向左search，就可以先把<code>root</code>視為upperbound，接下來的node如果再出現比<code>target</code>大的，一律可視為更接近<code>target</code>的上界。如何？想想很有道理吧！如果是小於全部input的邊界case，那麼我們的lowerbound就會一路維持在<code>root</code>的位置，然而不用擔心，因為target跟root的距離一定比跟現在upperbound的距離來得近。這個思路比上面的好多了，更有達到94%的beat數，然而我目前還無法確切分析出兩個解法為何有差這麼多的時間複雜度&hellip;</p>
+<h3 id="search-in-a-sorted-array-of-unknown-sizehttpsleetcodecomproblemssearch-in-a-sorted-array-of-unknown-sizesubmissions"><a href="https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/submissions/" target="_blank" rel="noopener noreffer">Search in a Sorted Array of Unknown Size</a></h3>
+<p>首先要先touch一下🤣因為好久沒有這麼短的時間解出medium了！這道問題用binary search的想法其實很直觀，就算不知道input的size，直接把他當成<code>10^4</code>的input，後面都當是超出範圍的數就好。而且當<code>reader</code>返回的結果是超出範圍的，我們可以毫不猶豫的再把search範圍縮小：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">search</span><span class="p">(</span><span class="k">const</span> <span class="n">ArrayReader</span><span class="o">&amp;</span> <span class="n">reader</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&gt;=</span> <span class="mi">10000</span> <span class="o">||</span> <span class="n">target</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">end</span><span class="p">;</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">end</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10000</span><span class="p">)</span> <span class="n">end</span> <span class="o">=</span> <span class="n">end</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="k">return</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">==</span> <span class="n">target</span> <span class="o">?</span> <span class="nl">mid</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>這裡給個小建議，前面<code>start</code>，<code>end</code>不用設<code>0</code>和<code>10000</code>。我們可以先探測應該可以包住target的範圍，這就是我第一個while在做的事。</p>
+<h2 id="九章大神模板---試解析">九章大神模板 - 試解析</h2>
+<p>這個模板的核心概念是為了少出錯，放棄在while中就找出最優解，縮小search space到<code>start</code>和<code>end</code>，再從中找出目標。其實這樣時間複雜度也不會差多少，畢竟<code>O(logn)</code>跟<code>O(logn + 1)</code>沒差多少嘛。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mid</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// find any position -&gt; return mid;
+</span><span class="c1"></span>        <span class="c1">// find first position -&gt; end = mid;
+</span><span class="c1"></span>        <span class="c1">// find last position -&gt; start = mid;
+</span><span class="c1"></span>    <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// find any position, 下面兩種順序都可
+</span><span class="c1">// find first position,
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="k">return</span> <span class="n">start</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="k">return</span> <span class="n">end</span><span class="p">;</span>
+<span class="c1">// find last position,
+</span><span class="c1">// 反過來就好
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>用<code>start + 1 &lt; end</code>以避免死循環。search space留下<code>start</code>和<code>end</code>，所以在迴圈外另外判斷哪一個是答案</li>
+<li>在小於目標或大於目標時用<code>mid + 1</code>或<code>mid - 1</code>可能會漏解</li>
+</ul>
+<p>在這裡也附上leetcode的模板解析：<a href="https://leetcode.com/explore/learn/card/binary-search/136/template-analysis/935/" target="_blank" rel="noopener noreffer">Binary Search Template Analysis</a></p>
+<h2 id="結論">結論</h2>
+<p>我發現這些題目都有一定的<strong>單調性</strong>，所以我們可以透過binary search去縮小搜尋的範圍。</p>
+<ul>
+<li>定義start, end, 或 mid？</li>
+<li>考慮邊界情況，他也會影響我們選擇<code>start &lt; end</code> 或是 <code>start &lt;= end</code>.</li>
+<li>在選完邊後，我們就把他視為子問題，專注於解決當前的情況。</li>
+<li>永遠記得：start和end是用來幫助我們找到一個目標！因此題目的目標如果是找到一個區間，binary search可以用來找到該最優區間的<strong>開頭</strong>或<strong>結尾</strong>。</li>
+</ul>
+<h2 id="參考">參考</h2>
+<ol>
+<li><a href="https://leetcode.com/explore/learn/card/binary-search/" target="_blank" rel="noopener noreffer">Leetcode Explore Binary Search</a></li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2020-08-17</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/explore-binary-search/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/explore-binary-search/" data-title="Explore Binary Search" data-via="1pwnch" data-hashtags="Leetcode,Binary Search"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/explore-binary-search/" data-hashtag="Leetcode"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/explore-binary-search/" data-title="Explore Binary Search" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/explore-binary-search/" data-title="Explore Binary Search"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/explore-binary-search/" data-title="Explore Binary Search"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/explore-binary-search/" data-title="Explore Binary Search" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/explore-binary-search/" data-title="Explore Binary Search" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/explore-binary-search/" data-title="Explore Binary Search"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leetcode/">Leetcode</a>,&nbsp;<a href="/tags/binary-search/">Binary Search</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/the-skyline-problem/" class="prev" rel="prev" title="The Skyline Problem"><i class="fas fa-angle-left fa-fw"></i>The Skyline Problem</a>
+            <a href="/posts/feel-free-to-contact-me/" class="next" rel="next" title="Feel Free to Contact Me">Feel Free to Contact Me<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment">
+
+</div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Rafael</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"Copy to clipboard","maxShownLines":100},"comment":{"gitalk":{"admin":["shinmao"],"clientID":"bdca5e2ee19179b3d15b","clientSecret":"7da8ea09ee3ff703c125776692d4ade2a076b530","id":"2020-08-17T17:30:05+08:00","owner":"shinmao","repo":"shinmao.github.io","title":"Explore Binary Search"}},"headerMode":{"desktop":"fixed","mobile":"auto"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
