@@ -3,7 +3,7 @@
         <title>Rafael</title>
         <link>http://blog.1pwnch.com/</link>
         <description>If you are interested in my chinese article, read my first article to contact me :)</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 23 Sep 2020 10:59:55 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,6 +11,15 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>LeetCode 33 Search in Rotated Array</title>
+    <link>http://blog.1pwnch.com/posts/leetcode-33-search-in-rotated-array/</link>
+    <pubDate>Wed, 23 Sep 2020 10:59:55 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/leetcode-33-search-in-rotated-array/</guid>
+    <description><![CDATA[First, I need to come up with the words, &lsquo;Damn it&rsquo;. This belongs to my LeetCode Self Challenge for 30 mins. I almost finish the problem, but I forget to check the search space for binary search, which should be the common sense for it. I will provide the writeup and the optimization here.
+Writeup   The programming language in video is C++
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42  int search(vector&lt;int&gt;&amp; nums, int target) { if(nums.]]></description>
 </item><item>
     <title>Explore Binary Search</title>
     <link>http://blog.1pwnch.com/posts/explore-binary-search/</link>
@@ -76,12 +85,5 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/</guid>
     <description><![CDATA[<p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p>]]></description>
-</item><item>
-    <title>Amortized analysis</title>
-    <link>http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/</link>
-    <pubDate>Fri, 10 Apr 2020 02:42:35 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/</guid>
-    <description><![CDATA[<p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>]]></description>
 </item></channel>
 </rss>

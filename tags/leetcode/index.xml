@@ -3,7 +3,16 @@
         <title>Leetcode - Tag - Rafael</title>
         <link>http://blog.1pwnch.com/tags/leetcode/</link>
         <description>Leetcode - Tag - Rafael</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 17 Aug 2020 17:30:05 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/leetcode/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 23 Sep 2020 10:59:55 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/leetcode/" rel="self" type="application/rss+xml" /><item>
+    <title>LeetCode 33 Search in Rotated Array</title>
+    <link>http://blog.1pwnch.com/posts/leetcode-33-search-in-rotated-array/</link>
+    <pubDate>Wed, 23 Sep 2020 10:59:55 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/leetcode-33-search-in-rotated-array/</guid>
+    <description><![CDATA[First, I need to come up with the words, &lsquo;Damn it&rsquo;. This belongs to my LeetCode Self Challenge for 30 mins. I almost finish the problem, but I forget to check the search space for binary search, which should be the common sense for it. I will provide the writeup and the optimization here.
+Writeup   The programming language in video is C++
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42  int search(vector&lt;int&gt;&amp; nums, int target) { if(nums.]]></description>
+</item><item>
     <title>Explore Binary Search</title>
     <link>http://blog.1pwnch.com/posts/explore-binary-search/</link>
     <pubDate>Mon, 17 Aug 2020 17:30:05 &#43;0800</pubDate>
