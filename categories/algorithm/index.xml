@@ -3,7 +3,16 @@
         <title>Algorithm - Category - Rafael</title>
         <link>http://blog.1pwnch.com/categories/algorithm/</link>
         <description>Algorithm - Category - Rafael</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 23 Sep 2020 10:59:55 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/algorithm/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 03 Oct 2020 20:56:57 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/algorithm/" rel="self" type="application/rss+xml" /><item>
+    <title>AlgoExpert Longest Peak</title>
+    <link>http://blog.1pwnch.com/posts/algoexpert-longest-peak/</link>
+    <pubDate>Sat, 03 Oct 2020 20:56:57 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/algoexpert-longest-peak/</guid>
+    <description><![CDATA[This challenge is not difficult; however, I make a mistake when analyzing the time complexity. The reason is that I make a large duplicate and useless calculation in my solution. Take a look into the detail for the challenge &ldquo;Longest Peak&rdquo;.
+Writeup   You can see the detail of challenge and my initial solution in this video. However, I can finish this problem in O(n) in fact. Why?
+Assume there is ten numbers in array:]]></description>
+</item><item>
     <title>LeetCode 33 Search in Rotated Array</title>
     <link>http://blog.1pwnch.com/posts/leetcode-33-search-in-rotated-array/</link>
     <pubDate>Wed, 23 Sep 2020 10:59:55 &#43;0800</pubDate>

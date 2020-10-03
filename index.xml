@@ -3,7 +3,7 @@
         <title>Rafael</title>
         <link>http://blog.1pwnch.com/</link>
         <description>If you are interested in my chinese article, read my first article to contact me :)</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 23 Sep 2020 10:59:55 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 03 Oct 2020 20:56:57 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,6 +11,15 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>AlgoExpert Longest Peak</title>
+    <link>http://blog.1pwnch.com/posts/algoexpert-longest-peak/</link>
+    <pubDate>Sat, 03 Oct 2020 20:56:57 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/algoexpert-longest-peak/</guid>
+    <description><![CDATA[This challenge is not difficult; however, I make a mistake when analyzing the time complexity. The reason is that I make a large duplicate and useless calculation in my solution. Take a look into the detail for the challenge &ldquo;Longest Peak&rdquo;.
+Writeup   You can see the detail of challenge and my initial solution in this video. However, I can finish this problem in O(n) in fact. Why?
+Assume there is ten numbers in array:]]></description>
 </item><item>
     <title>LeetCode 33 Search in Rotated Array</title>
     <link>http://blog.1pwnch.com/posts/leetcode-33-search-in-rotated-array/</link>
@@ -78,12 +87,5 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/</guid>
     <description><![CDATA[<p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>]]></description>
-</item><item>
-    <title>Functions You always need to Override</title>
-    <link>http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/</link>
-    <pubDate>Wed, 22 Apr 2020 02:42:35 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/2020-04-22-functions-you-always-need-to-override/</guid>
-    <description><![CDATA[<p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p>]]></description>
 </item></channel>
 </rss>

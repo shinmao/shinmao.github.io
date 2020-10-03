@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>two ptrs - Tag - Rafael</title>
+        <link>http://blog.1pwnch.com/tags/two-ptrs/</link>
+        <description>two ptrs - Tag - Rafael</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 03 Oct 2020 20:56:57 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/two-ptrs/" rel="self" type="application/rss+xml" /><item>
+    <title>AlgoExpert Longest Peak</title>
+    <link>http://blog.1pwnch.com/posts/algoexpert-longest-peak/</link>
+    <pubDate>Sat, 03 Oct 2020 20:56:57 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/algoexpert-longest-peak/</guid>
+    <description><![CDATA[This challenge is not difficult; however, I make a mistake when analyzing the time complexity. The reason is that I make a large duplicate and useless calculation in my solution. Take a look into the detail for the challenge &ldquo;Longest Peak&rdquo;.
+Writeup   You can see the detail of challenge and my initial solution in this video. However, I can finish this problem in O(n) in fact. Why?
+Assume there is ten numbers in array:]]></description>
+</item></channel>
+</rss>
