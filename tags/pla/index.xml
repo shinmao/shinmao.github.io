@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>PLA - Tag - Rafael</title>
+        <link>http://blog.1pwnch.com/tags/pla/</link>
+        <description>PLA - Tag - Rafael</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 05 Oct 2020 00:31:33 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/pla/" rel="self" type="application/rss+xml" /><item>
+    <title>Implementation of PLA</title>
+    <link>http://blog.1pwnch.com/posts/implementation-of-pla/</link>
+    <pubDate>Mon, 05 Oct 2020 00:31:33 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/implementation-of-pla/</guid>
+    <description><![CDATA[In this article, I would show the by-hand implementation of PLA. I won&rsquo;t get into the detail of the algorithm, but just help someone wants some practical experience. Also, I recommend everyone to implement it because only do it will you find the points you still not figure out about it.
+Dataset Here we have ten training sets and one test set. In datasets, we have two features and classification results in (0, 1).]]></description>
+</item></channel>
+</rss>

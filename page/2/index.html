@@ -12,7 +12,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://blog.1pwnch.com/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
-<meta property="og:updated_time" content="2020-10-03T20:56:57+08:00" />
+<meta property="og:updated_time" content="2020-10-05T00:31:33+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
 
@@ -104,6 +104,20 @@
         alt="Posts"
         title="Posts" /></a></div><h1 class="home-title">1pwnch</h1><div class="social-links"><a href="https://github.com/shinmao" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://linkedin.com/in/hung-mao-chen-a0850814b" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw"></i></a><a href="https://twitter.com/1pwnch" title="Twitter" target="_blank" rel="noopener noreffer me"><i class="fab fa-twitter fa-fw"></i></a><a href="https://www.youtube.com/channel/UC9jW5yQu-TsS2NYP0Ya2gIg" title="YouTube" target="_blank" rel="noopener noreffer me"><i class="fab fa-youtube fa-fw"></i></a><a href="mailto:shinmaox2016@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/count-of-smaller-nums-after-self/">Count of Smaller Nums After Self</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
+            published on&nbsp;<time datetime=2020-07-14>2020-07-14</time>
+        </span>&nbsp;
+            <span class="post-category">included in<a href="/categories/algorithm/">
+                        <i class="far fa-folder fa-fw"></i>Algorithm
+                    </a></span></div><div class="content">I use modified-BST to solve this problem. Each time inserting a new node takes O(logn) and also updates the value of count, and there are n nodes; therefore, I think the time complexity of my solution is O(nlogn).
+Writeup   The programming language in video is C++
+For the source code in video: Github
+Conclusion  Order of input: left to right or right to left? Definition of node: what member should we define for each nodes in tree?</div><div class="post-footer">
+        <a href="/posts/count-of-smaller-nums-after-self/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leetcode/">Leetcode</a>,&nbsp;<a href="/tags/bst/">BST</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/single-number-ii-on-leetcode/">Single Number II on Leetcode</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
             published on&nbsp;<time datetime=2020-07-08>2020-07-08</time>
@@ -160,17 +174,6 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
                     </a></span></div><div class="content"><p>We always can override non-final methods in parent class. However, we also need to pay attention to the general contracts of those methods. Otherwise, they will not work correctly. In this article, I would share how I learn about the way to override specific functions correctly with effective-java-3rd.</p></div><div class="post-footer">
         <a href="/posts/2020-04-22-functions-you-always-need-to-override/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/obj-oriented-in-java/">Obj Oriented in java</a>,&nbsp;<a href="/tags/equals/">equals()</a>,&nbsp;<a href="/tags/hashcode/">hashCode()</a>,&nbsp;<a href="/tags/clone/">clone()</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2020-04-10-amortized-analysis/">Amortized analysis</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
-            published on&nbsp;<time datetime=2020-04-10>2020-04-10</time>
-        </span>&nbsp;
-            <span class="post-category">included in<a href="/categories/algorithm/">
-                        <i class="far fa-folder fa-fw"></i>Algorithm
-                    </a></span></div><div class="content"><p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p></div><div class="post-footer">
-        <a href="/posts/2020-04-10-amortized-analysis/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/amortized-analysis/">amortized analysis</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item ">
                     <span class="page-link">

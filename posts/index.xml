@@ -3,7 +3,7 @@
         <title>All Posts - Rafael</title>
         <link>http://blog.1pwnch.com/posts/</link>
         <description>All Posts | Rafael</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 03 Oct 2020 20:56:57 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 05 Oct 2020 00:31:33 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,6 +11,14 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>Implementation of PLA</title>
+    <link>http://blog.1pwnch.com/posts/implementation-of-pla/</link>
+    <pubDate>Mon, 05 Oct 2020 00:31:33 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/implementation-of-pla/</guid>
+    <description><![CDATA[In this article, I would show the by-hand implementation of PLA. I won&rsquo;t get into the detail of the algorithm, but just help someone wants some practical experience. Also, I recommend everyone to implement it because only do it will you find the points you still not figure out about it.
+Dataset Here we have ten training sets and one test set. In datasets, we have two features and classification results in (0, 1).]]></description>
 </item><item>
     <title>AlgoExpert Longest Peak</title>
     <link>http://blog.1pwnch.com/posts/algoexpert-longest-peak/</link>
@@ -80,12 +88,5 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/stock-problem-on-leetcode/</guid>
     <description><![CDATA[<p>I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!</p>]]></description>
-</item><item>
-    <title>Some Points to design Classes and Interfaces</title>
-    <link>http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/</link>
-    <pubDate>Tue, 28 Apr 2020 02:42:35 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/2020-04-28-some-points-to-design-classes-and-interface/</guid>
-    <description><![CDATA[<p>This article would focus on access control of class, importance of mutability, choice between interface and abstrace class. Hope you enjoy it!</p>]]></description>
 </item></channel>
 </rss>
