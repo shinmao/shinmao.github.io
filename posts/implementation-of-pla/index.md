@@ -12,7 +12,7 @@ Here we have ten training sets and one test set. In datasets, we have two featur
 ...
 ```
 According to the dataset, we can formulate our PLA:  
-$$ y = w1*x1 + w2*x2 + bias $$  
+$$ y = w1*x1 + w2*x2 + b $$  
 Now, let's start on program.
 
 ## PLA
@@ -120,3 +120,4 @@ Misclassification rate:  0.0225
 Apparently, it takes more time on iterations.  
 
 One another thing I consider it to be important is **we will restrict our iteration time in fact**. If dataset is not linear separable, `while loop` in PLA will not stop forever. So to implement PLA, most people will set up a threshold of iterations, which show that the dataset is not linear separable if iterations time has crossed over this threshold. (We should switch to pocket PLA in this case, but this is another story :)
+
