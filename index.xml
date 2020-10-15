@@ -3,7 +3,7 @@
         <title>Rafael</title>
         <link>http://blog.1pwnch.com/</link>
         <description>If you are interested in my chinese article, read my first article to contact me :)</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 05 Oct 2020 00:31:33 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 15 Oct 2020 18:04:30 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,6 +11,14 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>LintCode Maximum Conn Area</title>
+    <link>http://blog.1pwnch.com/posts/lintcode-maximum-conn-area/</link>
+    <pubDate>Thu, 15 Oct 2020 18:04:30 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/lintcode-maximum-conn-area/</guid>
+    <description><![CDATA[At first, I thought this was just a simple BFS challenge with a little change. It was evaluated as a medium level; however, the process of solving problem was even interesting out of my expectation. It even helped me solve my myths about Union Find.
+Problem Description  There is a two-dimensional array, only consists of 0 and 1. You can change a 0 to 1 at most once, please calculate the maximum area of connected 1s.]]></description>
 </item><item>
     <title>Implementation of PLA</title>
     <link>http://blog.1pwnch.com/posts/implementation-of-pla/</link>
@@ -81,12 +89,5 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</guid>
     <description><![CDATA[I spend so much time on solving this problem. My challenge is not just solving this problem, but how to enhance the efficiency of my solution. The only one solution I come up with is DFS + check each of previous rows; however, this solution is too slow. Therefore, in following of my youtube video, I will explain four to five solutions, from idea building, coding by hands, and even debugging.]]></description>
-</item><item>
-    <title>Stock Problem on Leetcode</title>
-    <link>http://blog.1pwnch.com/posts/stock-problem-on-leetcode/</link>
-    <pubDate>Wed, 03 Jun 2020 18:47:17 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/stock-problem-on-leetcode/</guid>
-    <description><![CDATA[<p>I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!</p>]]></description>
 </item></channel>
 </rss>

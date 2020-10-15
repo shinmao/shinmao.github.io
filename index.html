@@ -12,7 +12,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://blog.1pwnch.com/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
-<meta property="og:updated_time" content="2020-10-05T00:31:33+08:00" />
+<meta property="og:updated_time" content="2020-10-15T18:04:30+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
 
@@ -112,6 +112,18 @@ So&hellip; In this blog, I would record my learning process including Algorithm,
         <a href="/posts/feel-free-to-contact-me/">Read More</a></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/lintcode-maximum-conn-area/">LintCode Maximum Conn Area</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
+            published on&nbsp;<time datetime=2020-10-15>2020-10-15</time>
+        </span>&nbsp;
+            <span class="post-category">included in<a href="/categories/algorithm/">
+                        <i class="far fa-folder fa-fw"></i>Algorithm
+                    </a></span></div><div class="content">At first, I thought this was just a simple BFS challenge with a little change. It was evaluated as a medium level; however, the process of solving problem was even interesting out of my expectation. It even helped me solve my myths about Union Find.
+Problem Description  There is a two-dimensional array, only consists of 0 and 1. You can change a 0 to 1 at most once, please calculate the maximum area of connected 1s.</div><div class="post-footer">
+        <a href="/posts/lintcode-maximum-conn-area/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lintcode/">LintCode</a>,&nbsp;<a href="/tags/union-find/">union find</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/implementation-of-pla/">Implementation of PLA</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
             published on&nbsp;<time datetime=2020-10-05>2020-10-05</time>
@@ -161,18 +173,6 @@ Writeup   The programming language in video is C++
  Explore Binary Search 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  class Solution { public: int search(vector&lt;int&gt;&amp; nums, int target) { if(target &lt; -9999 || target &gt; 9999) return -1; int start = 0, end = nums.size() - 1, mid = 0; while(start &lt;= end) { mid = start + ((end - start) &gt;&gt; 1); // remember your bracket  if(nums[mid] == target) return mid; if(nums[mid] &lt; target) start = mid + 1; else end = mid - 1; } return -1; } };   以上我的解法只有哪到66%的成績，但在我審了一遍前段的code之後，我推斷時間複雜度只差在I/O優化！</div><div class="post-footer">
         <a href="/posts/explore-binary-search/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leetcode/">Leetcode</a>,&nbsp;<a href="/tags/binary-search/">Binary Search</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/the-skyline-problem/">The Skyline Problem</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
-            published on&nbsp;<time datetime=2020-08-07>2020-08-07</time>
-        </span>&nbsp;
-            <span class="post-category">included in<a href="/categories/algorithm/">
-                        <i class="far fa-folder fa-fw"></i>Algorithm
-                    </a></span></div><div class="content">UVa 105 - The Skyline Problem
-This problem tests the application of priority queue which is implemented with min-heap. Min-heap takes O(logn) to insert a new node. It takes O(1) to extract current minimum value and O(logn) to sort again. With this data structure, I can iterate the boundaries of building in ascending order. My idea is recording all boundaries and associated heights in priority queue and current existing height in multiset.</div><div class="post-footer">
-        <a href="/posts/the-skyline-problem/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/uva/">UVa</a>,&nbsp;<a href="/tags/priority-queue/">Priority Queue</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item active">
                     <span class="page-link">
