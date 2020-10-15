@@ -108,7 +108,8 @@ private:
     vector<int> father;
     vector<int> area_;
     int not_zero = 0;
-    vector<vector<int>> dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    // Don't ignore this comment
+    //vector<vector<int>> dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     int find(int x) {
         if(father[x] == x)
             return x;

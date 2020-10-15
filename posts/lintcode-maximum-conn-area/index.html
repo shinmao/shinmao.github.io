@@ -37,7 +37,7 @@ Problem Description  There is a two-dimensional array, only consists of 0 and 1.
                 "url": "http:\/\/blog.1pwnch.com\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "LintCode, union find","wordcount":  1215 ,
+            },"genre": "posts","keywords": "LintCode, union find","wordcount":  1221 ,
         "url": "http:\/\/blog.1pwnch.com\/posts\/lintcode-maximum-conn-area\/","datePublished": "2020-10-15T18:04:30+08:00","dateModified": "2020-10-15T18:04:30+08:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
@@ -125,7 +125,7 @@ Problem Description  There is a two-dimensional array, only consists of 0 and 1.
                                 <i class="far fa-folder fa-fw"></i>Algorithm
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-10-15>2020-10-15</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 1215 words&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 1221 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>6 min&nbsp;</div>
         </div><div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
@@ -413,6 +413,7 @@ LintCode 261. Maximum Connected Area</p>
 </span><span class="lnt">89
 </span><span class="lnt">90
 </span><span class="lnt">91
+</span><span class="lnt">92
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
@@ -420,8 +421,9 @@ LintCode 261. Maximum Connected Area</p>
     <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">father</span><span class="p">;</span>
     <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">area_</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">not_zero</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dir</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
-    <span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Don&#39;t ignore this comment
+</span><span class="c1"></span>    <span class="c1">//vector&lt;vector&lt;int&gt;&gt; dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span><span class="p">(</span><span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
