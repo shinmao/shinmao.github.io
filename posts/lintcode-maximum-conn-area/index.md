@@ -41,7 +41,8 @@ public:
         visited[i][j] = true;
         
         int size = 0;
-        vector<vector<int>> dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        // plz uncomment this comment
+        //vector<vector<int>> dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         while(!q.empty()) {
             int curx = q.front().first;
             int cury = q.front().second;
@@ -108,7 +109,7 @@ private:
     vector<int> father;
     vector<int> area_;
     int not_zero = 0;
-    // Don't ignore this comment
+    // plz uncomment this comment
     //vector<vector<int>> dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     int find(int x) {
         if(father[x] == x)
