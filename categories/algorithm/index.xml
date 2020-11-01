@@ -3,7 +3,16 @@
         <title>Algorithm - Category - Rafael</title>
         <link>http://blog.1pwnch.com/categories/algorithm/</link>
         <description>Algorithm - Category - Rafael</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 15 Oct 2020 18:04:30 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/algorithm/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 31 Oct 2020 20:44:27 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/algorithm/" rel="self" type="application/rss+xml" /><item>
+    <title>LintCode Weekly Contest 30 Condition String</title>
+    <link>http://blog.1pwnch.com/posts/lintcode-weekly-content30-condition-string/</link>
+    <pubDate>Sat, 31 Oct 2020 20:44:27 -0400</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/lintcode-weekly-content30-condition-string/</guid>
+    <description><![CDATA[I ran into the &ldquo;Condition String&rdquo; in weekly contest of LintCode and failed to solve it. After spending some time on it after the contest ended, I found that the first idea I came up with was wrong. Here comes my writeup.
+Problem Description Here I would give the screenshot of challenge:
+First solution [Fail] First, I tried to handle this problem with longest increase subarray. For example, in acec]]></description>
+</item><item>
     <title>LintCode Maximum Conn Area</title>
     <link>http://blog.1pwnch.com/posts/lintcode-maximum-conn-area/</link>
     <pubDate>Thu, 15 Oct 2020 18:04:30 &#43;0800</pubDate>
@@ -80,12 +89,5 @@ Conclusion Solution 1 and 2 are similiar to each other, and they both try using 
     <author>Author</author>
     <guid>http://blog.1pwnch.com/posts/stock-problem-on-leetcode/</guid>
     <description><![CDATA[<p>I spend much time on completing a series of stock problem on leetcode. Some problem can be solved with greedy while others can be solved with dynamic programming. However, I ran into many challenges while defining the subproblems. Therefore, I would like to take a conclusion in this article, hope someone also try to solve these problems find this article helpful!</p>]]></description>
-</item><item>
-    <title>Amortized analysis</title>
-    <link>http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/</link>
-    <pubDate>Fri, 10 Apr 2020 02:42:35 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/2020-04-10-amortized-analysis/</guid>
-    <description><![CDATA[<p>We always use worst case analysis (big-O) to calculate time complexity. However, have you ever thought that we would overestimate the cost? In specific algorithm, there is a sequence of operations with different costs. You might said that time complexity would be <code>number of operations * the largest cost of operations</code>. For example, there are three kinds of operations for stack: push, pop, and multipop(n) which would pop out n elements. Based on knowledge of worst case analysis, the ith operation takes $ O(n) $ of time complexity in worst case, then the sequence of n operations takes $ O(n^2) $ time. But how if there is only one $ O(n) $ and the rest of them are all $ O(1) $? We have overestimate the cost of the case! Now, we know that the worst case bound is not tight because the expensive operation might not occur frequently. In amortized analysis, if sequence of operations have different costs, we can distribute the high one to the low ones. Following sections are three methods of amortized analysis.</p>]]></description>
 </item></channel>
 </rss>

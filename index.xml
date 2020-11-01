@@ -3,7 +3,7 @@
         <title>Rafael</title>
         <link>http://blog.1pwnch.com/</link>
         <description>If you are interested in my chinese article, read my first article to contact me :)</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 15 Oct 2020 18:04:30 &#43;0800</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 31 Oct 2020 20:44:27 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,6 +11,15 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>LintCode Weekly Contest 30 Condition String</title>
+    <link>http://blog.1pwnch.com/posts/lintcode-weekly-content30-condition-string/</link>
+    <pubDate>Sat, 31 Oct 2020 20:44:27 -0400</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/lintcode-weekly-content30-condition-string/</guid>
+    <description><![CDATA[I ran into the &ldquo;Condition String&rdquo; in weekly contest of LintCode and failed to solve it. After spending some time on it after the contest ended, I found that the first idea I came up with was wrong. Here comes my writeup.
+Problem Description Here I would give the screenshot of challenge:
+First solution [Fail] First, I tried to handle this problem with longest increase subarray. For example, in acec]]></description>
 </item><item>
     <title>LintCode Maximum Conn Area</title>
     <link>http://blog.1pwnch.com/posts/lintcode-maximum-conn-area/</link>
@@ -82,12 +91,5 @@ Conclusion  Order of input: left to right or right to left? Definition of node: 
 Writeup   The programming language in video is C++
 For the source code in video: Github
 Conclusion Solution 1 and 2 are similiar to each other, and they both try using 3*n + 1 to separate the single number from the others.]]></description>
-</item><item>
-    <title>N Queens on Leetcode</title>
-    <link>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</link>
-    <pubDate>Thu, 02 Jul 2020 14:06:16 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/n-queens-on-leetcode/</guid>
-    <description><![CDATA[I spend so much time on solving this problem. My challenge is not just solving this problem, but how to enhance the efficiency of my solution. The only one solution I come up with is DFS + check each of previous rows; however, this solution is too slow. Therefore, in following of my youtube video, I will explain four to five solutions, from idea building, coding by hands, and even debugging.]]></description>
 </item></channel>
 </rss>
