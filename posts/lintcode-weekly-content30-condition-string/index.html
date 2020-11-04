@@ -39,7 +39,7 @@ First solution [Fail] First, I tried to handle this problem with longest increas
                 "url": "http:\/\/blog.1pwnch.com\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "LintCode, Dynamic Programming","wordcount":  606 ,
+            },"genre": "posts","keywords": "LintCode, Dynamic Programming","wordcount":  1097 ,
         "url": "http:\/\/blog.1pwnch.com\/posts\/lintcode-weekly-content30-condition-string\/","datePublished": "2020-10-31T20:44:27-04:00","dateModified": "2020-10-31T20:44:27-04:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
@@ -127,8 +127,8 @@ First solution [Fail] First, I tried to handle this problem with longest increas
                                 <i class="far fa-folder fa-fw"></i>Algorithm
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-10-31>2020-10-31</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 606 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>3 min&nbsp;</div>
+                <i class="fas fa-pencil-alt fa-fw"></i>about 1097 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>6 min&nbsp;</div>
         </div><div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -138,7 +138,8 @@ First solution [Fail] First, I tried to handle this problem with longest increas
   <ul>
     <li><a href="#problem-description">Problem Description</a></li>
     <li><a href="#first-solution-fail">First solution [Fail]</a></li>
-    <li><a href="#final-solution-with-dp">Final solution with DP</a></li>
+    <li><a href="#solution-with-dp---longest-increase-subsequence">Solution with DP - Longest Increase SubSequence</a></li>
+    <li><a href="#optimized-method-for-finding-longest-increase-subsequence">Optimized method for finding Longest increase subsequence</a></li>
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
@@ -158,8 +159,8 @@ First solution [Fail] First, I tried to handle this problem with longest increas
 with start point from <code>a</code>, it would move forward until <code>e</code> and get the max length of 3.<br>
 with start point from <code>c</code>, it would move forward until <code>e</code> and get the max length of 2.
 However, after the contest ended, I found this idea was totally wrong. With this idea, we cannot find the case of <code>acc</code> because we also can remove the character of <code>e</code> to get the longest string. Therefore, we cannot handle this problem with longest increase subarray.</p>
-<h2 id="final-solution-with-dp">Final solution with DP</h2>
-<p>We need a DP array to memorize the current max length ending with three kinds of characters. Why this method can get the all possible cases of longest subsequence? Let me show the sample in following:</p>
+<h2 id="solution-with-dp---longest-increase-subsequence">Solution with DP - Longest Increase SubSequence</h2>
+<p>We cannot handle with longest increase subarray, but we can handle with longest increase sub-sequence. We need a DP array to memorize the current max length ending with three kinds of characters. Why this method can get the all possible cases of longest subsequence? Let me show the sample in following:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -285,9 +286,108 @@ However, after the contest ended, I found this idea was totally wrong. With this
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>I have explained for the part of <code>check()</code>, in main function part, we just need to separate the string to two groups and handle with function individually.</p>
+</div><p>I have explained for the part of <code>check()</code>, in main function part, we just need to separate the string to two groups and handle with function individually. What needs to be care about is the definition of DP array: <strong>length ended with index</strong>. In this solution, time complexity is <code>O(n^2)</code>. What is interesting, the solution can be optimized!</p>
+<h2 id="optimized-method-for-finding-longest-increase-subsequence">Optimized method for finding Longest increase subsequence</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">LIS</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">upper_bound</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">q</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="o">*</span><span class="n">iter</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INT_MAX</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The main idea of this optimized method is to replace next element with the <strong>first element in array which bigger than current element</strong>. To help understand much easier, I would give example,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">original array: [1, 2, 5, 7, 3, 4, 5]
+q = [Max, Max, Max, Max, Max, Max, Max]
+for-loop:
+q = [1, Max, Max, Max, Max, Max, Max]
+q = [1, 2, Max, Max, Max, Max, Max]
+q = [1, 2, 5, Max, Max, Max, Max]
+q = [1, 2, 5, 7, Max, Max, Max]  // 1.
+q = [1, 2, 3, 7, Max, Max, Max]  // 2.
+q = [1, 2, 3, 4, Max, Max, Max]
+q = [1, 2, 3, 4, 5, Max, Max]
+</code></pre></td></tr></table>
+</div>
+</div><p>In second loop, remove the elements which are still <code>INT_MAX</code> then we can get the longest increase subsequence in this array, which is <code>[1, 2, 3, 4, 5]</code>. Why am I sure this is the longest one in this array? From the change I showed in above, we can find that the method would <strong>lower the height of the whole subsequence</strong>. Same example in above, the comment 1 ends up with 5 at the index 2 and the comment 2 ends up with 3 at the same index, and there are much more possible numbers we can decide to put after 3 than 5. Therefore, this optimized method can help to extend the length. Time complexity is only <code>O(nlogn)</code>!</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>At first, this challenge is categorized to the hard level; however, down-leveled to medium one at the end. Well, this problem is not that hard as well. The key point is to come up with <strong>definition of DP</strong>: the max length ending with different characters.</p>
+<p>In fact, there was still a faster solution with <code>O(3N)</code>. If we change definition of dynamic programming, $$ dp[i][k]: LIS length of first i elements, which end up with k. $$<br>
+This is feasible because we only have three types of letter, so we can come with this solution:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+    <span class="p">}</span><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+    <span class="p">}</span><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Well, this method is only limited to such input size that we can list out all the cases.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
