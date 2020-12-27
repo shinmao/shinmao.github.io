@@ -3,7 +3,7 @@
         <title>All Posts - Rafael</title>
         <link>http://blog.1pwnch.com/posts/</link>
         <description>All Posts | Rafael</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 24 Dec 2020 17:47:27 -0500</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 31 Oct 2020 20:44:27 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,17 +11,6 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
-</item><item>
-    <title>Roblox OA 2020</title>
-    <link>http://blog.1pwnch.com/posts/roblox-oa-2021/</link>
-    <pubDate>Thu, 24 Dec 2020 17:47:27 -0500</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/roblox-oa-2021/</guid>
-    <description><![CDATA[Roblox是我2020收到的最後一份OA，真的真的收到OA就已經非常開心了。準備了幾題考古題然後興奮得打開OA，roblox的OA一樣是host在hackerrank上的，大概三題90分鐘。題目的難度比起之前抖音我覺得友善許多，不過還是沒寫完 😥&hellip; 寫到第三題的一半實在是沒想法只好投降。在這篇文章中想分享一下準備的過程，網路上有很多人在討論考古題，思維有些是有問題或code也沒有寫出來，我想在這裡做個總結，也會附上all-pass的code (至少我自己會測試5-10個左右的test cases)。如果覺得有錯的話歡迎留言討論 🤙
-Word Compression 題目要求不斷刪除字串中k個連續相同的字元。以題目給的Example abbcccb, k = 3 為例，先刪掉3個c，所以會變成abbb，再刪掉3個b，最後會變成a。這題很容易聯想到stack資料結構的應用，怎麼想的呢？我們由左到右讀取字串時，當push的字元跟stack頂的字元相同且連續count累積到3時，就把這個字給pop出來。想要紀錄各單字的count的話，大家都會想用map吧，這樣就可以用O(1)的時間複雜度檢查出現次數是否為k。但如果同一字母出現了好幾組呢？e.g. accbbcccbc。這組字串跟上面的例子一樣最後都會變成a，但是ccc有兩組：第一組ccc作為bbb被刪除之後拼接起來，連續count才會累積到3;而第二組ccc作爲第一組被刪除的對象，一開始連續count就是3了。如何？如果map用字母作為key去查詢連續count的話肯定會很麻煩唄！
-能夠區別這兩組c的方式就是把他們宣告成object，object因記憶體位置不同而被視為相異。以下為思路：
- 宣告一個結構體，裡面同時儲存單字和他目前位置累積的連續count stack儲存的對象就是這個結構體，讀取字串的同時，把字母轉換為結構體的type存入stack 若是stack頂的字母連續count為k，則pop這組字母 若是stack頂的字母跟當前讀入的字母一樣，則為連續count+1 若不一樣，則開一個新的結構體，連續count為1 有時候是我們讀完整個字串，剩下的字母拼接在一起才變成一組字母，所以我們最後還要再加判斷一次 (e.g. ccbbcccbc) 最後把stack裡剩下的內容倒著輸出，Done  以下為C++版本對應的code：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57  #include &lt;bits/stdc++.]]></description>
 </item><item>
     <title>LintCode Weekly Contest 30 Condition String</title>
     <link>http://blog.1pwnch.com/posts/lintcode-weekly-content30-condition-string/</link>
@@ -92,5 +81,15 @@ This problem tests the application of priority queue which is implemented with m
 Writeup   The programming language in video is C++
 For the source code in video: Github
 Conclusion  Order of input: left to right or right to left? Definition of node: what member should we define for each nodes in tree?]]></description>
+</item><item>
+    <title>Single Number II on Leetcode</title>
+    <link>http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/</link>
+    <pubDate>Wed, 08 Jul 2020 02:35:31 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/single-number-ii-on-leetcode/</guid>
+    <description><![CDATA[State machine is common and useful technique to be used in algorithm. I really recommend you to figure the last solution out thoroughly. Then try my extended problem!
+Writeup   The programming language in video is C++
+For the source code in video: Github
+Conclusion Solution 1 and 2 are similiar to each other, and they both try using 3*n + 1 to separate the single number from the others.]]></description>
 </item></channel>
 </rss>
