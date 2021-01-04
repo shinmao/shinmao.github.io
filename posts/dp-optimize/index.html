@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>揭開DP狀態壓縮的神秘面紗 - Rafael</title>
+        <meta name="Description" content="If you are interested in my chinese article, read my first article to contact me :)"><meta property="og:title" content="揭開DP狀態壓縮的神秘面紗" />
+<meta property="og:description" content="DP狀態壓縮可以優化空間複雜度，通常用於狀態只依靠鄰近狀態時，可以把二維的狀態壓縮成一維來表示。是不是聽到這裡覺得，狀壓是一個很猛的，只有聰明人會用的東西？不，這篇文章就是來為你解開狀態壓縮神秘的面紗，希望透過這篇文章，可以讓每個讀者都輕鬆寫出狀態壓縮。
+案例介紹 我非常不建議一開始就學狀態壓縮的寫法，應該先寫好高維的表示方式再進行降維。多說無益，這裏就給個案例 - Leetcode 494 - TargetSum。這題的解法不是此篇文章探討的重點，所以我只會focus在優化的部分。這題用dfs會超時，可以換成背包問題：求子集總和為target的方法數。背包問題有兩個狀態：一是目前可以挑的物品，另外一個則是背包剩下的容量，狀態轉移方程如下：
+1 2 3 4  //if pick the number dp[i][sum] = dp[i - 1][sum - current_num] &#43; dp[i - 1][sum] //if not pick dp[i][sum] = dp[i - 1][sum]   有了狀態轉移方程就很容易實現了。
+1 2 3 4 5 6 7 8  for(int i = 1; i &lt;= n; i&#43;&#43;) { for(int j = 0; j &lt;= target; j&#43;&#43;) { if(j - nums[i - 1] &gt;= 0) dp[i][j] = dp[i - 1][j - nums[i - 1]] &#43; dp[i - 1][j]; else dp[i][j] = dp[i - 1][j]; } }   每一個i的狀態都只需要依賴i - 1的值，所以或許我們根本不需要紀錄那麼多i的狀態，因此這個解法還可以進行優化。下一部分就是本文重點：狀態壓縮。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.1pwnch.com/posts/dp-optimize/" />
+<meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
+<meta property="article:published_time" content="2021-01-03T22:14:17-05:00" />
+<meta property="article:modified_time" content="2021-01-03T22:14:17-05:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
+
+<meta name="twitter:title" content="揭開DP狀態壓縮的神秘面紗"/>
+<meta name="twitter:description" content="DP狀態壓縮可以優化空間複雜度，通常用於狀態只依靠鄰近狀態時，可以把二維的狀態壓縮成一維來表示。是不是聽到這裡覺得，狀壓是一個很猛的，只有聰明人會用的東西？不，這篇文章就是來為你解開狀態壓縮神秘的面紗，希望透過這篇文章，可以讓每個讀者都輕鬆寫出狀態壓縮。
+案例介紹 我非常不建議一開始就學狀態壓縮的寫法，應該先寫好高維的表示方式再進行降維。多說無益，這裏就給個案例 - Leetcode 494 - TargetSum。這題的解法不是此篇文章探討的重點，所以我只會focus在優化的部分。這題用dfs會超時，可以換成背包問題：求子集總和為target的方法數。背包問題有兩個狀態：一是目前可以挑的物品，另外一個則是背包剩下的容量，狀態轉移方程如下：
+1 2 3 4  //if pick the number dp[i][sum] = dp[i - 1][sum - current_num] &#43; dp[i - 1][sum] //if not pick dp[i][sum] = dp[i - 1][sum]   有了狀態轉移方程就很容易實現了。
+1 2 3 4 5 6 7 8  for(int i = 1; i &lt;= n; i&#43;&#43;) { for(int j = 0; j &lt;= target; j&#43;&#43;) { if(j - nums[i - 1] &gt;= 0) dp[i][j] = dp[i - 1][j - nums[i - 1]] &#43; dp[i - 1][j]; else dp[i][j] = dp[i - 1][j]; } }   每一個i的狀態都只需要依賴i - 1的值，所以或許我們根本不需要紀錄那麼多i的狀態，因此這個解法還可以進行優化。下一部分就是本文重點：狀態壓縮。"/>
+<meta name="application-name" content="Rafael">
+<meta name="apple-mobile-web-app-title" content="Rafael"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/dp-optimize/" /><link rel="prev" href="http://blog.1pwnch.com/posts/lintcode-weekly-content30-condition-string/" /><link rel="next" href="http://blog.1pwnch.com/posts/feel-free-to-contact-me/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "揭開DP狀態壓縮的神秘面紗",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.1pwnch.com\/posts\/dp-optimize\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Dynamic Programming","wordcount":  153 ,
+        "url": "http:\/\/blog.1pwnch.com\/posts\/dp-optimize\/","datePublished": "2021-01-03T22:14:17-05:00","dateModified": "2021-01-03T22:14:17-05:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "Rafael"
+            },"description": ""
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rafael">1pwnch</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rafael">1pwnch</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">揭開DP狀態壓縮的神秘面紗</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/algorithm/">
+                                <i class="far fa-folder fa-fw"></i>Algorithm
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2021-01-03>2021-01-03</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 153 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>1 min&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#案例介紹">案例介紹</a></li>
+    <li><a href="#狀態壓縮">狀態壓縮</a></li>
+    <li><a href="#總結">總結</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>DP狀態壓縮可以優化空間複雜度，通常用於狀態只依靠<strong>鄰近狀態</strong>時，可以把二維的狀態壓縮成一維來表示。是不是聽到這裡覺得，狀壓是一個很猛的，只有聰明人會用的東西？不，這篇文章就是來為你解開狀態壓縮神秘的面紗，希望透過這篇文章，可以讓每個讀者都輕鬆寫出狀態壓縮。</p>
+<h2 id="案例介紹">案例介紹</h2>
+<p>我非常不建議一開始就學狀態壓縮的寫法，應該先寫好高維的表示方式再進行降維。多說無益，這裏就給個案例 - <a href="https://leetcode.com/problems/target-sum/" target="_blank" rel="noopener noreffer">Leetcode 494 - TargetSum</a>。這題的解法不是此篇文章探討的重點，所以我只會focus在優化的部分。這題用<code>dfs</code>會超時，可以換成背包問題：求子集總和為<code>target</code>的方法數。背包問題有兩個狀態：一是目前可以挑的物品，另外一個則是背包剩下的容量，狀態轉移方程如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//if pick the number
+</span><span class="c1"></span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">sum</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">sum</span> <span class="o">-</span> <span class="n">current_num</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">sum</span><span class="p">]</span>
+<span class="c1">//if not pick
+</span><span class="c1"></span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">sum</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">sum</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>有了狀態轉移方程就很容易實現了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">target</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> 
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+        <span class="k">else</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>每一個<code>i</code>的狀態都只需要依賴<code>i - 1</code>的值，所以或許我們根本不需要紀錄那麼多<code>i</code>的狀態，因此這個解法還可以進行優化。下一部分就是本文重點：狀態壓縮。</p>
+<h2 id="狀態壓縮">狀態壓縮</h2>
+<p>在for迴圈中，我們每一次只要紀錄一個<code>i</code>的狀態，但如果我把<code>dp[i][sum] = dp[i - 1][sum - cur_num] + dp[i][sum]</code>直接改成<code>dp[sum] = dp[sum - current_num] + dp[sum]</code>，會出現很大的問題喔 😨 問題的原因是什麼呢？讓我們先看看下面這張圖：<br>
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="/1-3-21/array.png"
+        data-srcset="/1-3-21/array.png, /1-3-21/array.png 1.5x, /1-3-21/array.png 2x"
+        data-sizes="auto"
+        alt="/1-3-21/array.png"
+        title="/1-3-21/array.png" /><br>
+我們更新狀態的方向是由左到右(<code>j</code>的方向)，由上到下(<code>i</code>的方向)。舉我們上面<code>黑2</code>的狀態，更新它的方法數需要<code>紅1</code>和<code>紅2</code>的方法數。當我進行狀態壓縮時(變成下面一維的狀態)，我會發現：咦？在我更新<code>黑2</code>前，<code>紅1</code>就已經被更新成<code>橘1</code>了誒！<br>
+問題就在於<strong>更新順序</strong>。那不如我們換個更新順序看看？我們把更新順序(<code>j</code>的方向)換成逆向，要更新<code>黑2</code>的時候<code>紅1</code>還沒被更新到，所以我們所需的方法數就沒有被改動到囉！因此優化後的代碼就能寫出來囉：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">target</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> 
+            <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="總結">總結</h2>
+<p>常常會看到有些人dp代碼寫得特別簡單，真不知道他哪來的思路，他絕對是個天才，其實也只不過是經歷上面這個過程的優化&hellip; 想寫出這個優化，把狀態和轉移的過程畫出來就明確很多了！回去看看leetcode上面股票買賣系列的文章，可能我們會覺得討論區中的代碼怎麼都這麼簡單，幾個變數就把狀態轉移方程表示完成？其實也只是壓縮完用變數把前一個所需的狀態存起來而已！如果覺得我圖畫得不夠明確或者想提供其他優化思路，歡迎留言討論喔 👍</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2021-01-03</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/dp-optimize/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/dp-optimize/" data-title="揭開DP狀態壓縮的神秘面紗" data-via="1pwnch" data-hashtags="Dynamic Programming"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/dp-optimize/" data-hashtag="Dynamic Programming"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/dp-optimize/" data-title="揭開DP狀態壓縮的神秘面紗" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/dp-optimize/" data-title="揭開DP狀態壓縮的神秘面紗"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/dp-optimize/" data-title="揭開DP狀態壓縮的神秘面紗"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/dp-optimize/" data-title="揭開DP狀態壓縮的神秘面紗" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/dp-optimize/" data-title="揭開DP狀態壓縮的神秘面紗" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/dp-optimize/" data-title="揭開DP狀態壓縮的神秘面紗"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dynamic-programming/">Dynamic Programming</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/lintcode-weekly-content30-condition-string/" class="prev" rel="prev" title="LintCode Weekly Contest 30 Condition String"><i class="fas fa-angle-left fa-fw"></i>LintCode Weekly Contest 30 Condition String</a>
+            <a href="/posts/feel-free-to-contact-me/" class="next" rel="next" title="Feel Free to Contact Me">Feel Free to Contact Me<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment">
+
+</div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Rafael</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"Copy to clipboard","maxShownLines":100},"comment":{"gitalk":{"admin":["shinmao"],"clientID":"bdca5e2ee19179b3d15b","clientSecret":"7da8ea09ee3ff703c125776692d4ade2a076b530","id":"2021-01-03T22:14:17-05:00","owner":"shinmao","repo":"shinmao.github.io","title":"揭開DP狀態壓縮的神秘面紗"}},"headerMode":{"desktop":"fixed","mobile":"auto"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

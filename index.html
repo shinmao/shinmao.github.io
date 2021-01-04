@@ -12,7 +12,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://blog.1pwnch.com/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
-<meta property="og:updated_time" content="2020-10-31T20:44:27-04:00" />
+<meta property="og:updated_time" content="2021-01-03T22:14:17-05:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
 
@@ -112,6 +112,20 @@ So&hellip; In this blog, I would record my learning process including Algorithm,
         <a href="/posts/feel-free-to-contact-me/">Read More</a></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/dp-optimize/">揭開DP狀態壓縮的神秘面紗</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
+            published on&nbsp;<time datetime=2021-01-03>2021-01-03</time>
+        </span>&nbsp;
+            <span class="post-category">included in<a href="/categories/algorithm/">
+                        <i class="far fa-folder fa-fw"></i>Algorithm
+                    </a></span></div><div class="content">DP狀態壓縮可以優化空間複雜度，通常用於狀態只依靠鄰近狀態時，可以把二維的狀態壓縮成一維來表示。是不是聽到這裡覺得，狀壓是一個很猛的，只有聰明人會用的東西？不，這篇文章就是來為你解開狀態壓縮神秘的面紗，希望透過這篇文章，可以讓每個讀者都輕鬆寫出狀態壓縮。
+案例介紹 我非常不建議一開始就學狀態壓縮的寫法，應該先寫好高維的表示方式再進行降維。多說無益，這裏就給個案例 - Leetcode 494 - TargetSum。這題的解法不是此篇文章探討的重點，所以我只會focus在優化的部分。這題用dfs會超時，可以換成背包問題：求子集總和為target的方法數。背包問題有兩個狀態：一是目前可以挑的物品，另外一個則是背包剩下的容量，狀態轉移方程如下：
+1 2 3 4  //if pick the number dp[i][sum] = dp[i - 1][sum - current_num] + dp[i - 1][sum] //if not pick dp[i][sum] = dp[i - 1][sum]   有了狀態轉移方程就很容易實現了。
+1 2 3 4 5 6 7 8  for(int i = 1; i &lt;= n; i++) { for(int j = 0; j &lt;= target; j++) { if(j - nums[i - 1] &gt;= 0) dp[i][j] = dp[i - 1][j - nums[i - 1]] + dp[i - 1][j]; else dp[i][j] = dp[i - 1][j]; } }   每一個i的狀態都只需要依賴i - 1的值，所以或許我們根本不需要紀錄那麼多i的狀態，因此這個解法還可以進行優化。下一部分就是本文重點：狀態壓縮。</div><div class="post-footer">
+        <a href="/posts/dp-optimize/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dynamic-programming/">Dynamic Programming</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/lintcode-weekly-content30-condition-string/">LintCode Weekly Contest 30 Condition String</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
             published on&nbsp;<time datetime=2020-10-31>2020-10-31</time>
@@ -161,19 +175,6 @@ Assume there is ten numbers in array:</div><div class="post-footer">
         <a href="/posts/algoexpert-longest-peak/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/algoexpert/">AlgoExpert</a>,&nbsp;<a href="/tags/two-ptrs/">two ptrs</a></div></div>
 </article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/leetcode-33-search-in-rotated-array/">LeetCode 33 Search in Rotated Array</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
-            published on&nbsp;<time datetime=2020-09-23>2020-09-23</time>
-        </span>&nbsp;
-            <span class="post-category">included in<a href="/categories/algorithm/">
-                        <i class="far fa-folder fa-fw"></i>Algorithm
-                    </a></span></div><div class="content">First, I need to come up with the words, &lsquo;Damn it&rsquo;. This belongs to my LeetCode Self Challenge for 30 mins. I almost finish the problem, but I forget to check the search space for binary search, which should be the common sense for it. I will provide the writeup and the optimization here.
-Writeup   The programming language in video is C++
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42  int search(vector&lt;int&gt;&amp; nums, int target) { if(nums.</div><div class="post-footer">
-        <a href="/posts/leetcode-33-search-in-rotated-array/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leetcode/">Leetcode</a>,&nbsp;<a href="/tags/binary-search/">Binary Search</a></div></div>
-</article>
 <ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -186,10 +187,14 @@ Writeup   The programming language in video is C++
                     <span class="page-link">
                         <a href="/page/3/">3</a>
                     </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/4/">4</a>
+                    </span>
                 </li></ul></div></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Rafael</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Rafael</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

@@ -3,7 +3,17 @@
         <title>Dynamic Programming - Tag - Rafael</title>
         <link>http://blog.1pwnch.com/tags/dynamic-programming/</link>
         <description>Dynamic Programming - Tag - Rafael</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 31 Oct 2020 20:44:27 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/dynamic-programming/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 03 Jan 2021 22:14:17 -0500</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/dynamic-programming/" rel="self" type="application/rss+xml" /><item>
+    <title>揭開DP狀態壓縮的神秘面紗</title>
+    <link>http://blog.1pwnch.com/posts/dp-optimize/</link>
+    <pubDate>Sun, 03 Jan 2021 22:14:17 -0500</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/dp-optimize/</guid>
+    <description><![CDATA[DP狀態壓縮可以優化空間複雜度，通常用於狀態只依靠鄰近狀態時，可以把二維的狀態壓縮成一維來表示。是不是聽到這裡覺得，狀壓是一個很猛的，只有聰明人會用的東西？不，這篇文章就是來為你解開狀態壓縮神秘的面紗，希望透過這篇文章，可以讓每個讀者都輕鬆寫出狀態壓縮。
+案例介紹 我非常不建議一開始就學狀態壓縮的寫法，應該先寫好高維的表示方式再進行降維。多說無益，這裏就給個案例 - Leetcode 494 - TargetSum。這題的解法不是此篇文章探討的重點，所以我只會focus在優化的部分。這題用dfs會超時，可以換成背包問題：求子集總和為target的方法數。背包問題有兩個狀態：一是目前可以挑的物品，另外一個則是背包剩下的容量，狀態轉移方程如下：
+1 2 3 4  //if pick the number dp[i][sum] = dp[i - 1][sum - current_num] + dp[i - 1][sum] //if not pick dp[i][sum] = dp[i - 1][sum]   有了狀態轉移方程就很容易實現了。
+1 2 3 4 5 6 7 8  for(int i = 1; i &lt;= n; i++) { for(int j = 0; j &lt;= target; j++) { if(j - nums[i - 1] &gt;= 0) dp[i][j] = dp[i - 1][j - nums[i - 1]] + dp[i - 1][j]; else dp[i][j] = dp[i - 1][j]; } }   每一個i的狀態都只需要依賴i - 1的值，所以或許我們根本不需要紀錄那麼多i的狀態，因此這個解法還可以進行優化。下一部分就是本文重點：狀態壓縮。]]></description>
+</item><item>
     <title>LintCode Weekly Contest 30 Condition String</title>
     <link>http://blog.1pwnch.com/posts/lintcode-weekly-content30-condition-string/</link>
     <pubDate>Sat, 31 Oct 2020 20:44:27 -0400</pubDate>
