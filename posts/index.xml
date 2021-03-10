@@ -3,7 +3,7 @@
         <title>All Posts - Rafael</title>
         <link>http://blog.1pwnch.com/posts/</link>
         <description>All Posts | Rafael</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 03 Jan 2021 22:14:17 -0500</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 09 Mar 2021 20:39:51 -0500</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,6 +11,14 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>Static Link vs Dynamic Link</title>
+    <link>http://blog.1pwnch.com/posts/static-link-vs-dynamic-link/</link>
+    <pubDate>Tue, 09 Mar 2021 20:39:51 -0500</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/static-link-vs-dynamic-link/</guid>
+    <description><![CDATA[In this post, I would show the way to create static library and dynamic library and how they link to the executable files. I would not dig into the details of comparison, advantages, or disadvantages between static and dynamic library, please make sure you already have a whole picture before starting on this post.
+Create static library First, create a source file without main function as our library. Attention, filename should start from lib so that compiler can identify it as library file.]]></description>
 </item><item>
     <title>揭開DP狀態壓縮的神秘面紗</title>
     <link>http://blog.1pwnch.com/posts/dp-optimize/</link>
@@ -81,15 +89,5 @@ Writeup   The programming language in video is C++
     <guid>http://blog.1pwnch.com/posts/the-skyline-problem/</guid>
     <description><![CDATA[UVa 105 - The Skyline Problem
 This problem tests the application of priority queue which is implemented with min-heap. Min-heap takes O(logn) to insert a new node. It takes O(1) to extract current minimum value and O(logn) to sort again. With this data structure, I can iterate the boundaries of building in ascending order. My idea is recording all boundaries and associated heights in priority queue and current existing height in multiset.]]></description>
-</item><item>
-    <title>Count of Smaller Nums After Self</title>
-    <link>http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/</link>
-    <pubDate>Tue, 14 Jul 2020 20:57:55 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/</guid>
-    <description><![CDATA[I use modified-BST to solve this problem. Each time inserting a new node takes O(logn) and also updates the value of count, and there are n nodes; therefore, I think the time complexity of my solution is O(nlogn).
-Writeup   The programming language in video is C++
-For the source code in video: Github
-Conclusion  Order of input: left to right or right to left? Definition of node: what member should we define for each nodes in tree?]]></description>
 </item></channel>
 </rss>

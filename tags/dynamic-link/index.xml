@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>dynamic link - Tag - Rafael</title>
+        <link>http://blog.1pwnch.com/tags/dynamic-link/</link>
+        <description>dynamic link - Tag - Rafael</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 09 Mar 2021 20:39:51 -0500</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/dynamic-link/" rel="self" type="application/rss+xml" /><item>
+    <title>Static Link vs Dynamic Link</title>
+    <link>http://blog.1pwnch.com/posts/static-link-vs-dynamic-link/</link>
+    <pubDate>Tue, 09 Mar 2021 20:39:51 -0500</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/static-link-vs-dynamic-link/</guid>
+    <description><![CDATA[In this post, I would show the way to create static library and dynamic library and how they link to the executable files. I would not dig into the details of comparison, advantages, or disadvantages between static and dynamic library, please make sure you already have a whole picture before starting on this post.
+Create static library First, create a source file without main function as our library. Attention, filename should start from lib so that compiler can identify it as library file.]]></description>
+</item></channel>
+</rss>
