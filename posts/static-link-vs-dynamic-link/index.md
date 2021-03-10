@@ -32,10 +32,11 @@ Next, **create dynamic library** with `gcc *.o -shared -o libfoo.so`, then we ca
 Finally, we can link with shared library. To tell program where to search for the libraries, we can use `gcc -L$PWD -Wall -o main main.c -lfoo`, or just `export LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH`.
 
 ## Analyze dynamic-linked Executables
-![](/static/3-9-21/dynamic-lib.png)  
+![](/3-9-21/dynamic-lib.png)  
 Same result with `nm` command. After reading the command manual about `nm`, we can compare the result in last section with this section. In previous result of `nm` command, `func()` showed with label `T`, which means text section. In this result, `func()` showed with `U`, which means undefined, definition exists in another file.
-![](/static/3-9-21/dynamic-lib-asm.png)
+![](/3-9-21/dynamic-lib-asm.png)
 Here is the difference from static library that we cannot see the copied code of `func()`, but only the `func@plt` which would be replaced with the real address with lazy binding later.
 
 ## Conclusion
 In addition to try from the perspective of compilation, it is also interesting to think about the way to trace the source of function if we get an executable. Welcome to correct me or leave your comments to discuss with me.
+

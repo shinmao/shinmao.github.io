@@ -200,20 +200,20 @@ Finally, we can link with shared library. To tell program where to search for th
 <p><img
         class="lazyload"
         src="/svg/loading/small.min.svg"
-        data-src="/static/3-9-21/dynamic-lib.png"
-        data-srcset="/static/3-9-21/dynamic-lib.png, /static/3-9-21/dynamic-lib.png 1.5x, /static/3-9-21/dynamic-lib.png 2x"
+        data-src="/3-9-21/dynamic-lib.png"
+        data-srcset="/3-9-21/dynamic-lib.png, /3-9-21/dynamic-lib.png 1.5x, /3-9-21/dynamic-lib.png 2x"
         data-sizes="auto"
-        alt="/static/3-9-21/dynamic-lib.png"
-        title="/static/3-9-21/dynamic-lib.png" /><br>
+        alt="/3-9-21/dynamic-lib.png"
+        title="/3-9-21/dynamic-lib.png" /><br>
 Same result with <code>nm</code> command. After reading the command manual about <code>nm</code>, we can compare the result in last section with this section. In previous result of <code>nm</code> command, <code>func()</code> showed with label <code>T</code>, which means text section. In this result, <code>func()</code> showed with <code>U</code>, which means undefined, definition exists in another file.
 <img
         class="lazyload"
         src="/svg/loading/small.min.svg"
-        data-src="/static/3-9-21/dynamic-lib-asm.png"
-        data-srcset="/static/3-9-21/dynamic-lib-asm.png, /static/3-9-21/dynamic-lib-asm.png 1.5x, /static/3-9-21/dynamic-lib-asm.png 2x"
+        data-src="/3-9-21/dynamic-lib-asm.png"
+        data-srcset="/3-9-21/dynamic-lib-asm.png, /3-9-21/dynamic-lib-asm.png 1.5x, /3-9-21/dynamic-lib-asm.png 2x"
         data-sizes="auto"
-        alt="/static/3-9-21/dynamic-lib-asm.png"
-        title="/static/3-9-21/dynamic-lib-asm.png" />
+        alt="/3-9-21/dynamic-lib-asm.png"
+        title="/3-9-21/dynamic-lib-asm.png" />
 Here is the difference from static library that we cannot see the copied code of <code>func()</code>, but only the <code>func@plt</code> which would be replaced with the real address with lazy binding later.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>In addition to try from the perspective of compilation, it is also interesting to think about the way to trace the source of function if we get an executable. Welcome to correct me or leave your comments to discuss with me.</p>
