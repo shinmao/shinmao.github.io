@@ -37,7 +37,7 @@ Create static library First, create a source file without main function as our l
                 "url": "http:\/\/blog.1pwnch.com\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "static link, dynamic link","wordcount":  541 ,
+            },"genre": "posts","keywords": "static link, dynamic link","wordcount":  575 ,
         "url": "http:\/\/blog.1pwnch.com\/posts\/static-link-vs-dynamic-link\/","datePublished": "2021-03-09T20:39:51-05:00","dateModified": "2021-03-09T20:39:51-05:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
@@ -125,7 +125,7 @@ Create static library First, create a source file without main function as our l
                                 <i class="far fa-folder fa-fw"></i>ELF
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2021-03-09>2021-03-09</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 541 words&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 575 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>3 min&nbsp;</div>
         </div><div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
@@ -171,8 +171,8 @@ Create static library First, create a source file without main function as our l
 <span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Compile the source program with <code>gcc -c lib_lib.c -o lib_lib.o</code>. After we get object file for static libraries, we can <strong>finally create static library</strong> with <code>ar rcs lib_lib.a lib_lib.o</code>, which would bundle several object file into single static library.<br>
-I know that object file would link to static libraries at compilation time. Create a main program, and let compiler do it for us with <code>gcc -o main main.o -L. -l_lib</code> (<code>-L.</code> means static lib exists in current folder; <code>-lxxx</code> means link to the lib with name: <code>xxx</code>).</p>
+</div><p>Compile the source program with <code>gcc -c lib_lib.c -o lib_lib.o</code>. After we get object file for static libraries, we can <strong>finally create static library</strong> with <code>ar rcs lib_lib.a lib_lib.o</code>, which would bundle several object file into single static library.(If we use command <code>ar -t lib_lib.a</code>, then we can find that which object file it depends on)<br>
+I know that object file would link to static libraries at compilation time. Create a main program, and let compiler do it for us with <code>gcc -static -o main main.o -L. -l_lib</code> (<code>-L.</code> means static lib exists in current folder; <code>-lxxx</code> means link to the lib with name: <code>xxx</code>).</p>
 <h2 id="analyze-static-linked-executables">Analyze static-linked Executables</h2>
 <p><img
         class="lazyload"
@@ -181,7 +181,7 @@ I know that object file would link to static libraries at compilation time. Crea
         data-srcset="/3-9-21/static-lib.png, /3-9-21/static-lib.png 1.5x, /3-9-21/static-lib.png 2x"
         data-sizes="auto"
         alt="/3-9-21/static-lib.png"
-        title="/3-9-21/static-lib.png" />
+        title="/3-9-21/static-lib.png" /><br>
 In picture above, <code>nm</code> command would show us the symbol in the executable, and you can see the symbol of <code>func</code>. We also know that compiler will copy the code of lib into executable at compilation time; therefore, I should see the whole code of <code>func()</code> if I dump the assembly code of executable.<br>
 <img
         class="lazyload"
@@ -213,10 +213,10 @@ Same result with <code>nm</code> command. After reading the command manual about
         data-srcset="/3-9-21/dynamic-lib-asm.png, /3-9-21/dynamic-lib-asm.png 1.5x, /3-9-21/dynamic-lib-asm.png 2x"
         data-sizes="auto"
         alt="/3-9-21/dynamic-lib-asm.png"
-        title="/3-9-21/dynamic-lib-asm.png" />
+        title="/3-9-21/dynamic-lib-asm.png" /><br>
 Here is the difference from static library that we cannot see the copied code of <code>func()</code>, but only the <code>func@plt</code> which would be replaced with the real address with lazy binding later.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>In addition to try from the perspective of compilation, it is also interesting to think about the way to trace the source of function if we get an executable. Welcome to correct me or leave your comments to discuss with me.</p>
+<p>Given an executable, we can use command <code>file</code> to check whether it use dynamic-linking or static-linking. In addition to try from the perspective of compilation, it is also interesting to think about the way to trace the source of function if we get an executable. Welcome to correct me or leave your comments to discuss with me.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

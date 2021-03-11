@@ -17,11 +17,11 @@ Create header file for `lib_lib.c` so that we can include it in main program lat
 /* filename: lib_lib.h */
 void func(void);
 ```
-Compile the source program with `gcc -c lib_lib.c -o lib_lib.o`. After we get object file for static libraries, we can **finally create static library** with `ar rcs lib_lib.a lib_lib.o`, which would bundle several object file into single static library.  
-I know that object file would link to static libraries at compilation time. Create a main program, and let compiler do it for us with `gcc -o main main.o -L. -l_lib` (`-L.` means static lib exists in current folder; `-lxxx` means link to the lib with name: `xxx`).
+Compile the source program with `gcc -c lib_lib.c -o lib_lib.o`. After we get object file for static libraries, we can **finally create static library** with `ar rcs lib_lib.a lib_lib.o`, which would bundle several object file into single static library.(If we use command `ar -t lib_lib.a`, then we can find that which object file it depends on)  
+I know that object file would link to static libraries at compilation time. Create a main program, and let compiler do it for us with `gcc -static -o main main.o -L. -l_lib` (`-L.` means static lib exists in current folder; `-lxxx` means link to the lib with name: `xxx`).
 
 ## Analyze static-linked Executables
-![](/3-9-21/static-lib.png)
+![](/3-9-21/static-lib.png)  
 In picture above, `nm` command would show us the symbol in the executable, and you can see the symbol of `func`. We also know that compiler will copy the code of lib into executable at compilation time; therefore, I should see the whole code of `func()` if I dump the assembly code of executable.  
 ![](/3-9-21/static-lib-asm.png)  
 In picture above, I dump the assembly code of `main` with `objdump -d main` and can find that the code of `func()` has been copied to `main`.
@@ -34,9 +34,9 @@ Finally, we can link with shared library. To tell program where to search for th
 ## Analyze dynamic-linked Executables
 ![](/3-9-21/dynamic-lib.png)  
 Same result with `nm` command. After reading the command manual about `nm`, we can compare the result in last section with this section. In previous result of `nm` command, `func()` showed with label `T`, which means text section. In this result, `func()` showed with `U`, which means undefined, definition exists in another file.
-![](/3-9-21/dynamic-lib-asm.png)
+![](/3-9-21/dynamic-lib-asm.png)  
 Here is the difference from static library that we cannot see the copied code of `func()`, but only the `func@plt` which would be replaced with the real address with lazy binding later.
 
 ## Conclusion
-In addition to try from the perspective of compilation, it is also interesting to think about the way to trace the source of function if we get an executable. Welcome to correct me or leave your comments to discuss with me.
+Given an executable, we can use command `file` to check whether it use dynamic-linking or static-linking. In addition to try from the perspective of compilation, it is also interesting to think about the way to trace the source of function if we get an executable. Welcome to correct me or leave your comments to discuss with me.
 
