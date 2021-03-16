@@ -175,8 +175,9 @@ docker rmi  -- remove images
 <li><code>docker run -d usr/repo</code>
 run a consistant service in container</li>
 <li><code>docker run -d img ping localhost</code>
-manually run a consistant service<br>
-<img
+manually run a consistant service</li>
+</ol>
+<p><img
         class="lazyload"
         src="/svg/loading/small.min.svg"
         data-src="/3-16-21/docker-d.png"
@@ -208,14 +209,13 @@ There is another usually used command can help solve the problem: <code>exec</co
 <img
         class="lazyload"
         src="/svg/loading/small.min.svg"
-        data-src="/static/3-16-21/docker-exec.png"
-        data-srcset="/static/3-16-21/docker-exec.png, /static/3-16-21/docker-exec.png 1.5x, /static/3-16-21/docker-exec.png 2x"
+        data-src="/3-16-21/docker-exec.png"
+        data-srcset="/3-16-21/docker-exec.png, /3-16-21/docker-exec.png 1.5x, /3-16-21/docker-exec.png 2x"
         data-sizes="auto"
-        alt="/static/3-16-21/docker-exec.png"
-        title="/static/3-16-21/docker-exec.png" /><br>
+        alt="/3-16-21/docker-exec.png"
+        title="/3-16-21/docker-exec.png" /><br>
 In screenshot above, I open another shell in container <code>test</code> and run the command <code>ps</code>. In my project, I always like to use <code>docker exec -it &lt;name&gt; bash -c &quot;command&quot;</code> to run the bash command from the outside. Option <code>it</code> helps me to see the results shown in container.<br>
-We always like to use the images created by others. But how if we make some changes to the existing container and I want it to be saved as a new image? <code>docker commit &lt;name&gt; repo:tag</code> would be your friend!</li>
-</ol>
+We always like to use the images created by others. But how if we make some changes to the existing container and I want it to be saved as a new image? <code>docker commit &lt;name&gt; repo:tag</code> would be your friend!</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>I hope this post can help you learn docker in an easier way. Share or leave the comments if you find some more important commands for beginer. Hope you enjoy it.</p>
 </div><div class="post-footer" id="post-footer">

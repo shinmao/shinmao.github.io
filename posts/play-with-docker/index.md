@@ -23,6 +23,7 @@ Basically, container would stop when it finish the intructions given by you. For
 run a consistant service in container
 2. `docker run -d img ping localhost`
 manually run a consistant service  
+
 ![](/3-16-21/docker-d.png)  
 Here you can see that `great_carson` runs the command of ping in container in the background.  
 Of course, you would like to **go into** the container to take a look, you might like to run `attach` command to do it.  
@@ -31,7 +32,7 @@ Here you can see that I try to attach the ping service container. However, after
 ![](/3-16-21/docker-attach-td.png)  
 In the screenshot above, I tried to build up another container with `-td` option. This option means **container would continue working in background even we exit it**. This time, after I tried attach and exited it, `ps` told me that it still working in the background!  
 There is another usually used command can help solve the problem: `exec`. This command would open another shell to run the command **from the outside**.  
-![](/static/3-16-21/docker-exec.png)  
+![](/3-16-21/docker-exec.png)  
 In screenshot above, I open another shell in container `test` and run the command `ps`. In my project, I always like to use `docker exec -it <name> bash -c "command"` to run the bash command from the outside. Option `it` helps me to see the results shown in container.  
 We always like to use the images created by others. But how if we make some changes to the existing container and I want it to be saved as a new image? `docker commit <name> repo:tag` would be your friend!
 
