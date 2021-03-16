@@ -3,7 +3,7 @@
         <title>Rafael</title>
         <link>http://blog.1pwnch.com/</link>
         <description>If you are interested in my chinese article, read my first article to contact me :)</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 09 Mar 2021 20:39:51 -0500</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 16 Mar 2021 02:11:57 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,6 +11,14 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>Play With Docker</title>
+    <link>http://blog.1pwnch.com/posts/play-with-docker/</link>
+    <pubDate>Tue, 16 Mar 2021 02:11:57 -0400</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/play-with-docker/</guid>
+    <description><![CDATA[Docker has become a trend that every engineer would be familiar with, but most of the people would mistake docker for a kind of virtual machine. In this post, I would like to show the difference between container and virtual machine. Of course, I would like to help people to figure out how to play with docker in easier way.
+Difference between Container and Virtual machine With the picture above, you should find the difference between virtual machine and container.]]></description>
 </item><item>
     <title>Static Link vs Dynamic Link</title>
     <link>http://blog.1pwnch.com/posts/static-link-vs-dynamic-link/</link>
@@ -81,13 +89,5 @@ Writeup   The programming language in video is C++
     <description><![CDATA[查找一個數組裡面的目標，我們能夠想到最快的方法可能是hash table，然而當數組很大時，內存就會爆掉！第二個選擇則是binary search。Binary search的觀念看似很簡單，然而卻有多種實現方法！最近在做一些題目時(包括面試時)發現binary search的應用面其實很廣，只要dataset有單調性，我們都可以用binary search把時間複雜度縮小到對數等級。特別感謝Leetcode出了Explore篇章幫助我進行摸索。下面我也會針對Explore上的題目做出解析來整理Binary search的訣竅！
 解題過程  所有的元素為unique，尋找唯一的index
  Explore Binary Search 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  class Solution { public: int search(vector&lt;int&gt;&amp; nums, int target) { if(target &lt; -9999 || target &gt; 9999) return -1; int start = 0, end = nums.size() - 1, mid = 0; while(start &lt;= end) { mid = start + ((end - start) &gt;&gt; 1); // remember your bracket  if(nums[mid] == target) return mid; if(nums[mid] &lt; target) start = mid + 1; else end = mid - 1; } return -1; } };   以上我的解法只有哪到66%的成績，但在我審了一遍前段的code之後，我推斷時間複雜度只差在I/O優化！]]></description>
-</item><item>
-    <title>The Skyline Problem</title>
-    <link>http://blog.1pwnch.com/posts/the-skyline-problem/</link>
-    <pubDate>Fri, 07 Aug 2020 11:27:01 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/the-skyline-problem/</guid>
-    <description><![CDATA[UVa 105 - The Skyline Problem
-This problem tests the application of priority queue which is implemented with min-heap. Min-heap takes O(logn) to insert a new node. It takes O(1) to extract current minimum value and O(logn) to sort again. With this data structure, I can iterate the boundaries of building in ascending order. My idea is recording all boundaries and associated heights in priority queue and current existing height in multiset.]]></description>
 </item></channel>
 </rss>
