@@ -25,7 +25,7 @@ run a consistant service in container
 manually run a consistant service  
 
 ![](/3-16-21/docker-d.png)  
-Here you can see that `great_carson` runs the command of ping in container in the background.  
+Here you can see that `great_carson` runs the command of ping in container in the background. A recommended way is to use `docker run -d img /bin/bash`.  
 Of course, you would like to **go into** the container to take a look, you might like to run `attach` command to do it.  
 ![](/3-16-21/docker-attach.png)  
 Here you can see that I try to attach the ping service container. However, after I tried to exit the container, then the service and container also stopped by the way. The solution is to use `-td` option when running the command of `docker run`.  
@@ -34,7 +34,16 @@ In the screenshot above, I tried to build up another container with `-td` option
 There is another usually used command can help solve the problem: `exec`. This command would open another shell to run the command **from the outside**.  
 ![](/3-16-21/docker-exec.png)  
 In screenshot above, I open another shell in container `test` and run the command `ps`. In my project, I always like to use `docker exec -it <name> bash -c "command"` to run the bash command from the outside. Option `it` helps me to see the results shown in container.  
-We always like to use the images created by others. But how if we make some changes to the existing container and I want it to be saved as a new image? `docker commit <name> repo:tag` would be your friend!
+We always like to use the images created by others. But how if we make some changes to the existing container and I want it to be saved as a new image? `docker commit <name> repo:tag` would be your friend! Following are the commands for giving your image as a file to others:  
+```
+# save the image as file
+docker save usr:tag > xxx.tar
+# load the image file into localhost
+docker load xxx.tar   # then you can find it in your docker images
+docker run -itd use:tag /bin/bash
+```
+Share with the man whom you like to give images to:)  
 
 ## Conclusion
-I hope this post can help you learn docker in an easier way. Share or leave the comments if you find some more important commands for beginer. Hope you enjoy it.
+Some interesting details I found while working with command `docker exec bash -c`. You need to pay attention to the fact that this command would start up a **new shell** on each time when called. Which case would be affected by this case? I set env variable in the previous command: `docker exec bash -c "export CC=clang"`, but `CC` would not work in next command because it would be different shell. Therefore, my solution is to use `docker exec bash -c` for only one time. I hope this post can help you learn docker in an easier way. Share or leave the comments if you find some more important commands for beginer. Hope you enjoy it.
+

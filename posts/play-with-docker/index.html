@@ -37,7 +37,7 @@ Difference between Container and Virtual machine With the picture above, you sho
                 "url": "http:\/\/blog.1pwnch.com\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "docker","wordcount":  601 ,
+            },"genre": "posts","keywords": "docker","wordcount":  762 ,
         "url": "http:\/\/blog.1pwnch.com\/posts\/play-with-docker\/","datePublished": "2021-03-16T02:11:57-04:00","dateModified": "2021-03-16T02:11:57-04:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
@@ -125,8 +125,8 @@ Difference between Container and Virtual machine With the picture above, you sho
                                 <i class="far fa-folder fa-fw"></i>Container
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2021-03-16>2021-03-16</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 601 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>3 min&nbsp;</div>
+                <i class="fas fa-pencil-alt fa-fw"></i>about 762 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>4 min&nbsp;</div>
         </div><div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -185,7 +185,7 @@ manually run a consistant service</li>
         data-sizes="auto"
         alt="/3-16-21/docker-d.png"
         title="/3-16-21/docker-d.png" /><br>
-Here you can see that <code>great_carson</code> runs the command of ping in container in the background.<br>
+Here you can see that <code>great_carson</code> runs the command of ping in container in the background. A recommended way is to use <code>docker run -d img /bin/bash</code>.<br>
 Of course, you would like to <strong>go into</strong> the container to take a look, you might like to run <code>attach</code> command to do it.<br>
 <img
         class="lazyload"
@@ -215,9 +215,26 @@ There is another usually used command can help solve the problem: <code>exec</co
         alt="/3-16-21/docker-exec.png"
         title="/3-16-21/docker-exec.png" /><br>
 In screenshot above, I open another shell in container <code>test</code> and run the command <code>ps</code>. In my project, I always like to use <code>docker exec -it &lt;name&gt; bash -c &quot;command&quot;</code> to run the bash command from the outside. Option <code>it</code> helps me to see the results shown in container.<br>
-We always like to use the images created by others. But how if we make some changes to the existing container and I want it to be saved as a new image? <code>docker commit &lt;name&gt; repo:tag</code> would be your friend!</p>
+We always like to use the images created by others. But how if we make some changes to the existing container and I want it to be saved as a new image? <code>docker commit &lt;name&gt; repo:tag</code> would be your friend! Following are the commands for giving your image as a file to others:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># save the image as file
+docker save usr:tag &gt; xxx.tar
+# load the image file into localhost
+docker load xxx.tar   # then you can find it in your docker images
+docker run -itd use:tag /bin/bash
+</code></pre></td></tr></table>
+</div>
+</div><p>Share with the man whom you like to give images to:)</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>I hope this post can help you learn docker in an easier way. Share or leave the comments if you find some more important commands for beginer. Hope you enjoy it.</p>
+<p>Some interesting details I found while working with command <code>docker exec bash -c</code>. You need to pay attention to the fact that this command would start up a <strong>new shell</strong> on each time when called. Which case would be affected by this case? I set env variable in the previous command: <code>docker exec bash -c &quot;export CC=clang&quot;</code>, but <code>CC</code> would not work in next command because it would be different shell. Therefore, my solution is to use <code>docker exec bash -c</code> for only one time. I hope this post can help you learn docker in an easier way. Share or leave the comments if you find some more important commands for beginer. Hope you enjoy it.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
