@@ -3,7 +3,7 @@
         <title>All Posts - Rafael</title>
         <link>http://blog.1pwnch.com/posts/</link>
         <description>All Posts | Rafael</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 16 Mar 2021 02:11:57 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 28 Apr 2021 00:30:15 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Feel Free to Contact Me</title>
     <link>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</link>
     <pubDate>Wed, 19 Aug 2020 13:05:26 &#43;0800</pubDate>
@@ -11,6 +11,13 @@
     <guid>http://blog.1pwnch.com/posts/feel-free-to-contact-me/</guid>
     <description><![CDATA[Nice to meet you, I am Rafael.
 So&hellip; In this blog, I would record my learning process including Algorithm, writeup of OJ, System Design, Notes of Machine Learning/Deep Learning, Some myths I always mistake for and so on. You can search tags to find what you want. I would use my home language - which is Chinese to make the notes. Of course, if you are interested in specific articles, I am happy to translate for you in my free time.]]></description>
+</item><item>
+    <title>Learn Compiler - Introduction</title>
+    <link>http://blog.1pwnch.com/posts/learn-compiler/</link>
+    <pubDate>Wed, 28 Apr 2021 00:30:15 -0400</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/learn-compiler/</guid>
+    <description><![CDATA[Once in college, I regreted not spending much time on learning compiler so hard. However, the opportunity comes to me again. Software analysis is very important for my research field in PhD: Automatic Exploitation Generation. Compiler is the necessary concept for Software analysis such for static analysis or dynamic analysis, I would grab this chance to learn compiler from basics again. This series include the learning notes for the Stanford course on edx, and would start from Introduction to each parts of Lexical Analysis, Parsing, Semantic Analysis, Optimization, and Code Generation.]]></description>
 </item><item>
     <title>Play With Docker</title>
     <link>http://blog.1pwnch.com/posts/play-with-docker/</link>
@@ -80,14 +87,5 @@ Assume there is ten numbers in array:]]></description>
     <description><![CDATA[First, I need to come up with the words, &lsquo;Damn it&rsquo;. This belongs to my LeetCode Self Challenge for 30 mins. I almost finish the problem, but I forget to check the search space for binary search, which should be the common sense for it. I will provide the writeup and the optimization here.
 Writeup   The programming language in video is C++
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42  int search(vector&lt;int&gt;&amp; nums, int target) { if(nums.]]></description>
-</item><item>
-    <title>Explore Binary Search</title>
-    <link>http://blog.1pwnch.com/posts/explore-binary-search/</link>
-    <pubDate>Mon, 17 Aug 2020 17:30:05 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://blog.1pwnch.com/posts/explore-binary-search/</guid>
-    <description><![CDATA[查找一個數組裡面的目標，我們能夠想到最快的方法可能是hash table，然而當數組很大時，內存就會爆掉！第二個選擇則是binary search。Binary search的觀念看似很簡單，然而卻有多種實現方法！最近在做一些題目時(包括面試時)發現binary search的應用面其實很廣，只要dataset有單調性，我們都可以用binary search把時間複雜度縮小到對數等級。特別感謝Leetcode出了Explore篇章幫助我進行摸索。下面我也會針對Explore上的題目做出解析來整理Binary search的訣竅！
-解題過程  所有的元素為unique，尋找唯一的index
- Explore Binary Search 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  class Solution { public: int search(vector&lt;int&gt;&amp; nums, int target) { if(target &lt; -9999 || target &gt; 9999) return -1; int start = 0, end = nums.size() - 1, mid = 0; while(start &lt;= end) { mid = start + ((end - start) &gt;&gt; 1); // remember your bracket  if(nums[mid] == target) return mid; if(nums[mid] &lt; target) start = mid + 1; else end = mid - 1; } return -1; } };   以上我的解法只有哪到66%的成績，但在我審了一遍前段的code之後，我推斷時間複雜度只差在I/O優化！]]></description>
 </item></channel>
 </rss>

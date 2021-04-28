@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Compiler - Category - Rafael</title>
+        <link>http://blog.1pwnch.com/categories/compiler/</link>
+        <description>Compiler - Category - Rafael</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 28 Apr 2021 00:30:15 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/categories/compiler/" rel="self" type="application/rss+xml" /><item>
+    <title>Learn Compiler - Introduction</title>
+    <link>http://blog.1pwnch.com/posts/learn-compiler/</link>
+    <pubDate>Wed, 28 Apr 2021 00:30:15 -0400</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/learn-compiler/</guid>
+    <description><![CDATA[Once in college, I regreted not spending much time on learning compiler so hard. However, the opportunity comes to me again. Software analysis is very important for my research field in PhD: Automatic Exploitation Generation. Compiler is the necessary concept for Software analysis such for static analysis or dynamic analysis, I would grab this chance to learn compiler from basics again. This series include the learning notes for the Stanford course on edx, and would start from Introduction to each parts of Lexical Analysis, Parsing, Semantic Analysis, Optimization, and Code Generation.]]></description>
+</item></channel>
+</rss>
