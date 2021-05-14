@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Lexical Analysis - Tag - Rafael</title>
+        <link>http://blog.1pwnch.com/tags/lexical-analysis/</link>
+        <description>Lexical Analysis - Tag - Rafael</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 12 May 2021 22:05:42 -0400</lastBuildDate><atom:link href="http://blog.1pwnch.com/tags/lexical-analysis/" rel="self" type="application/rss+xml" /><item>
+    <title>Lexical Analysis</title>
+    <link>http://blog.1pwnch.com/posts/lexical-analysis/</link>
+    <pubDate>Wed, 12 May 2021 22:05:42 -0400</pubDate>
+    <author>Author</author>
+    <guid>http://blog.1pwnch.com/posts/lexical-analysis/</guid>
+    <description><![CDATA[The goal of lexical analysis The goal of lexical analysis is to partition the input string into lexemes, identify the token of each lexeme then give to parser. On other hand, first part about lexemes is to partition input to units, and second part about token is to define the class of each units.
+ Given a input string, such as foo = 42 Lexical-Analyzer would identify tokens as &lt;&quot;id&quot;, &quot;foo&quot;&gt;, &lt;Op, &quot;=&quot;&gt;, and &lt;&quot;Int&quot;, &quot;42&quot;&gt; Give to parser  There are several kinds of token classes, such as Identifier, Integer, Numbers, Keyword, Whitespace.]]></description>
+</item></channel>
+</rss>

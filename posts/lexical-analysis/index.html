@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Lexical Analysis - Rafael</title>
+        <meta name="Description" content="If you are interested in my chinese article, read my first article to contact me :)"><meta property="og:title" content="Lexical Analysis" />
+<meta property="og:description" content="The goal of lexical analysis The goal of lexical analysis is to partition the input string into lexemes, identify the token of each lexeme then give to parser. On other hand, first part about lexemes is to partition input to units, and second part about token is to define the class of each units.
+ Given a input string, such as foo = 42 Lexical-Analyzer would identify tokens as &lt;&quot;id&quot;, &quot;foo&quot;&gt;, &lt;Op, &quot;=&quot;&gt;, and &lt;&quot;Int&quot;, &quot;42&quot;&gt; Give to parser  There are several kinds of token classes, such as Identifier, Integer, Numbers, Keyword, Whitespace." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.1pwnch.com/posts/lexical-analysis/" />
+<meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
+<meta property="article:published_time" content="2021-05-12T22:05:42-04:00" />
+<meta property="article:modified_time" content="2021-05-12T22:05:42-04:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
+
+<meta name="twitter:title" content="Lexical Analysis"/>
+<meta name="twitter:description" content="The goal of lexical analysis The goal of lexical analysis is to partition the input string into lexemes, identify the token of each lexeme then give to parser. On other hand, first part about lexemes is to partition input to units, and second part about token is to define the class of each units.
+ Given a input string, such as foo = 42 Lexical-Analyzer would identify tokens as &lt;&quot;id&quot;, &quot;foo&quot;&gt;, &lt;Op, &quot;=&quot;&gt;, and &lt;&quot;Int&quot;, &quot;42&quot;&gt; Give to parser  There are several kinds of token classes, such as Identifier, Integer, Numbers, Keyword, Whitespace."/>
+<meta name="application-name" content="Rafael">
+<meta name="apple-mobile-web-app-title" content="Rafael"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.1pwnch.com/posts/lexical-analysis/" /><link rel="prev" href="http://blog.1pwnch.com/posts/learn-compiler/" /><link rel="next" href="http://blog.1pwnch.com/posts/feel-free-to-contact-me/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Lexical Analysis",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.1pwnch.com\/posts\/lexical-analysis\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Stanford Courses, Lexical Analysis","wordcount":  783 ,
+        "url": "http:\/\/blog.1pwnch.com\/posts\/lexical-analysis\/","datePublished": "2021-05-12T22:05:42-04:00","dateModified": "2021-05-12T22:05:42-04:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/blog.1pwnch.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "Rafael"
+            },"description": ""
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rafael">1pwnch</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rafael">1pwnch</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Lexical Analysis</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/compiler/">
+                                <i class="far fa-folder fa-fw"></i>Compiler
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2021-05-12>2021-05-12</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 783 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>4 min&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-goal-of-lexical-analysis">The goal of lexical analysis</a></li>
+    <li><a href="#lexical-specification">Lexical specification</a></li>
+    <li><a href="#lexical-implementation">Lexical implementation</a></li>
+    <li><a href="#from-nfa-to-dfa">From NFA to DFA</a></li>
+    <li><a href="#implementing-finite-automata">Implementing Finite Automata</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="the-goal-of-lexical-analysis">The goal of lexical analysis</h2>
+<p>The goal of lexical analysis is to partition the input string into lexemes, identify the token of each lexeme then give to parser. On other hand, first part about lexemes is to partition input to units, and second part about token is to define the class of each units.</p>
+<ol>
+<li>Given a input string, such as <code>foo = 42</code></li>
+<li>Lexical-Analyzer would identify tokens as <code>&lt;&quot;id&quot;, &quot;foo&quot;&gt;</code>, <code>&lt;Op, &quot;=&quot;&gt;</code>, and <code>&lt;&quot;Int&quot;, &quot;42&quot;&gt;</code></li>
+<li>Give to parser</li>
+</ol>
+<p>There are several kinds of token classes, such as Identifier, Integer, Numbers, Keyword, Whitespace. Two interesting classes: One is identifier, which is string composed of letters or digits and start with letter, e.g. <code>A1</code>, <code>B17</code>. Another one is keyword, which is composed of something like <code>if</code>, <code>else</code>&hellip; etc.</p>
+<blockquote>
+<p>It is also to see which value belongs to the token class. Therefore, the format of token consists of token name and attribute value.</p>
+</blockquote>
+<p>There is another example for FORTRAN in the course: The difference between <code>DO 5 I = 1,25</code> and <code>DO 5 I = 1.25</code>. Whitespace in FORTRAN is insignificant, so we just need to ignore it. The first one represents <code>for-loop</code> while the second one represents simple assignment. In this case, <code>DO</code> in the first one would be keyword, but <code>DO</code> in the second one would be the substring of identifier. Now comes the problem, it makes sense that we scan the input from left-hand side to right-hand side; however, how do we identify whether it is keyword or identifier while we are still in left-hand side. We need the right-hand side, which is the difference between <code>1,25</code> and <code>1.25</code>; therefore, we need to <strong>look-ahead</strong>.</p>
+<ol>
+<li>The goal is to partition string. This can be implemented by scanning input from left to right, recognizing one token at a time.</li>
+<li><strong>Look-ahead</strong> may be required to decide where the next token starts.</li>
+</ol>
+<h2 id="lexical-specification">Lexical specification</h2>
+<p>To specify which set of strings belong to each token class, we could use <strong>regular languages</strong>. To define the regular languages, we use <strong>regular expression</strong>. Assume a meaning function <code>L</code>, which can map expression expression to set of strings by <code>L(E) -&gt; set of strings</code>. It&rsquo;s said that meaning function can help map syntax to semantics.</p>
+<p><strong>Why is this mapping to semantics also important?</strong> It can allow us to consider notation a separated issue. Same semantics can be mapped to by several syntaxs. Soemtimes our syntax is not the best solution for the problem, so we could find another solution based on same semantic.</p>
+<p><strong>How to check whether a string belongs to L(R) or not?</strong></p>
+<ol>
+<li>List all regular expressions of token classes</li>
+<li>Union: <code>L(token_a) U L(token_b) U L(token_c) ...</code></li>
+<li>Given string <code>x</code>, check whether substring <code>sx</code> belongs to <code>L(R)</code> or not.</li>
+<li>If true, remove <code>sx</code> from <code>x</code>. Put the rest of <code>x</code> to step 3 until <code>x</code> is totally empty.</li>
+</ol>
+<p><strong>How if there are multiple token classes matched?</strong> &ldquo;Maximal mutch&rdquo;: choose the Longest Matched Prefix one. Given <code>sx</code>, it would belong to the token class with higher priority. For example, <code>if</code> could belong to identifier or keyword, and identifier has higher priority.</p>
+<h2 id="lexical-implementation">Lexical implementation</h2>
+<p>We used regular expression to make lexical specification, but how do we implement it? We could use <strong>Finite automata</strong>. There is a brief introduction to automata on <a href="https://www.geeksforgeeks.org/introduction-of-finite-automata/" target="_blank" rel="noopener noreffer">geeksforgeeks</a>. Therefore, we know that automata consists of an input alphabet, finite set of states S, a start state, a set of accepted states, and a set of transition.</p>
+<p>There are difference between Deterministic Finite Automata (DFA) and Nondeterministic Finite Automata (NFA). For DFA, one transition per input per state, and no epsilon moves are allowed. For NFA, multiple transition for per input given state, but epsilon moves are allowed. (epsilon move means transition to different states without assuming any input).</p>
+<p>Previously, we already know we can use regular expression to do lexical specification. In following steps, we would convert regular expressions to NFA, from NFA to DFA, then from DFA to Table-driven implementation of DFA at the end.</p>
+<h2 id="from-nfa-to-dfa">From NFA to DFA</h2>
+<p>In fact, this section in course is very hard for me to understand. Personally I consider this step is for the purpose that NFA is too ambiguous to implement transition. Per input for NFA can transition to different states while per input for DFA can only transition to one state.</p>
+<blockquote>
+<p>I might still need some time to figure the meaning of this section out.</p>
+</blockquote>
+<h2 id="implementing-finite-automata">Implementing Finite Automata</h2>
+<p>For the purpose of making iteration speedy, we would like to derive the table of DFA (row would be state, and col would be input symbol). The conversion between NFA to DFA is the trade-off between speed and space (conversion to DFA can reduce the col number).</p>
+<h2 id="reference">Reference</h2>
+<ol>
+<li><a href="https://www.geeksforgeeks.org/introduction-of-finite-automata/" target="_blank" rel="noopener noreffer">Introduction of Finite Automata
+</a></li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2021-05-12</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/lexical-analysis/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://blog.1pwnch.com/posts/lexical-analysis/" data-title="Lexical Analysis" data-via="1pwnch" data-hashtags="Stanford Courses,Lexical Analysis"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://blog.1pwnch.com/posts/lexical-analysis/" data-hashtag="Stanford Courses"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://blog.1pwnch.com/posts/lexical-analysis/" data-title="Lexical Analysis" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://blog.1pwnch.com/posts/lexical-analysis/" data-title="Lexical Analysis"><i class="fab fa-line fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://blog.1pwnch.com/posts/lexical-analysis/" data-title="Lexical Analysis"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://blog.1pwnch.com/posts/lexical-analysis/" data-title="Lexical Analysis" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://blog.1pwnch.com/posts/lexical-analysis/" data-title="Lexical Analysis" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://blog.1pwnch.com/posts/lexical-analysis/" data-title="Lexical Analysis"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/stanford-courses/">Stanford Courses</a>,&nbsp;<a href="/tags/lexical-analysis/">Lexical Analysis</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/learn-compiler/" class="prev" rel="prev" title="Learn Compiler - Introduction"><i class="fas fa-angle-left fa-fw"></i>Learn Compiler - Introduction</a>
+            <a href="/posts/feel-free-to-contact-me/" class="next" rel="next" title="Feel Free to Contact Me">Feel Free to Contact Me<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment">
+
+</div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Rafael</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"Copy to clipboard","maxShownLines":100},"comment":{"gitalk":{"admin":["shinmao"],"clientID":"bdca5e2ee19179b3d15b","clientSecret":"7da8ea09ee3ff703c125776692d4ade2a076b530","id":"2021-05-12T22:05:42-04:00","owner":"shinmao","repo":"shinmao.github.io","title":"Lexical Analysis"}},"headerMode":{"desktop":"fixed","mobile":"auto"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

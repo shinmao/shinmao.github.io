@@ -12,7 +12,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://blog.1pwnch.com/" />
 <meta property="og:image" content="http://blog.1pwnch.com/logo.png"/>
-<meta property="og:updated_time" content="2021-04-28T00:30:15-04:00" />
+<meta property="og:updated_time" content="2021-05-12T22:05:42-04:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://blog.1pwnch.com/logo.png"/>
 
@@ -112,6 +112,18 @@ So&hellip; In this blog, I would record my learning process including Algorithm,
         <a href="/posts/feel-free-to-contact-me/">Read More</a></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/lexical-analysis/">Lexical Analysis</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
+            published on&nbsp;<time datetime=2021-05-12>2021-05-12</time>
+        </span>&nbsp;
+            <span class="post-category">included in<a href="/categories/compiler/">
+                        <i class="far fa-folder fa-fw"></i>Compiler
+                    </a></span></div><div class="content">The goal of lexical analysis The goal of lexical analysis is to partition the input string into lexemes, identify the token of each lexeme then give to parser. On other hand, first part about lexemes is to partition input to units, and second part about token is to define the class of each units.
+ Given a input string, such as foo = 42 Lexical-Analyzer would identify tokens as &lt;&quot;id&quot;, &quot;foo&quot;&gt;, &lt;Op, &quot;=&quot;&gt;, and &lt;&quot;Int&quot;, &quot;42&quot;&gt; Give to parser  There are several kinds of token classes, such as Identifier, Integer, Numbers, Keyword, Whitespace.</div><div class="post-footer">
+        <a href="/posts/lexical-analysis/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/stanford-courses/">Stanford Courses</a>,&nbsp;<a href="/tags/lexical-analysis/">Lexical Analysis</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/learn-compiler/">Learn Compiler - Introduction</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
             published on&nbsp;<time datetime=2021-04-28>2021-04-28</time>
@@ -159,19 +171,6 @@ Create static library First, create a source file without main function as our l
 1 2 3 4 5 6 7 8  for(int i = 1; i &lt;= n; i++) { for(int j = 0; j &lt;= target; j++) { if(j - nums[i - 1] &gt;= 0) dp[i][j] = dp[i - 1][j - nums[i - 1]] + dp[i - 1][j]; else dp[i][j] = dp[i - 1][j]; } }   每一個i的狀態都只需要依賴i - 1的值，所以或許我們根本不需要紀錄那麼多i的狀態，因此這個解法還可以進行優化。下一部分就是本文重點：狀態壓縮。</div><div class="post-footer">
         <a href="/posts/dp-optimize/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dynamic-programming/">Dynamic Programming</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/lintcode-weekly-content30-condition-string/">LintCode Weekly Contest 30 Condition String</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Rafael</a></span>&nbsp;<span class="post-publish">
-            published on&nbsp;<time datetime=2020-10-31>2020-10-31</time>
-        </span>&nbsp;
-            <span class="post-category">included in<a href="/categories/algorithm/">
-                        <i class="far fa-folder fa-fw"></i>Algorithm
-                    </a></span></div><div class="content">I ran into the &ldquo;Condition String&rdquo; in weekly contest of LintCode and failed to solve it. After spending some time on it after the contest ended, I found that the first idea I came up with was wrong. Here comes my writeup.
-Problem Description Here I would give the screenshot of challenge:
-First solution [Fail] First, I tried to handle this problem with longest increase subarray. For example, in acec</div><div class="post-footer">
-        <a href="/posts/lintcode-weekly-content30-condition-string/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lintcode/">LintCode</a>,&nbsp;<a href="/tags/dynamic-programming/">Dynamic Programming</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item active">
                     <span class="page-link">
