@@ -8,11 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-I am Rafael. Currently, I am studying as 2nd PhD student in Information Security. I have research interest in vulnerability discovery and binary analysis. I love to take things into practice, so I would play some real-world bug hunting or PWN in CTF in rest of my time. Welcome to contact me if you find some interesting projects in following.
-
-Publications
-======
-
+I am Rafael, and I am studying as 2nd PhD student in Information Security. Generally speaking, I have research interest in vulnerability discovery and binary analysis. As Rust comes out as a memory-safety language, I believe there would be more and more systems and applications equipped with modules rewritten in Rust. Therefore, I am interested in digging potential bugs led by inconsistency between multi-languages currently for my research. In my rest of time, I would play some real-world bug hunting or PWN in CTF in rest of my time. Welcome to contact me if you find some interesting projects in following.
 
 Github
 ======
