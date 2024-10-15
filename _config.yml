@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Hung-Mao (Rafael) Chen"
 title_separator          : "-"
 name                     : &name "Rafael"
-description              : &description "2nd PhD student<br/>Security Researcher"
+description              : &description "PhD student<br/>Security Researcher"
 url                      : https://shinmao.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "shinmao.github.io"
@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "Rafael"
   avatar           : "profile.png"
-  bio              : "2nd PhD student<br/>Security Researcher"
+  bio              : "PhD student<br/>Security Researcher"
   location         : 
   employer         :
   pubmed           : 
