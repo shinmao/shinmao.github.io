@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Who am I"
+title: "About"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
@@ -8,15 +8,14 @@ redirect_from:
   - /about.html
 ---
 
-I am Rafael, and I am studying as 2nd PhD student in Information Security. Generally speaking, I have research interest in vulnerability discovery and binary analysis. As Rust comes out as a memory-safety language, I believe there would be more and more systems and applications equipped with modules rewritten in Rust. Therefore, I am interested in digging potential bugs led by inconsistency between multi-languages currently for my research. In my rest of time, I would play some real-world bug hunting or PWN in CTF in rest of my time. Welcome to contact me if you find some interesting projects in following.
+Hung-Mao (Rafael) Chen is currently pursuing a Ph.D. in [Sun Security Lab](https://sunlab-gmu.github.io/) at George Mason University, where his research focuses on automating the detection and repair of security vulnerabilities in the Rust ecosystem. He has significant experience in static analysis, reverse engineering, and vulnerability detection. Rafael has been instrumental in developing tools to detect type confusion bugs, which has led to the discovery of over 100 zero-day vulnerabilities in critical Rust packages. His work has been recognized through multiple RUSTSEC and CVE IDs. His technical proficiency spans languages such as Rust, C/C++, Python, and more, with expertise in frameworks like PyTorch, PySpark, and Docker, allowing him to design and implement robust security solutions. In addition to his academic work, Rafael has completed internships that solidified his practical skills. At [Certik](https://www.certik.com/), he developed a static analysis tool in detecting integer vulnerabilities of benchmark dataset in cross-chain ecosystems. During his internship at [Vector35](https://vector35.com/), he built [AlgoProphet](https://github.com/Vector35/AlgoProphet), a Binary Ninja plugin capable of reverse-engineering complex arithmetic algorithms across different architectures, showcasing his expertise in security research and system analysis.
 
-Github
+Work Experience
 ======
+* **Security Research, Summer Intern 2024:** Rust, Program Analysis, Cross-Chain Blockchain Ecosystem
+* **Security Research, Summer Intern 2022:** C++, Reverse Engineering, Machine Learning
 
-Vector35/AlgoProphet
-------
-This is a open-source project which can be found on [github](https://github.com/Vector35/AlgoProphet), and only has one release version currently. The purpose of AlgoProphet is to identify and localize the **arithmetic** algorithm which is built on non-visited implementation from the binary. Given a function in binary, AlgoProphet can build up a DFG(Dataflow Graph) based on [MLIL-SSA of Binary Ninja](https://docs.binary.ninja/dev/bnil-mlil.html), then use graph matching algorithm(Isomorphism) to match the models saved in the database. We spent a lot of time on the design of **customized**-DFG and tried to answers the questions, e.g., How to represent a computation algorithm in the loop? In current phase, AlgoProphet can help us identify some algorithms like vector summation or discrete fourier transform both on `x86-64` and `arm64`. Of course, working on different architectures should be easy based on layout-agnostic IR; however, we still found that a same instruction can have many different implementations. You can find more details in README of the repo. Also appreciate any comments in issues!
 
-egalito-reversePatch
-------
-This is a open-source project which can be found on [github](https://github.com/shinmao/egalito-reversePatch), and the original project of egalito can be found [here](https://github.com/columbia/egalito). egalito-reversePatch leaverages the interesting design of egalito IR and makes some **binary code similarity** works with clustering methods. However, the most amazing power of egalito IR is that it makes static binary instrumentation and relocation easier. Thanks for the support from authors and @Anthony in Columbia, I have realized that IR can be designed for different purpose, which has a big impact on my research in the future. The main code of my work can be found in [pass/reversepatch.cpp](https://github.com/shinmao/egalito-reversePatch/blob/main/src/pass/reversepatch.cpp), and it would extract the tokens as training features while visiting each instruction (It only worked on arch `x86_64` at this time).
+Contact me
+======
+* Gmail: [shinmaox2016@gmail.com](mailto:shinmaox2016@gmail.com)
