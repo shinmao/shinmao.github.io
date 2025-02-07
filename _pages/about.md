@@ -8,14 +8,24 @@ redirect_from:
   - /about.html
 ---
 
-Hung-Mao (Rafael) Chen is currently pursuing a Ph.D. in [Sun Security Lab](https://sunlab-gmu.github.io/) at George Mason University, where his research focuses on automating the detection and repair of security vulnerabilities in the Rust ecosystem. He has significant experience in static analysis, reverse engineering, and vulnerability detection. Rafael has been instrumental in developing an automatic tool to detect type confusion bugs, which has led to the discovery of over 100 zero-day vulnerabilities in critical Rust packages. His work has been recognized through multiple RUSTSEC and CVE IDs. 
+Rafael is currently pursuing a Ph.D. at George Mason University, advised by [Dr. Kun Sun](https://csis.gmu.edu/ksun/) and [Dr. Xiaokuan Zhang](https://mainarke.github.io/). Before that, he has earned a master's degree and a bachelor's degree in Computer Science. He had took security research internship at Certik and Vector35.
+
+His research focuses on Automatic Program Analysis to detect and enhance the security of program. He has published a paper in USENIX Security on type confusion bugs detection. Currently, he is working on automatically refactoring Rust program with Large Language Model. He has experience in vulnerability Analysis, which has been recognized through multiple RUSTSEC and CVE IDs.  
+
+[![shinmao](https://img.shields.io/badge/shinmao-black?style=flat&logo=github&logoColor=white)](https://github.com/shinmao)
 
 Work Experience
 ======
-* **[Certik](https://www.certik.com/), Security Research, Summer Intern 2024:** Rust, Program Analysis, Cross-Chain Blockchain Ecosystem
-* **[Vector35](https://binary.ninja/), Security Research, Summer Intern 2022:** C++, Reverse Engineering (Binary Ninja), Machine Learning
+* **[Certik](https://www.certik.com/), Security Researcher, Summer Intern 2024**  
+      Rust, Program Analysis, Cross-Chain Blockchain Ecosystem
+* **[Vector35](https://binary.ninja/), Security Researcher, Summer Intern 2022**  
+      C++, Reverse Engineering (Binary Ninja), Machine Learning
 
+What's New
+======
+* One paper accepted by **USENIX Security 2025**.  
+  [![TYPEPULSE](https://img.shields.io/badge/TYPEPULSE-blue?style=flat&logo=googlescholar&logoColor=white)](https://arxiv.org/pdf/2502.03271)
 
 Contact me
 ======
-* Gmail: [shinmaox2016@gmail.com](mailto:shinmaox2016@gmail.com)
+[![Gmail](https://img.shields.io/badge/Gmail-red?style=flat&logo=gmail&logoColor=white)](mailto:shinmaox2016@gmail.com)

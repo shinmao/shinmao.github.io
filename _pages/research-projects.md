@@ -9,6 +9,10 @@ redirect_from:
 
 {% include base_path %}
 
+TYPEPULSE
+------
+To be relased.
+
 Vector35/AlgoProphet
 ------
 This is a open-source project which can be found on [github](https://github.com/Vector35/AlgoProphet), and only has one release version currently. The purpose of AlgoProphet is to identify and localize the **arithmetic** algorithm which is built on non-visited implementation from the binary. Given a function in binary, AlgoProphet can build up a DFG(Dataflow Graph) based on [MLIL-SSA of Binary Ninja](https://docs.binary.ninja/dev/bnil-mlil.html), then use graph matching algorithm(Isomorphism) to match the models saved in the database. We spent a lot of time on the design of **customized**-DFG and tried to answers the questions, e.g., How to represent a computation algorithm in the loop? In current phase, AlgoProphet can help us identify some algorithms like vector summation or discrete fourier transform both on `x86-64` and `arm64`. Of course, working on different architectures should be easy based on layout-agnostic IR; however, we still found that a same instruction can have many different implementations. You can find more details in README of the repo. Also appreciate any comments in issues!
