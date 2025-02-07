@@ -12,14 +12,17 @@ Rafael is currently pursuing a Ph.D. at George Mason University, advised by [Dr.
 
 His research focuses on Automatic Program Analysis to detect and enhance the security of program. He has published a paper in USENIX Security on type confusion bugs detection. Currently, he is working on automatically refactoring Rust program with Large Language Model. He has experience in vulnerability Analysis, which has been recognized through multiple RUSTSEC and CVE IDs.  
 
-[![shinmao](https://img.shields.io/badge/shinmao-black?style=flat&logo=github&logoColor=white)](https://github.com/shinmao)
-
 Work Experience
 ======
 * **[Certik](https://www.certik.com/), Security Researcher, Summer Intern 2024**  
       Rust, Program Analysis, Cross-Chain Blockchain Ecosystem
 * **[Vector35](https://binary.ninja/), Security Researcher, Summer Intern 2022**  
       C++, Reverse Engineering (Binary Ninja), Machine Learning
+
+Vulnerability Analysis
+======
+* Get assigned with CVE and RUSTSEC in Rust program  
+  [![Bug Hunting in Rust](https://img.shields.io/badge/Bug%20Hunting%20in%20Rust-black?style=flat&logo=github)](https://github.com/shinmao/Bug-hunting-in-Rust)
 
 What's New
 ======
