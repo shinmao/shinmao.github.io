@@ -14,6 +14,8 @@ His research focuses on Automatic Program Analysis to detect and enhance the sec
 
 Work Experience
 ======
+* **Google, PhD SWE Intern 2025**  
+      Hardware, LLM
 * **[Certik](https://www.certik.com/), Security Researcher, Summer Intern 2024**  
       Rust, Program Analysis, Cross-Chain Blockchain Ecosystem
 * **[Vector35](https://binary.ninja/), Security Researcher, Summer Intern 2022**  
@@ -26,8 +28,9 @@ Vulnerability Analysis
 
 What's New
 ======
-* One paper accepted by **USENIX Security 2025**.  
-  [![TYPEPULSE](https://img.shields.io/badge/TYPEPULSE-blue?style=flat&logo=googlescholar&logoColor=white)](https://arxiv.org/pdf/2502.03271)
+* Served as **NDSS 2026** Artefact Evaluation Committee.  
+* Served as **CCS 2025** Artifact Evaluation Committee.  
+* One paper accepted by **USENIX Security 2025**. [![TYPEPULSE](https://img.shields.io/badge/TYPEPULSE-blue?style=flat&logo=googlescholar&logoColor=white)](https://arxiv.org/pdf/2502.03271)
 
 Contact me
 ======
